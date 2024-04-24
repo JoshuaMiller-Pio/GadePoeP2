@@ -3,8 +3,10 @@
 /workspace.xml
 # Rider ignored files
 /contentModel.xml
-/.idea.GadePoeP2.iml
+
 /modules.xml
+/.idea.GadePoeP2.iml
+
 /projectSettingsUpdater.xml
 # Editor-based HTTP Client requests
 /httpRequests/
