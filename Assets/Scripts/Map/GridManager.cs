@@ -12,8 +12,8 @@ public class GridManager : MonoBehaviour
     void Start()
     {
 
-        displacementt = Random.Range(5, 12);
-        secondDisplace = Random.Range(8, 30);
+        displacementt = Random.Range(4, 7);//5 12
+        secondDisplace = Random.Range(8, 30);//8 30
 
         for (int x = 0; x < length; x++)
         {
@@ -38,23 +38,23 @@ public class GridManager : MonoBehaviour
       
         
         
-        if (position.y >= 10 && position.y < 14)
+        if (position.y >= 14 && position.y < 17)
         {
             return mountain;
         }
-        else if (position.y >= 14)
+        else if (position.y >= 17)
         {
             return snow;
         }
-        else if (position.y <= 4)
+        else if (position.y <= 2.5)
         {
             return lava;
         }
         
-        if (DesertBioms <=Random.Range(50,100))
+        if (DesertBioms <=Random.Range(((length*breath)/5),(length*breath)/2))
         {
             RaycastHit info;
-            if ( DesertBioms <= Random.Range(0,3) && Random.Range(0, 10) == Random.Range(0, 10))
+            if ( DesertBioms <= Random.Range(0,4) && Random.Range(0, 10) == Random.Range(0, 10))
             {
                 DesertBioms++;
                 return desert;
@@ -71,7 +71,6 @@ public class GridManager : MonoBehaviour
      
         }
         
-        Debug.Log("forest");
         return forest;
     }
 }
