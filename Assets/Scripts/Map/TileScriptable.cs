@@ -15,7 +15,8 @@ public class TileScriptable : ScriptableObject
         Mountain
     }
 
-    public float tickDamage = 0, APneeded = 1;
-    
+    public bool hasMine = true;
+    public float tickDamage = 0, APneeded = 1,mineValue;
+    public GameObject mine;
     public TileType tileType;
 }
