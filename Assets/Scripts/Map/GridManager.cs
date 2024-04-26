@@ -5,35 +5,41 @@ using UnityEngine.UIElements;
 
 public class GridManager : MonoBehaviour
 {
-    public float length, breath, displacementt,secondDisplace;
-    private float DesertBioms;
+    public float distance, displacement,secondDisplace;
+    private float DesertBioms, minesAllowed, currentMines = 0;
     public GameObject forest, snow, lava, mountain, desert;
     // Start is called before the first frame update
     void Start()
     {
-
-        displacementt = Random.Range(4, 7);//5 12
+        float mapCoverage = Random.Range(((distance*distance)/5),(distance*distance)/2),bioNum = Random.Range(0, 10);
+        minesAllowed = distance / 3;
+        displacement = Random.Range(4, 7);//4 7
         secondDisplace = Random.Range(8, 30);//8 30
 
-        for (int x = 0; x < length; x++)
+        for (int x = 0; x < distance; x++)
         {
-            for (int z = 0; z < breath; z++)
+            for (int z = 0; z < distance; z++)
             {
-                Vector3 position = new Vector3(x * 6, PerlNoise(x,z,displacementt) *secondDisplace, z * 6);
-                GameObject tile = Instantiate(Biomeselector(position),position,Quaternion.identity) as GameObject;
+                Vector3 position = new Vector3(x * 6, PerlNoise(x,z,displacement) *secondDisplace, z * 6);
+                GameObject tile = Instantiate(Biomeselector(position,mapCoverage,bioNum),position,Quaternion.identity) as GameObject;
+                if (currentMines <minesAllowed && Random.Range(0, 40) == Random.Range(0, 40))
+                {
+                    tile.GetComponent<Tile>().hasMine();
+                    currentMines++;
+                }
                 tile.transform.SetParent(this.transform);
             }
         }
     }
 
-    private float PerlNoise(int x, int z, float displacment)
+    private float PerlNoise(int x, int z, float displace)
     {
-        float xDisplace = (x + this.transform.position.x) / displacment;
-        float zDisplace = (z + this.transform.position.y) / displacment;
+        float xDisplace = (x + this.transform.position.x) / displace;
+        float zDisplace = (z + this.transform.position.y) / displace;
         return Mathf.PerlinNoise(xDisplace, zDisplace);
     }
 
-    private GameObject Biomeselector(Vector3 position)
+    private GameObject Biomeselector(Vector3 position, float mapCoverage,float  bioNum)
     {
       
         
@@ -51,10 +57,11 @@ public class GridManager : MonoBehaviour
             return lava;
         }
         
-        if (DesertBioms <=Random.Range(((length*breath)/5),(length*breath)/2))
+        //checks if desert map coverage
+        if (DesertBioms <= mapCoverage)
         {
             RaycastHit info;
-            if ( DesertBioms <= Random.Range(0,4) && Random.Range(0, 10) == Random.Range(0, 10))
+            if ( DesertBioms <= bioNum && Random.Range(0, 40) == Random.Range(0, 40))
             {
                 DesertBioms++;
                 return desert;

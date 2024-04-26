@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77436cff1e739e046a3ef3a29e40846f, type: 3}
   m_Name: Forest
   m_EditorClassIdentifier: 
+  hasMine: 1
   tickDamage: 0
   APneeded: 1
+  mineValue: 2
+  mine: {fileID: 6434864199351736583, guid: ef8615e1eba3e03458178ce5aad76dc9, type: 3}
   tileType: 0
