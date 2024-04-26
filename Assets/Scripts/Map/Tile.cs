@@ -7,18 +7,42 @@ public class Tile : MonoBehaviour
 {
     public TileScriptable tileInfo;
     private bool _hasMine;
- 
+    public GridManager GridManager;
+    private Renderer _renderer;
 
     private void OnMouseEnter()
     {
-        Debug.Log($"entered {gameObject.name}");
-        
+        Color highlightcolor = Color.cyan;
+        _renderer.material.color =   highlightcolor;
+
     }
-    
+
+    private void OnMouseExit()
+    {
+
+        _renderer.material.color = tileInfo.Color;
+    }
+
+    private void OnMouseDown()
+    {
+        GameObject test = GridManager.GetTileAtPosition(new Vector3(transform.localPosition.x,transform.localPosition.y, transform.localPosition.z));
+        
+        if (test != null)
+        {
+            
+            Debug.Log($"entered {test.name}");
+        }
+        else
+        {
+            Debug.Log("null");
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        GridManager = GameObject.FindWithTag("GameController").GetComponent<GridManager>();
+        _renderer = GetComponent<Renderer>();
     }
 
    public void hasMine()

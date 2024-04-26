@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77436cff1e739e046a3ef3a29e40846f, type: 3}
   m_Name: Snow
   m_EditorClassIdentifier: 
+  Color: {r: 0.654902, g: 1, b: 0.94509804, a: 1}
   hasMine: 1
   tickDamage: 1
   APneeded: 2

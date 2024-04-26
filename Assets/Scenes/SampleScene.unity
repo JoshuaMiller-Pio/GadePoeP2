@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 3.2
+  m_AmbientIntensity: 1.92
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf7910fe67d57f4fa2c2ad5dd877283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Movespeed: 1
+  Movespeed: 0.5
   RotateSpeed: 1
   moveTime: 5
   rotationSpeed: 1
@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 1872648201}
   m_Layer: 0
   m_Name: GridManager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
