@@ -15,6 +15,8 @@ public class TileScriptable : ScriptableObject
         Mountain
     }
 
+    public Color Color;
+
     public bool hasMine = true;
     public float tickDamage = 0, APneeded = 1,mineValue;
     public GameObject mine;

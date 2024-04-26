@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77436cff1e739e046a3ef3a29e40846f, type: 3}
   m_Name: Mountain
   m_EditorClassIdentifier: 
+  Color: {r: 0.47058824, g: 0.21960784, b: 0, a: 1}
   hasMine: 1
   tickDamage: 0
   APneeded: 3

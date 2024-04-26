@@ -6,8 +6,10 @@ using UnityEngine.UIElements;
 public class GridManager : MonoBehaviour
 {
     public float distance, displacement,secondDisplace;
-    private float DesertBioms, minesAllowed, currentMines = 0;
     public GameObject forest, snow, lava, mountain, desert;
+    private float DesertBioms, minesAllowed, currentMines = 0;
+    public  Dictionary<Vector3, GameObject> _tiles;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,12 +17,13 @@ public class GridManager : MonoBehaviour
         minesAllowed = distance / 3;
         displacement = Random.Range(4, 7);//4 7
         secondDisplace = Random.Range(8, 30);//8 30
-
+        _tiles = new Dictionary<Vector3, GameObject>();
         for (int x = 0; x < distance; x++)
         {
             for (int z = 0; z < distance; z++)
             {
-                Vector3 position = new Vector3(x * 6, PerlNoise(x,z,displacement) *secondDisplace, z * 6);
+                float y = PerlNoise(x, z, displacement) * secondDisplace;
+                Vector3 position = new Vector3(x * 6, y , z * 6);
                 GameObject tile = Instantiate(Biomeselector(position,mapCoverage,bioNum),position,Quaternion.identity) as GameObject;
                 if (currentMines <minesAllowed && Random.Range(0, 40) == Random.Range(0, 40))
                 {
@@ -28,10 +31,10 @@ public class GridManager : MonoBehaviour
                     currentMines++;
                 }
                 tile.transform.SetParent(this.transform);
+                _tiles[tile.transform.localPosition] = tile;
             }
         }
     }
-
     private float PerlNoise(int x, int z, float displace)
     {
         float xDisplace = (x + this.transform.position.x) / displace;
@@ -39,6 +42,16 @@ public class GridManager : MonoBehaviour
         return Mathf.PerlinNoise(xDisplace, zDisplace);
     }
 
+    public GameObject GetTileAtPosition(Vector3 position)
+    {
+        if (_tiles.TryGetValue(position, out GameObject tile))
+        {
+            return tile;
+        }
+
+        return null;
+
+    }
     private GameObject Biomeselector(Vector3 position, float mapCoverage,float  bioNum)
     {
       

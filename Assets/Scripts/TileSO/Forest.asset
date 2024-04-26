@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77436cff1e739e046a3ef3a29e40846f, type: 3}
   m_Name: Forest
   m_EditorClassIdentifier: 
+  Color: {r: 0, g: 0.47058824, b: 0.1254902, a: 1}
   hasMine: 1
   tickDamage: 0
   APneeded: 1
