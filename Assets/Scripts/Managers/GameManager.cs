@@ -5,6 +5,10 @@ using UnityEngine;
 public class Gamemanager : Singleton<Gamemanager>
 {
     public TurnManager _turnManager;
+
+    public HumanPlayer _HumanPlayer;
+
+    public AIPlayer _AIPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,6 +16,7 @@ public class Gamemanager : Singleton<Gamemanager>
         _turnManager = GameObject.FindGameObjectWithTag("TurnManager").GetComponent<TurnManager>();
     }
 
+    
     // Update is called once per frame
     void Update()
     {
