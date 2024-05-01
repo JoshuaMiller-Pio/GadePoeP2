@@ -1,11 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    public Gamemanager _gameManager;
     public TurnOrder turnPlayer;
+    public static event Action RoundEnd;
     public enum TurnOrder
     {
         Player1,
@@ -15,7 +16,6 @@ public class TurnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _gameManager = Gamemanager.Instance;
         ResetGame();
     }
 
@@ -26,6 +26,7 @@ public class TurnManager : MonoBehaviour
     
     public void EndTurn(TurnOrder currentTurnPlayer)
     {
+        RoundEnd?.Invoke();
         if (currentTurnPlayer == TurnOrder.Player1)
         {
             turnPlayer = TurnOrder.Player2;

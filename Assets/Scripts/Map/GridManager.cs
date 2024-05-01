@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class GridManager : MonoBehaviour
 {
@@ -9,22 +11,37 @@ public class GridManager : MonoBehaviour
     public GameObject forest, snow, lava, mountain, desert;
     private float DesertBioms, minesAllowed, currentMines = 0;
     public  Dictionary<Vector3, GameObject> _tiles;
-    
+
     // Start is called before the first frame update
     void Start()
     {
+        //event from the tile script
+        Tile.tileLocator += GetTileAtPosition;
+        
+        //TODO remember what the hell this is supposed to do
+        //edit: selects the what % of the map should be desert
         float mapCoverage = Random.Range(((distance*distance)/5),(distance*distance)/2),bioNum = Random.Range(0, 10);
+        
+        //sets the max mines allowed on the map
         minesAllowed = distance / 3;
+        
+        //displaces the perlin noise for randomness
         displacement = Random.Range(4, 7);//4 7
+        
+        //allows for more randomness
         secondDisplace = Random.Range(8, 30);//8 30
+       
+        //creates the dictionary 
         _tiles = new Dictionary<Vector3, GameObject>();
+     
+        //
         for (int x = 0; x < distance; x++)
         {
             for (int z = 0; z < distance; z++)
             {
                 float y = PerlNoise(x, z, displacement) * secondDisplace;
                 Vector3 position = new Vector3(x * 6, y , z * 6);
-                GameObject tile = Instantiate(Biomeselector(position,mapCoverage,bioNum),position,Quaternion.identity) as GameObject;
+                GameObject tile = Instantiate(Biomeselector(position,mapCoverage,bioNum),position,Quaternion.identity);
                 if (currentMines <minesAllowed && Random.Range(0, 40) == Random.Range(0, 40))
                 {
                     tile.GetComponent<Tile>().hasMine();
@@ -35,6 +52,7 @@ public class GridManager : MonoBehaviour
             }
         }
     }
+    //adds mountains and revines to the map
     private float PerlNoise(int x, int z, float displace)
     {
         float xDisplace = (x + this.transform.position.x) / displace;
@@ -42,6 +60,7 @@ public class GridManager : MonoBehaviour
         return Mathf.PerlinNoise(xDisplace, zDisplace);
     }
 
+    //accesses the dictionary through and event
     public GameObject GetTileAtPosition(Vector3 position)
     {
         if (_tiles.TryGetValue(position, out GameObject tile))
@@ -52,6 +71,8 @@ public class GridManager : MonoBehaviour
         return null;
 
     }
+    
+    //decides what biome the instantiated game object should be
     private GameObject Biomeselector(Vector3 position, float mapCoverage,float  bioNum)
     {
       
