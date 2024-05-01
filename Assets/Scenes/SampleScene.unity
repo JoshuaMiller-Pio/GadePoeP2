@@ -1730,6 +1730,7 @@ Transform:
   - {fileID: 1436182400}
   - {fileID: 1378048490}
   - {fileID: 486489827}
+  - {fileID: 2052161440}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &874324854
@@ -2064,7 +2065,7 @@ GameObject:
   - component: {fileID: 1085539177}
   - component: {fileID: 1085539176}
   m_Layer: 5
-  m_Name: ImageTile
+  m_Name: ImageCity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2918,6 +2919,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1943652745}
   m_CullTransparentMesh: 1
+--- !u!1 &2052161439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052161440}
+  - component: {fileID: 2052161441}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2052161440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052161439}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.181521, y: -19.098684, z: -4.02914}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 773607607}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2052161441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052161439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b1df0e03ba7e244baa601be18c587c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterPanel: {fileID: 720019772}
+  tilePanel: {fileID: 1498697114}
+  cityPanel: {fileID: 493854357}
+  characterName: {fileID: 574293739}
+  characterMove: {fileID: 417115707}
+  characterAtk: {fileID: 23561546}
+  characterHp: {fileID: 1388455173}
+  characterDescription: {fileID: 495825044}
+  tileName: {fileID: 1943652747}
+  tileMovementCost: {fileID: 328615856}
+  tileDescription: {fileID: 1786001688}
+  cityName: {fileID: 635144208}
+  cityHp: {fileID: 741042424}
+  cityGold: {fileID: 874324856}
+  characterImage: {fileID: 1609292275}
+  tileImage: {fileID: 312699475}
+  cityImage: {fileID: 1085539176}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
