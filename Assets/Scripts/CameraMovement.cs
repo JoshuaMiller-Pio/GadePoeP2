@@ -50,12 +50,10 @@ public class CameraMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Q) )
         {
-            Debug.Log("rotate");
             newRot *= Quaternion.Euler(Vector3.up * -rotationSpeed);
         }
         if (Input.GetKey(KeyCode.E) )
         {
-            Debug.Log("rotate");
             newRot *= Quaternion.Euler(Vector3.up * rotationSpeed);
         }
 

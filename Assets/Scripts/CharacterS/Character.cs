@@ -8,7 +8,7 @@ public class Character : CharacterSuper
     public float moveSpeed = 5;
     public GameObject target;
     // Start is called before the first frame update
-    public enum ability
+    public enum Ability
     {
         Mine,
         KnockBack,
