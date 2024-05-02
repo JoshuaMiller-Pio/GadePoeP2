@@ -7,6 +7,7 @@ public class TurnManager : MonoBehaviour
 {
     public TurnOrder turnPlayer;
     public static event Action RoundEnd;
+    
     public enum TurnOrder
     {
         Player1,

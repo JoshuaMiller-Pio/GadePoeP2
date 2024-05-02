@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CharacterScriptable : ScriptableObject
 {
-  public enum characterType
+  public  enum characterType
   {
     Melee,
     Ranged,
