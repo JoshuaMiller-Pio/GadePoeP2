@@ -18,7 +18,8 @@ public class UIManager : MonoBehaviour
         tileDescription,
         cityName,
         cityHp,
-        cityGold;
+        cityGold,
+        gameOverText;
 
     public Image characterImage, tileImage, cityImage;
 
@@ -41,6 +42,7 @@ public class UIManager : MonoBehaviour
         Character.characterActionUI += UpdateCharacterActionDisplay;
         CityManager.cityActionUI += UpdateCityActionDisplay;
         CityManager.cityInfoUI += UpdateCityInfoDisplay;
+        CityManager.gameOver += DisplayGameOver;
     }
 
     private void TileInfoUIUpdater(TileScriptable tile)
@@ -91,9 +93,17 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void DisplayGameOver()
+    public void DisplayGameOver(bool player1Turn)
     {
         gameOverCanvas.SetActive(true);
+        if (player1Turn == true)
+        {
+            gameOverText.text = "Player 1 Wins! Congratulations!";
+        }
+        else
+        {
+            gameOverText.text = "Player 2 Wins! Congratulations!";
+        }
     }
     
     // Update is called once per frame

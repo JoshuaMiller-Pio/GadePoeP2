@@ -36,7 +36,7 @@ public class CityManager : MonoBehaviour
     
     public static event Action<CityManager> cityInfoUI;
     public static event Action<CityManager> cityActionUI;
-    
+    public static event Action<bool> gameOver;
     private void OnMouseEnter()
     {
      //   Color highlightcolor = Color.cyan;
@@ -102,7 +102,11 @@ public class CityManager : MonoBehaviour
         }
 
     }
-    
+
+    public void Death()
+    {
+        gameOver?.Invoke(player1turn);
+    }
     public void spawnWorker()
     {
         GameObject TargetPosition = tileBelow.GetComponent<Tile>().getSurroundingBlocks();
@@ -142,6 +146,10 @@ public class CityManager : MonoBehaviour
     private void takeDamage(float damage)
     {
         _cityHealth -= damage;
+        if (_cityHealth <= 0)
+        {
+            Death();
+        }
     }
    
 }
