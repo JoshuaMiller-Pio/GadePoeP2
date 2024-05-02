@@ -1,17 +1,23 @@
 using System.Collections;
 using System;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class CityManager : MonoBehaviour
 {
     private float _tGold = 10, _cityHealth = 100, _bPop = 1, _aPop =0, _gpt = 1;
     public static event Func<Vector3, GameObject> CityManagerTile; 
     private Renderer _renderer;
+    
     public GameObject tileBelow, meele, ranger, worker;
     // Start is called before the first frame update
     void Start()
     {
+        
     }
+    
+    
     public static event Action<CityManager> cityInfoUI;
     public static event Action<CityManager> cityActionUI;
     
@@ -41,41 +47,39 @@ public class CityManager : MonoBehaviour
     public float Gpt => _gpt;
 
     
-    private void spawnUnit()
+    public void spawnUnit()
     {
-        _aPop++;
-        Tile tile;
-        
-        Vector3 up = new Vector3(tileBelow.transform.localPosition.x, tileBelow.transform.localPosition.y, tileBelow.transform.localPosition.z);
-        Vector3 down = new Vector3(tileBelow.transform.localPosition.x, tileBelow.transform.localPosition.y, tileBelow.transform.localPosition.z);
-        Vector3 left = new Vector3(tileBelow.transform.localPosition.x, tileBelow.transform.localPosition.y, tileBelow.transform.localPosition.z);
-        Vector3 right = new Vector3(tileBelow.transform.localPosition.x, tileBelow.transform.localPosition.y, tileBelow.transform.localPosition.z);
-        
-        GameObject TileCheck = CityManagerTile?.Invoke(up);
-        tile = TileCheck.GetComponent<Tile>();
-
-        if (!tile._occupied)
+        Vector3 TargetPosition = tileBelow.GetComponent<Tile>().getSurroundingBlocks();
+        Vector3 spawnPosition = new Vector3(TargetPosition.x, TargetPosition.y+10.1f,TargetPosition.z);
+        if (TargetPosition != new Vector3(0,0,0))
         {
-            tile._occupied = true;
-            
-            //TODO change vector 3
-            Instantiate(meele, up, Quaternion.identity);
+            _aPop++;
+            Instantiate(meele, spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("NoSpace");
         }
 
-        //access grid manager to find tile
-        //check if tile is free
-        //spawn game object
+    }
+    
+    public void spawnWorker()
+    {
+        Vector3 TargetPosition = tileBelow.GetComponent<Tile>().getSurroundingBlocks();
+        Vector3 spawnPosition = new Vector3(TargetPosition.x, TargetPosition.y+10.1f,TargetPosition.z);
+        if (TargetPosition != new Vector3(0,0,0))
+        {
+            _bPop++;
+            Instantiate(meele, spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("NoSpace");
+        }
 
     }
-    
-    private void spawnWorker()
-    {
-        _bPop++;
-        //access grid manager to find tile
-        // check if tile is free
-        //spawn game object
-    }
-    
+
+  
     private void increaseGold()
     {
         _tGold += _gpt;

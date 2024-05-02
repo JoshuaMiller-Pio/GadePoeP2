@@ -3576,7 +3576,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1069112416}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1069112416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6001,7 +6013,9 @@ MonoBehaviour:
   lava: {fileID: 4601077990813952791, guid: f0d4b1fa60ebc29419a95e6587a0fc13, type: 3}
   mountain: {fileID: 8501335203073514569, guid: 0c4dcd0a796b54d47907beea83d079d3, type: 3}
   desert: {fileID: 4392836720895987007, guid: 8c7e2ff55c1f11e4f8a0d7f7e515363e, type: 3}
-  Towns: []
+  Towns:
+  - {fileID: 8364473535806513280, guid: 8b933ed01c33dbe44ad40330f530f686, type: 3}
+  - {fileID: 8364473535806513280, guid: bf98b6c9e0854f04485d8f4ad1b9cbe4, type: 3}
 --- !u!4 &1872648202
 Transform:
   m_ObjectHideFlags: 0
@@ -6010,13 +6024,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872648200}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 8.181521, y: 30.901316, z: -4.02914}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 773607607}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1903239288
 GameObject:
   m_ObjectHideFlags: 0
@@ -6663,11 +6677,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b1df0e03ba7e244baa601be18c587c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterInfoPanel: {fileID: 720019772}
-  characterActionPanel: {fileID: 671248435}
-  tileInfoPanel: {fileID: 1498697114}
-  cityInfoPanel: {fileID: 493854357}
-  cityActionPanel: {fileID: 2007893863}
+  characterInfoPanel: {fileID: 0}
+  characterActionPanel: {fileID: 0}
+  tileInfoPanel: {fileID: 0}
+  cityInfoPanel: {fileID: 0}
+  cityActionPanel: {fileID: 0}
   characterName: {fileID: 574293739}
   characterMove: {fileID: 417115707}
   characterAtk: {fileID: 23561546}

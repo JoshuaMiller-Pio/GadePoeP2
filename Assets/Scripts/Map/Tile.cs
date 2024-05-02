@@ -71,6 +71,64 @@ public class Tile : MonoBehaviour
         mine.transform.SetParent(this.transform);
         mine.transform.localPosition = pos;
     }
+
+   public Vector3 getSurroundingBlocks()
+   {
+       RaycastHit info;
+       
+       if (Physics.Raycast(transform.position, Vector3.back, out info, 12))
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==false)
+           {
+               gameobjectTile._occupied = true;
+               return info.collider.gameObject.transform.position;
+           }
+       }
+        if (Physics.Raycast(transform.position, Vector3.forward, out info, 12))
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==false)
+           {
+               gameobjectTile._occupied = true;
+               return info.collider.gameObject.transform.position;
+           }
+       }
+        if (Physics.Raycast(transform.position, Vector3.back, out info, 12))
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==false)
+           {
+               gameobjectTile._occupied = true;
+               return info.collider.gameObject.transform.position;
+           }
+       }
+        if (Physics.Raycast(transform.position, Vector3.left, out info, 12))
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==false)
+           {
+               gameobjectTile._occupied = true;
+               return info.collider.gameObject.transform.position;
+           }
+       }
+        if (Physics.Raycast(transform.position, Vector3.right, out info, 12))
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==false)
+           {
+               gameobjectTile._occupied = true;
+               return info.collider.gameObject.transform.position;
+           }
+       }
+    Debug.Log("wrong");
+       return new Vector3(0,0,0);
+   }
     // Update is called once per frame
     void Update()
     {
