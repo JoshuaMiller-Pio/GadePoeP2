@@ -130,6 +130,7 @@ public class CityManager : MonoBehaviour
   
     private void increaseGold(float mineGold)
     {
+        Debug.Log("IncreasedGold");
         _tGold += _gpt;
         _tGold += mineGold;
     }

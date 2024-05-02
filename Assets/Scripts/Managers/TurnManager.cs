@@ -30,10 +30,10 @@ public class TurnManager : MonoBehaviour
         
     }
     
-    public void EndTurn(TurnOrder currentTurnPlayer)
+    public void EndTurn()
     {
         RoundEnd?.Invoke();
-        if (currentTurnPlayer == TurnOrder.Player1)
+        if (TurnPlayer == TurnOrder.Player1)
         {
             TurnPlayer = TurnOrder.Player2;
         }

@@ -55,9 +55,11 @@ public class Character : CharacterSuper
         Physics.Raycast(transform.position, Vector3.down, out info, 12);
         GameObject CurrentTile = info.collider.gameObject;
         Tile tileScript = CurrentTile.GetComponent<Tile>();
+            Debug.Log("isInsideFuncion");
         if (characterScript.CharacterType == CharacterScriptable.characterType.Miner && tileScript.HasMine )
         {
             Incrasegold?.Invoke(tileScript.tileInfo.mineValue);
+            Debug.Log("invoked");
         }
     }
    
