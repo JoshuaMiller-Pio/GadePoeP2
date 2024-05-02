@@ -40,7 +40,6 @@ public class ButtonManager : MonoBehaviour
         else
         {
             SpawnMM?.Invoke();
-            Debug.Log("AH");
 
         }
 
@@ -71,6 +70,7 @@ public class ButtonManager : MonoBehaviour
         {
             TurnManager.TurnPlayer = TurnManager.TurnOrder.Player1;
         }
+        
     }
     void switchPlayer()
     {
