@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
     private Renderer _renderer;
     public  bool _occupied;
     public static event Action<GameObject> placeTown;
+    public static event Action<Tile> TileSelected;
     public static event Func<Vector3, GameObject> tileLocator; 
     public static event Action<TileScriptable> tileUI;
     //on mouse hover highlights game object
@@ -40,6 +41,10 @@ public class Tile : MonoBehaviour
             if (Gamemanager.Instance.canPlaceTown)
             {
                 placeTown?.Invoke(selectedBlock);
+            }
+            else
+            {
+                TileSelected?.Invoke(this);
             }
             //send event of a click
             
@@ -112,6 +117,52 @@ public class Tile : MonoBehaviour
            }
        }
     Debug.Log("wrong");
+       return null;
+   }
+   
+   
+   public GameObject getMovmentBlocks(int passthrough)
+   {
+       RaycastHit info;
+       
+      
+       if (Physics.Raycast(transform.position, Vector3.forward, out info, 12) && passthrough == 0)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==false)
+           {
+               return info.collider.gameObject;
+           }
+       }
+       if (Physics.Raycast(transform.position, Vector3.back, out info, 12) && passthrough == 1)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==false)
+           {
+               return info.collider.gameObject;
+           }
+       }
+       if (Physics.Raycast(transform.position, Vector3.left, out info, 12) && passthrough == 2)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==false)
+           {
+               return info.collider.gameObject;
+           }
+       }
+       if (Physics.Raycast(transform.position, Vector3.right, out info, 12)&& passthrough == 3)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==false)
+           {
+               return info.collider.gameObject;
+           }
+       }
+       Debug.Log("wrong");
        return null;
    }
     // Update is called once per frame
