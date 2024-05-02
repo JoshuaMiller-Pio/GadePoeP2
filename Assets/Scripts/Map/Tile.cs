@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
@@ -28,8 +26,9 @@ public class Tile : MonoBehaviour
     //when mouse is clicked will send off block information TODO try move into own script
     private void OnMouseDown()
     {
-        Vector3 newTileLocation = new Vector3(transform.localPosition.x, transform.localPosition.y,
-            transform.localPosition.z);
+        Vector3 newTileLocation = new Vector3(transform.localPosition.x, transform.localPosition.y,transform.localPosition.z);
+        
+        
         GameObject selectedBlock = tileLocator?.Invoke(newTileLocation);
 
         if (selectedBlock != null)

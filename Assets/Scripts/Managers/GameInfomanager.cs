@@ -9,11 +9,14 @@ public class GameInfomanager : MonoBehaviour
     {
         TurnManager.RoundEnd += updateMetrics;
     }
-
+    
+    //on round end updates metrics
     public void updateMetrics()
     {
         
     }
+    
+    
     // Update is called once per frame
     void Update()
     {
