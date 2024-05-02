@@ -11746,7 +11746,7 @@ MonoBehaviour:
   damage: 0
   moveableTiles: 0
   abilityType: 0
-  characterScript: {fileID: 11400000, guid: d3016369e79a3074fb37963af752bd72, type: 2}
+  characterScript: {fileID: 11400000, guid: 151514e6fd8fc134e96cb133deecdeb5, type: 2}
   moveSpeed: 5
   target: {fileID: 0}
 --- !u!1 &9124899165644550460

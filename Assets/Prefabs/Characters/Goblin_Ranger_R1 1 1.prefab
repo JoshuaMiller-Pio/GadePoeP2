@@ -162,7 +162,7 @@ MonoBehaviour:
   damage: 0
   moveableTiles: 0
   abilityType: 0
-  characterScript: {fileID: 11400000, guid: 44e0d0a91a88a874d92893a4740441f8, type: 2}
+  characterScript: {fileID: 11400000, guid: 5c0e2de09fb388046b5834155690e4ea, type: 2}
   moveSpeed: 5
   target: {fileID: 0}
 --- !u!4 &3039090254889864288 stripped
