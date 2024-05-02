@@ -42,25 +42,11 @@ public class Character : CharacterSuper
         characterActionUI?.Invoke(this);
     }
 
-    public override void Move()
-    {
-        gameObject.transform.position =
-            Vector3.Lerp(gameObject.transform.position, target.transform.position, moveSpeed);
-    }
+   
 
-    public override void Attack()
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
-    public override void TakeDamage(float incomingDamage)
-    {
-        currentHealth = currentHealth - incomingDamage;
-        if (currentHealth <= 0)
-        {
-            Death();
-        }
-    }
+   
 
     public override void UseAbility(int ability)
     {
