@@ -8,12 +8,13 @@ public class Tile : MonoBehaviour
     private Renderer _renderer;
     public static event Action<Vector3> placeTown;
     public static event Func<Vector3, GameObject> tileLocator; 
+    
     //on mouse hover highlights game object
     private void OnMouseEnter()
     {
         Color highlightcolor = Color.cyan;
         _renderer.material.color =   highlightcolor;
-
+        
     }
     
     //removes highlight

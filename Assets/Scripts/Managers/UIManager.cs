@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using UnityEditor.Experimental.Licensing;
+
 public class UIManager : MonoBehaviour
 {
     public GameObject characterPanel, tilePanel, cityPanel;
@@ -28,10 +31,12 @@ public class UIManager : MonoBehaviour
     private Character _characterPiece;
 
     private Tile _tile;
+
+    public static event Func<GameObject> tileInfo;
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     public void UpdateDisplay()
