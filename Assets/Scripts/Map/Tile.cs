@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
@@ -9,13 +10,13 @@ public class Tile : MonoBehaviour
     public  bool _occupied;
     public static event Action<GameObject> placeTown;
     public static event Func<Vector3, GameObject> tileLocator; 
-    
+    public static event Action<TileScriptable> tileUI;
     //on mouse hover highlights game object
     private void OnMouseEnter()
     {
         Color highlightcolor = Color.cyan;
         _renderer.material.color =   highlightcolor;
-        
+        tileUI?.Invoke(tileInfo);
     }
     
     //removes highlight
@@ -54,7 +55,10 @@ public class Tile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       // tileInfo = gameObject.GetComponent<TileScriptable>();
         _renderer = GetComponent<Renderer>();
+        tileInfo.name = tileInfo.names[Convert.ToInt32(tileInfo.tileType)];
+        tileInfo.tileDescription = tileInfo.tileDescriptions[Convert.ToInt32(tileInfo.tileType)];
     }
 
     //called from grid manager, populates if there are mines

@@ -6,12 +6,33 @@ public class CityManager : MonoBehaviour
 {
     private float _tGold = 10, _cityHealth = 100, _bPop = 1, _aPop =0, _gpt = 1;
     public static event Func<Vector3, GameObject> CityManagerTile; 
-
+    private Renderer _renderer;
     public GameObject tileBelow, meele, ranger, worker;
     // Start is called before the first frame update
     void Start()
     {
     }
+    public static event Action<CityManager> cityInfoUI;
+    public static event Action<CityManager> cityActionUI;
+    
+    private void OnMouseEnter()
+    {
+     //   Color highlightcolor = Color.cyan;
+     //   _renderer.material.color =   highlightcolor;
+        cityInfoUI?.Invoke(this);
+    }
+    
+    //removes highlight
+    private void OnMouseExit()
+    {
+        
+       //_renderer.material.color = tileInfo.Color;
+    }
+    private void OnMouseDown()
+    {
+        cityActionUI?.Invoke(this);
+    }
+    
     
     public float TGold => _tGold;
     public float CityHealth => _cityHealth;

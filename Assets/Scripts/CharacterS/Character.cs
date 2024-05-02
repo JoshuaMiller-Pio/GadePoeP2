@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Character : CharacterSuper
 {
     public CharacterScriptable characterScript;
     public float moveSpeed = 5;
     public GameObject target;
+    private MeshRenderer _renderer;
+    public static event Action<Character> characterInfoUI;
+    public static event Action<Character> characterActionUI;
+    public string name;
     // Start is called before the first frame update
     public enum Ability
     {
@@ -17,12 +22,24 @@ public class Character : CharacterSuper
 
     void Start()
     {
-        characterScript = gameObject.GetComponent<CharacterScriptable>();
+       // characterScript = gameObject.GetComponent<CharacterScriptable>();
         currentHealth = characterScript.maxHealth;
         damage = characterScript.damage;
         moveableTiles = characterScript.moveableTiles;
         abilityType = characterScript.abilityType;
-        
+        name = characterScript.characterNames[Convert.ToInt32(characterScript.CharacterType)];
+    }
+
+    private void OnMouseEnter()
+    {
+        Color highlightcolor = Color.cyan;
+       // _renderer.material.color =   highlightcolor;
+        characterInfoUI?.Invoke(this);
+    }
+
+    private void OnMouseDown()
+    {
+        characterActionUI?.Invoke(this);
     }
 
     public override void Move()

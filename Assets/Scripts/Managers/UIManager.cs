@@ -8,7 +8,7 @@ using UnityEditor.Experimental.Licensing;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject characterPanel, tilePanel, cityPanel;
+    public GameObject characterInfoPanel, characterActionPanel, tileInfoPanel, cityInfoPanel, cityActionPanel;
 
     public TMP_Text characterName,
         characterMove,
@@ -30,18 +30,55 @@ public class UIManager : MonoBehaviour
 
     private Character _characterPiece;
 
-    private Tile _tile;
+    private CharacterScriptable _characterScript;
 
-    public static event Func<GameObject> tileInfo;
+    private TileScriptable _tile;
+
+   
     // Start is called before the first frame update
     void Start()
     {
-       
+        Tile.tileUI += TileInfoUIUpdater;
+        Character.characterInfoUI += CharacterInfoUIUpdater;
+        Character.characterActionUI += UpdateCharacterActionDisplay;
     }
 
-    public void UpdateDisplay()
+    private void TileInfoUIUpdater(TileScriptable tile)
     {
+        characterInfoPanel.SetActive(false);
+        cityInfoPanel.SetActive(false);
+        tileInfoPanel.SetActive(true);
+        _tile = tile;
+        tileName.text = _tile.name;
+        tileMovementCost.text = "Move cost = " + _tile.APneeded;
+        tileDescription.text = _tile.tileDescription;
+    }
+
+    public void CharacterInfoUIUpdater(Character character)
+    {
+        _characterPiece = character;
         
+      //  _characterScript = character.GetComponent<CharacterScriptable>();
+        cityInfoPanel.SetActive(false);
+        tileInfoPanel.SetActive(false);
+        characterInfoPanel.SetActive(true);
+        
+        characterName.text = _characterPiece.name;
+        characterAtk.text = "Attack: " + _characterPiece.characterScript.damage;
+        characterHp.text = "HP: " + _characterPiece.currentHealth + "/" + _characterPiece.characterScript.maxHealth;
+        characterMove.text = "Move: " + _characterPiece.characterScript.moveableTiles;
+    }
+    public void UpdateCharacterActionDisplay(Character character)
+    {
+        cityActionPanel.SetActive(false);
+        characterActionPanel.SetActive(true);
+        
+    }
+
+    public void UpdateCityActionDisplay(CityManager city)
+    {
+        characterActionPanel.SetActive(false);
+        cityActionPanel.SetActive(true);
     }
     // Update is called once per frame
     void Update()

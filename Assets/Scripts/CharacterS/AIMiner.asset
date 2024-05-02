@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c93073c0132db448af3bce2539050c7, type: 3}
   m_Name: AIMiner
   m_EditorClassIdentifier: 
+  CharacterType: 2
+  characterNames:
+  - Soldier
+  - Ranger
+  - Miner
+  characterName: 
   moveableTiles: 5
   maxHealth: 5
   damage: 1
