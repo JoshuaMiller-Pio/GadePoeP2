@@ -16,7 +16,7 @@ public class ButtonManager : MonoBehaviour
     private bool player1turn = true;
     
     
-    public void SpawnHArcher()
+    public void SpawnArcher()
     {
         if (player1turn)
         {
@@ -28,7 +28,7 @@ public class ButtonManager : MonoBehaviour
         }
     }
     
-    public void SpawnHMeele()
+    public void SpawnMeele()
     {
         if (player1turn)
         {
@@ -43,7 +43,7 @@ public class ButtonManager : MonoBehaviour
 
     }
     
-    public void SpawnHMiner()
+    public void SpawnMiner()
     {
         if (player1turn)
         {        

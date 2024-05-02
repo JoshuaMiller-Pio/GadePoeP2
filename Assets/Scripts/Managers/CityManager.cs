@@ -9,12 +9,28 @@ public class CityManager : MonoBehaviour
     private float _tGold = 10, _cityHealth = 100, _bPop = 1, _aPop =0, _gpt = 1;
     public static event Func<Vector3, GameObject> CityManagerTile; 
     private Renderer _renderer;
-    
+    private bool player1turn = true;
     public GameObject tileBelow, meele, ranger, worker;
     // Start is called before the first frame update
+  
     void Start()
     {
+        TurnManager.RoundEnd += switchPlayer;
+        if (gameObject.tag == "Human")
+        {
+            ButtonManager.SpawnHA += spawnRanger;
+            ButtonManager.SpawnHMi += spawnUnit;
+            ButtonManager.SpawnHM += spawnWorker ;
+            
+        }
+        else
+        {
+            ButtonManager.SpawnMA += spawnRanger;
+            ButtonManager.SpawnMM += spawnUnit;
+            ButtonManager.SpawnMMi += spawnWorker;
+        }
         
+       
     }
     
     
@@ -62,6 +78,21 @@ public class CityManager : MonoBehaviour
         }
 
     }
+    public void spawnRanger()
+    {
+        Vector3 TargetPosition = tileBelow.GetComponent<Tile>().getSurroundingBlocks();
+        Vector3 spawnPosition = new Vector3(TargetPosition.x, TargetPosition.y+10.1f,TargetPosition.z);
+        if (TargetPosition != new Vector3(0,0,0))
+        {
+            _aPop++;
+            Instantiate(meele, spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("NoSpace");
+        }
+
+    }
     
     public void spawnWorker()
     {
@@ -78,7 +109,17 @@ public class CityManager : MonoBehaviour
         }
 
     }
-
+    void switchPlayer()
+    {
+        if (player1turn)
+        {
+            player1turn = false;
+        }
+        else
+        {
+            player1turn = true;
+        }
+    }
   
     private void increaseGold()
     {
