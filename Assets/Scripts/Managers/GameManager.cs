@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,23 +29,26 @@ public class Gamemanager : Singleton<Gamemanager>
     {
         _towns = towns;
         canPlaceTown = true;
-        Debug.Log("canPlace");
     }
 
-    private void TownPlaced(Vector3 SBLocation)
+    private void TownPlaced(GameObject SBLocation)
     {
-        Debug.Log("inside");
-        if (_townsPlaced <= 2)
+        if (_townsPlaced <  2)
         {
-            Debug.Log("spawn");
-
+            Vector3 castleLocation = new Vector3(SBLocation.transform.position.x, SBLocation.transform.position.y + 9.59f, SBLocation.transform.position.z);
+           GameObject town = Instantiate(_towns[_townsPlaced], castleLocation, Quaternion.identity);
+           town.GetComponent<CityManager>().tileBelow = SBLocation;
+        }
+        else
+        {
             canPlaceTown = false;
-            Vector3 castleLocation = new Vector3(SBLocation.x, SBLocation.y + 9.59f, SBLocation.z);
-            Debug.Log(SBLocation.y);
-            Instantiate(_towns[_townsPlaced], castleLocation, Quaternion.identity);
+            Tile.placeTown -= TownPlaced;
+
         }
         _townsPlaced++;
-
     }
 
+    private void Update()
+    {
+    }
 }

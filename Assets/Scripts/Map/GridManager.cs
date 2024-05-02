@@ -18,6 +18,7 @@ public class GridManager : MonoBehaviour
     {
         //event from the tile script
         Tile.tileLocator += GetTileAtPosition;
+        CityManager.CityManagerTile += GetTileAtPosition;
         float mapCoverage = Random.Range(((distance*distance)/5),(distance*distance)/2),bioNum = Random.Range(0, 10);
         
         //sets the max mines allowed on the map
