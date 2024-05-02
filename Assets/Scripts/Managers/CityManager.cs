@@ -19,8 +19,8 @@ public class CityManager : MonoBehaviour
         if (gameObject.tag == "Human")
         {
             ButtonManager.SpawnHA += spawnRanger;
-            ButtonManager.SpawnHMi += spawnUnit;
-            ButtonManager.SpawnHM += spawnWorker ;
+            ButtonManager.SpawnHM += spawnUnit ;
+            ButtonManager.SpawnHMi += spawnWorker ;
             
         }
         else
@@ -67,7 +67,7 @@ public class CityManager : MonoBehaviour
     {
         Vector3 TargetPosition = tileBelow.GetComponent<Tile>().getSurroundingBlocks();
         Vector3 spawnPosition = new Vector3(TargetPosition.x, TargetPosition.y+10.1f,TargetPosition.z);
-        if (TargetPosition != new Vector3(0,0,0))
+        if (TargetPosition != new Vector3(0,0,0) && (_tGold - 5) >=0 )
         {
             _aPop++;
             Instantiate(meele, spawnPosition, Quaternion.identity);
@@ -82,7 +82,7 @@ public class CityManager : MonoBehaviour
     {
         Vector3 TargetPosition = tileBelow.GetComponent<Tile>().getSurroundingBlocks();
         Vector3 spawnPosition = new Vector3(TargetPosition.x, TargetPosition.y+10.1f,TargetPosition.z);
-        if (TargetPosition != new Vector3(0,0,0))
+        if (TargetPosition != new Vector3(0,0,0)&& (_tGold - 5) >=0)
         {
             _aPop++;
             Instantiate(ranger, spawnPosition, Quaternion.identity);
@@ -98,7 +98,7 @@ public class CityManager : MonoBehaviour
     {
         Vector3 TargetPosition = tileBelow.GetComponent<Tile>().getSurroundingBlocks();
         Vector3 spawnPosition = new Vector3(TargetPosition.x, TargetPosition.y+10.1f,TargetPosition.z);
-        if (TargetPosition != new Vector3(0,0,0))
+        if (TargetPosition != new Vector3(0,0,0)&& (_tGold - 5) >=0)
         {
             _bPop++;
             Instantiate(worker, spawnPosition, Quaternion.identity);
