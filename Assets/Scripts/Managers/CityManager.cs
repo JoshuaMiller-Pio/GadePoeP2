@@ -85,7 +85,7 @@ public class CityManager : MonoBehaviour
         if (TargetPosition != new Vector3(0,0,0))
         {
             _aPop++;
-            Instantiate(meele, spawnPosition, Quaternion.identity);
+            Instantiate(ranger, spawnPosition, Quaternion.identity);
         }
         else
         {
@@ -101,7 +101,7 @@ public class CityManager : MonoBehaviour
         if (TargetPosition != new Vector3(0,0,0))
         {
             _bPop++;
-            Instantiate(meele, spawnPosition, Quaternion.identity);
+            Instantiate(worker, spawnPosition, Quaternion.identity);
         }
         else
         {
