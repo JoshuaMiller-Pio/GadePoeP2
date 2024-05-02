@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using UnityEditor.Experimental.Licensing;
+
 
 public class UIManager : MonoBehaviour
 {
