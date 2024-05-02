@@ -2524,7 +2524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &671248436
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6224,6 +6224,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 486489828}
+        m_TargetAssemblyTypeName: TurnManager, Assembly-CSharp
+        m_MethodName: EndTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1456560060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8261,6 +8273,7 @@ MonoBehaviour:
   cityName: {fileID: 635144208}
   cityHp: {fileID: 741042424}
   cityGold: {fileID: 874324856}
+  gameOverText: {fileID: 0}
   characterImage: {fileID: 1609292275}
   tileImage: {fileID: 312699475}
   cityImage: {fileID: 1085539176}
