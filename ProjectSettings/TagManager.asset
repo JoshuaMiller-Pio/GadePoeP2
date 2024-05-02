@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TurnManager
+  - Human
+  - Monster
   layers:
   - Default
   - TransparentFX
