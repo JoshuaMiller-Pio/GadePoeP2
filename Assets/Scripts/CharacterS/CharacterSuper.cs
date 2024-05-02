@@ -6,13 +6,18 @@ public abstract class CharacterSuper : MonoBehaviour
 {
     public float currentHealth, damage, moveableTiles;
     public int abilityType;
-    
+    public TurnManager.TurnOrder controllingPlayer;
     public float MoveableTiles
     {
         get => moveableTiles;
         set => moveableTiles = value;
     }
-    
+
+    public TurnManager.TurnOrder ControllingPlayer
+    {
+        get => controllingPlayer;
+        set => controllingPlayer = value;
+    }
     public int AbilityType
     {
         get => abilityType;
