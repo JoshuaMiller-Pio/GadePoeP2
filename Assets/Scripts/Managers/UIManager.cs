@@ -6,7 +6,7 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject characterInfoPanel, characterActionPanel, tileInfoPanel, cityInfoPanel, cityActionPanel;
+    public GameObject characterInfoPanel, characterActionPanel, tileInfoPanel, cityInfoPanel, cityActionPanel, pauseMenuCanvas, gameOverCanvas;
 
     public TMP_Text characterName,
         characterMove,
@@ -90,11 +90,18 @@ public class UIManager : MonoBehaviour
         cityHp.text = "HP: " + city.CityHealth.ToString();
         
     }
-    
+
+    public void DisplayGameOver()
+    {
+        gameOverCanvas.SetActive(true);
+    }
     
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            pauseMenuCanvas.SetActive(true);
+        }
     }
 }
