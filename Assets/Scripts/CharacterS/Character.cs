@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class Character : CharacterSuper
 {
@@ -41,6 +42,7 @@ public class Character : CharacterSuper
 
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         characterActionUI?.Invoke(this);
     }
 

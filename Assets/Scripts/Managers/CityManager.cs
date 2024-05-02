@@ -3,6 +3,8 @@ using System;
 using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class CityManager : MonoBehaviour
 {
@@ -52,6 +54,7 @@ public class CityManager : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         cityActionUI?.Invoke(this);
     }
     
