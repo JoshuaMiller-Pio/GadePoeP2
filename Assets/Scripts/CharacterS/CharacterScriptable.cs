@@ -9,4 +9,6 @@ public class CharacterScriptable : ScriptableObject
   public float moveableTiles, maxHealth, damage;
 
   public int abilityType;
+
+  public TurnManager.TurnOrder player;
 }
