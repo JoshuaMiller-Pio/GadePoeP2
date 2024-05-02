@@ -12,9 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77436cff1e739e046a3ef3a29e40846f, type: 3}
   m_Name: Lava
   m_EditorClassIdentifier: 
+  names:
+  - Forest
+  - Desert
+  - Lava
+  - Snow
+  - Mountain
+  tileDescriptions:
+  - A lush, beautiful forest that allows for safe and easy traversal
+  - A harsh, hot, weather beaten expanse. The soft sand makes the land difficult
+    to traverse
+  - Covered with the molten hot blood of the land, standing in this terrain deals
+    5 damage to characters per turn
+  - A hard, frozen, weather beaten expanse. The the cold climate and harsh weather
+    make the land difficult to traverse
+  - Wide open cliffs give expansive views, but steep elevation makes for the most
+    difficult traversal
   Color: {r: 0.49019608, g: 0.007843138, b: 0.07450981, a: 1}
+  name: Lava
+  tileDescription: Covered with the molten hot blood of the land, standing in this
+    terrain deals 5 damage to characters per turn
   hasMine: 1
-  tickDamage: 5
+  tickDamage: 2
   APneeded: 1
   mineValue: 10
   mine: {fileID: 6434864199351736583, guid: ef8615e1eba3e03458178ce5aad76dc9, type: 3}
