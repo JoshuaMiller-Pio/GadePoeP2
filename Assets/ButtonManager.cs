@@ -60,6 +60,17 @@ public class ButtonManager : MonoBehaviour
 
     }
 
+    public void EndTurn()
+    {
+        if (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1)
+        {
+            TurnManager.TurnPlayer = TurnManager.TurnOrder.Player2;
+        }
+        else
+        {
+            TurnManager.TurnPlayer = TurnManager.TurnOrder.Player1;
+        }
+    }
     void switchPlayer()
     {
         if (player1turn)
