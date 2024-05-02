@@ -11,11 +11,13 @@ public class CityManager : MonoBehaviour
     private Renderer _renderer;
     private bool player1turn = true;
     public GameObject tileBelow, meele, ranger, worker;
-    // Start is called before the first frame update
+    public static event Action<CityManager> cityInfoUI;
+    public static event Action<CityManager> cityActionUI;
+    public static event Action<String> gameOver;
   
     void Start()
     {
-        TurnManager.RoundEnd += switchPlayer;
+        Character.Incrasegold += increaseGold;
         if (gameObject.tag == "Human")
         {
             ButtonManager.SpawnHA += spawnRanger;
@@ -34,9 +36,7 @@ public class CityManager : MonoBehaviour
     }
     
     
-    public static event Action<CityManager> cityInfoUI;
-    public static event Action<CityManager> cityActionUI;
-    public static event Action<bool> gameOver;
+
     private void OnMouseEnter()
     {
      //   Color highlightcolor = Color.cyan;
@@ -105,7 +105,7 @@ public class CityManager : MonoBehaviour
 
     public void Death()
     {
-        gameOver?.Invoke(player1turn);
+        gameOver?.Invoke(gameObject.tag);
     }
     public void spawnWorker()
     {
@@ -126,21 +126,12 @@ public class CityManager : MonoBehaviour
         }
 
     }
-    void switchPlayer()
-    {
-        if (player1turn)
-        {
-            player1turn = false;
-        }
-        else
-        {
-            player1turn = true;
-        }
-    }
+
   
-    private void increaseGold()
+    private void increaseGold(float mineGold)
     {
         _tGold += _gpt;
+        _tGold += mineGold;
     }
 
     private void takeDamage(float damage)

@@ -8,6 +8,8 @@ public class Tile : MonoBehaviour
     private bool _hasMine;
     private Renderer _renderer;
     public  bool _occupied;
+
+    public bool HasMine => _hasMine;
     public static event Action<GameObject> placeTown;
     public static event Action<Tile> TileSelected;
     public static event Func<Vector3, GameObject> tileLocator; 
