@@ -6,6 +6,16 @@ using UnityEngine;
 
 public class CharacterScriptable : ScriptableObject
 {
+  public enum characterType
+  {
+    Melee,
+    Ranged,
+    Miner
+  }
+
+  public characterType CharacterType;
+  public string[] characterNames = new string[3] { "Soldier", "Ranger", "Miner" };
+  public string characterName;
   public float moveableTiles, maxHealth, damage;
 
   public int abilityType;

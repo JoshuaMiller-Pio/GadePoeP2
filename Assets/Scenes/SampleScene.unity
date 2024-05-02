@@ -1365,7 +1365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &493854358
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5370,7 +5370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1498697115
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6001,6 +6001,7 @@ MonoBehaviour:
   lava: {fileID: 4601077990813952791, guid: f0d4b1fa60ebc29419a95e6587a0fc13, type: 3}
   mountain: {fileID: 8501335203073514569, guid: 0c4dcd0a796b54d47907beea83d079d3, type: 3}
   desert: {fileID: 4392836720895987007, guid: 8c7e2ff55c1f11e4f8a0d7f7e515363e, type: 3}
+  Towns: []
 --- !u!4 &1872648202
 Transform:
   m_ObjectHideFlags: 0
@@ -6662,9 +6663,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b1df0e03ba7e244baa601be18c587c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPanel: {fileID: 720019772}
-  tilePanel: {fileID: 1498697114}
-  cityPanel: {fileID: 493854357}
+  characterInfoPanel: {fileID: 720019772}
+  characterActionPanel: {fileID: 671248435}
+  tileInfoPanel: {fileID: 1498697114}
+  cityInfoPanel: {fileID: 493854357}
+  cityActionPanel: {fileID: 2007893863}
   characterName: {fileID: 574293739}
   characterMove: {fileID: 417115707}
   characterAtk: {fileID: 23561546}
