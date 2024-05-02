@@ -4150,6 +4150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5917504373130417949}
   - component: {fileID: -2904303815009134610}
+  - component: {fileID: 3959724683930174243}
   m_Layer: 0
   m_Name: HCastle
   m_TagString: Untagged
@@ -4189,6 +4190,27 @@ MonoBehaviour:
   meele: {fileID: 8588348427817837513, guid: 4d948de0ceb997b42b2717fbebe34dc7, type: 3}
   ranger: {fileID: 1773092167984523283, guid: af004fedae44ba64c8e28eedd9613131, type: 3}
   worker: {fileID: 3870539324872044047, guid: 08c54edaf4a4f99469f99404c73920e6, type: 3}
+--- !u!65 &3959724683930174243
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8364473535806513280}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.466729, y: 1.3370271, z: 4.623157}
+  m_Center: {x: 0.2060442, y: 1.0160534, z: 0.06961131}
 --- !u!1 &8456149727250264182
 GameObject:
   m_ObjectHideFlags: 0
