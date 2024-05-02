@@ -38,9 +38,11 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       //TODO ADD BACK Tile.tileUI += TileInfoUIUpdater;
+        Tile.tileUI += TileInfoUIUpdater;
         Character.characterInfoUI += CharacterInfoUIUpdater;
         Character.characterActionUI += UpdateCharacterActionDisplay;
+        CityManager.cityActionUI += UpdateCityActionDisplay;
+        CityManager.cityInfoUI += UpdateCityInfoDisplay;
     }
 
     private void TileInfoUIUpdater(TileScriptable tile)
@@ -80,6 +82,18 @@ public class UIManager : MonoBehaviour
         characterActionPanel.SetActive(false);
         cityActionPanel.SetActive(true);
     }
+
+    public void UpdateCityInfoDisplay(CityManager city)
+    {
+        tileInfoPanel.SetActive(false);
+        characterInfoPanel.SetActive(false);
+        cityInfoPanel.SetActive(true);
+        cityGold.text = "Gold: " + city.TGold.ToString();
+        cityHp.text = "HP: " + city.CityHealth.ToString();
+        
+    }
+    
+    
     // Update is called once per frame
     void Update()
     {
