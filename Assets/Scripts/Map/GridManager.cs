@@ -39,7 +39,6 @@ public class GridManager : MonoBehaviour
             for (int z = 0; z < distance; z++)
             {
                 float y = PerlNoise(x, z, displacement) * secondDisplace;
-                Debug.Log(z);
                 Vector3 position = new Vector3(x * 6, y , z * 6);
                 GameObject tile = Instantiate(Biomeselector(position,mapCoverage,bioNum),position,Quaternion.identity);
                 if (currentMines <minesAllowed && Random.Range(0, 40) == Random.Range(0, 40))
@@ -51,7 +50,6 @@ public class GridManager : MonoBehaviour
                 _tiles[tile.transform.localPosition] = tile;
             }
         }
-        Debug.Log("gridManager off");
         Gamemanager.Instance.subscribe();
         MapCreated?.Invoke(Towns);
     }

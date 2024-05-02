@@ -38,6 +38,7 @@ public class Gamemanager : Singleton<Gamemanager>
             Vector3 castleLocation = new Vector3(SBLocation.transform.position.x, SBLocation.transform.position.y + 9.59f, SBLocation.transform.position.z);
            GameObject town = Instantiate(_towns[_townsPlaced], castleLocation, Quaternion.identity);
            town.GetComponent<CityManager>().tileBelow = SBLocation;
+           SBLocation.GetComponent<Tile>()._occupied = true;
         }
         else
         {
