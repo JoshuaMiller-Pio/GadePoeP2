@@ -36,13 +36,11 @@ public class Tile : MonoBehaviour
 
         if (selectedBlock != null)
         {
-                Debug.Log(Gamemanager.Instance.canPlaceTown);
             
             if (Gamemanager.Instance.canPlaceTown)
             {
                 placeTown?.Invoke(selectedBlock);
             }
-            Debug.Log($"entered {selectedBlock.name + transform.position}");
             //send event of a click
             
         }
@@ -72,28 +70,18 @@ public class Tile : MonoBehaviour
         mine.transform.localPosition = pos;
     }
 
-   public Vector3 getSurroundingBlocks()
+   public GameObject getSurroundingBlocks()
    {
        RaycastHit info;
        
-       if (Physics.Raycast(transform.position, Vector3.back, out info, 12))
-       {
-           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
-           
-           if (gameobjectTile._occupied ==false)
-           {
-               gameobjectTile._occupied = true;
-               return info.collider.gameObject.transform.position;
-           }
-       }
+      
         if (Physics.Raycast(transform.position, Vector3.forward, out info, 12))
        {
            Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
            
            if (gameobjectTile._occupied ==false)
            {
-               gameobjectTile._occupied = true;
-               return info.collider.gameObject.transform.position;
+               return info.collider.gameObject;
            }
        }
         if (Physics.Raycast(transform.position, Vector3.back, out info, 12))
@@ -102,8 +90,7 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==false)
            {
-               gameobjectTile._occupied = true;
-               return info.collider.gameObject.transform.position;
+               return info.collider.gameObject;
            }
        }
         if (Physics.Raycast(transform.position, Vector3.left, out info, 12))
@@ -112,8 +99,7 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==false)
            {
-               gameobjectTile._occupied = true;
-               return info.collider.gameObject.transform.position;
+               return info.collider.gameObject;
            }
        }
         if (Physics.Raycast(transform.position, Vector3.right, out info, 12))
@@ -122,12 +108,11 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==false)
            {
-               gameobjectTile._occupied = true;
-               return info.collider.gameObject.transform.position;
+               return info.collider.gameObject;
            }
        }
     Debug.Log("wrong");
-       return new Vector3(0,0,0);
+       return null;
    }
     // Update is called once per frame
     void Update()

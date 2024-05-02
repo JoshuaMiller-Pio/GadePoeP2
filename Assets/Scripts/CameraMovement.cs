@@ -75,7 +75,6 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.mouseScrollDelta.y != 0)
         {
-            Debug.Log("zooming");
             camDist = Input.mouseScrollDelta.y * Zsens;
             if (ComponentBase is CinemachineFramingTransposer &&
                 (ComponentBase as CinemachineFramingTransposer).m_CameraDistance <= 100 && (ComponentBase as CinemachineFramingTransposer).m_CameraDistance >= 0) 

@@ -18,19 +18,20 @@ public class ButtonManager : MonoBehaviour
     
     public void SpawnArcher()
     {
-        if (player1turn)
+        if (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1)
         {
             SpawnHA?.Invoke();
         }
         else
         {
             SpawnMA?.Invoke();
+            Debug.Log("AH");
         }
     }
     
     public void SpawnMeele()
     {
-        if (player1turn)
+        if (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1)
         {
             SpawnHM?.Invoke();
 
@@ -38,6 +39,7 @@ public class ButtonManager : MonoBehaviour
         else
         {
             SpawnMM?.Invoke();
+            Debug.Log("AH");
 
         }
 
@@ -45,13 +47,15 @@ public class ButtonManager : MonoBehaviour
     
     public void SpawnMiner()
     {
-        if (player1turn)
+        if (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1)
         {        
             SpawnHMi?.Invoke();
         }
         else
         {
             SpawnMMi?.Invoke();
+            Debug.Log("AH");
+
         }
 
     }
