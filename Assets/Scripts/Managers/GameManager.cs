@@ -6,8 +6,7 @@ using UnityEngine;
 public class Gamemanager : Singleton<Gamemanager>
 {
     public TurnManager _turnManager;
-    public HumanPlayer _HumanPlayer;
-    public AIPlayer _AIPlayer;
+   
     public bool canPlaceTown;
     private GameObject[] _towns;
     private int _townsPlaced = 0;
@@ -48,6 +47,7 @@ public class Gamemanager : Singleton<Gamemanager>
         }
         _townsPlaced++;
     }
+
 
     private void Update()
     {
