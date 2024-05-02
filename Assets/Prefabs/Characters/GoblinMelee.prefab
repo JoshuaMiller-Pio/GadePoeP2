@@ -1161,7 +1161,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 94
   m_CollisionDetection: 0
 --- !u!114 &8905714504632259192
 MonoBehaviour:
@@ -1179,9 +1179,11 @@ MonoBehaviour:
   damage: 0
   moveableTiles: 0
   abilityType: 0
+  controllingPlayer: 0
   characterScript: {fileID: 11400000, guid: b7377d9aa85ab614a81488b4b2ef0971, type: 2}
   moveSpeed: 5
   target: {fileID: 0}
+  name: 
 --- !u!1 &7069404883025381189
 GameObject:
   m_ObjectHideFlags: 0

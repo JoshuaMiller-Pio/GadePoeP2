@@ -38,14 +38,14 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Tile.tileUI += TileInfoUIUpdater;
+       //TODO ADD BACK Tile.tileUI += TileInfoUIUpdater;
         Character.characterInfoUI += CharacterInfoUIUpdater;
         Character.characterActionUI += UpdateCharacterActionDisplay;
     }
 
     private void TileInfoUIUpdater(TileScriptable tile)
     {
-        characterInfoPanel.SetActive(false);
+       characterInfoPanel.SetActive(false);
         cityInfoPanel.SetActive(false);
         tileInfoPanel.SetActive(true);
         _tile = tile;
