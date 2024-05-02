@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
@@ -12,6 +11,8 @@ public class ButtonManager : MonoBehaviour
     public static event Action SpawnMA;
     public static event Action SpawnMM;
     public static event Action SpawnMMi;
+    
+    public static event Action onMovePressed;
 
     private bool player1turn = true;
     
@@ -82,7 +83,11 @@ public class ButtonManager : MonoBehaviour
             player1turn = true;
         }
     }
-    
+
+    public void moveCharacter()
+    {
+        onMovePressed?.Invoke();
+    }
     private void Start()
     {
         TurnManager.RoundEnd += switchPlayer;

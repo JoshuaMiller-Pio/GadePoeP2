@@ -8,7 +8,7 @@ public abstract class CharacterSuper : MonoBehaviour
     public float currentHealth, damage, moveableTiles;
     public int abilityType;
     public TurnManager.TurnOrder controllingPlayer;
-    private GameObject CurrentTile, nextTile;
+    private GameObject CurrentTile ;
     Tile  SelectedTile;
     private RaycastHit info;
     public float MoveableTiles
@@ -19,9 +19,9 @@ public abstract class CharacterSuper : MonoBehaviour
 
     private void Start()
     {
-        Physics.Raycast(transform.position, Vector3.forward, out info, 12);
-        CurrentTile = info.collider.gameObject;
-        Tile.TileSelected += selectTile;
+      
+        
+        
     }
 
     public TurnManager.TurnOrder ControllingPlayer
@@ -52,16 +52,20 @@ public abstract class CharacterSuper : MonoBehaviour
     
     public void Move()
     {
+        Physics.Raycast(transform.position, Vector3.down, out info, 12);
+        CurrentTile = info.collider.gameObject;
         Tile tileScript = CurrentTile.GetComponent<Tile>();
-
+        Debug.Log("move");
         for (int i = 0; i < 4; i++)
         {
-            if (SelectedTile.gameObject == tileScript.getMovmentBlocks(i))
+            if (SelectedTile.gameObject == tileScript.getMovmentBlocks(i) && !SelectedTile._occupied)
             {
                 tileScript._occupied = false;
                 SelectedTile._occupied = true;
                 Vector3 MoveTarget = new Vector3(SelectedTile.transform.position.x, SelectedTile.transform.position.y + 10.1f, SelectedTile.transform.position.z);
                 gameObject.transform.position = MoveTarget;
+
+                CurrentTile = SelectedTile.gameObject;
             }
         }
        
