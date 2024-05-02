@@ -6,7 +6,7 @@ public class Tile : MonoBehaviour
     public TileScriptable tileInfo;
     private bool _hasMine;
     private Renderer _renderer;
-
+    public static event Action<Vector3> placeTown;
     public static event Func<Vector3, GameObject> tileLocator; 
     //on mouse hover highlights game object
     private void OnMouseEnter()
@@ -33,8 +33,14 @@ public class Tile : MonoBehaviour
 
         if (selectedBlock != null)
         {
-
-            Debug.Log($"entered {selectedBlock.name}");
+            if (Gamemanager.Instance.canPlaceTown)
+            {
+                Debug.Log("eventOff");
+                placeTown?.Invoke(selectedBlock.transform.position);
+            }
+            Debug.Log($"entered {selectedBlock.name + transform.position}");
+            //send event of a click
+            
         }
         else
         {

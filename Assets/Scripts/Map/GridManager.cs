@@ -11,15 +11,13 @@ public class GridManager : MonoBehaviour
     public GameObject forest, snow, lava, mountain, desert;
     private float DesertBioms, minesAllowed, currentMines = 0;
     public  Dictionary<Vector3, GameObject> _tiles;
-
+    public GameObject[] Towns;
+    public static event Action<GameObject[]> MapCreated;
     // Start is called before the first frame update
     void Start()
     {
         //event from the tile script
         Tile.tileLocator += GetTileAtPosition;
-        
-        //TODO remember what the hell this is supposed to do
-        //edit: selects the what % of the map should be desert
         float mapCoverage = Random.Range(((distance*distance)/5),(distance*distance)/2),bioNum = Random.Range(0, 10);
         
         //sets the max mines allowed on the map
@@ -51,6 +49,9 @@ public class GridManager : MonoBehaviour
                 _tiles[tile.transform.localPosition] = tile;
             }
         }
+        Debug.Log("gridManager off");
+        Gamemanager.Instance.subscribe();
+        MapCreated?.Invoke(Towns);
     }
     //adds mountains and revines to the map
     private float PerlNoise(int x, int z, float displace)
