@@ -28,6 +28,8 @@ public class Character : CharacterSuper
         moveableTiles = characterScript.moveableTiles;
         abilityType = characterScript.abilityType;
         name = characterScript.characterNames[Convert.ToInt32(characterScript.CharacterType)];
+        Tile.TileSelected += selectTile;
+        ButtonManager.onMovePressed += Move;
     }
 
     private void OnMouseEnter()
