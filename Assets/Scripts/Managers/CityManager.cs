@@ -87,12 +87,13 @@ public class CityManager : MonoBehaviour
 
             gameobjectTile._occupied = true;
             Instantiate(meele, spawnPosition, Quaternion.identity);
+            Gamemanager.Instance.DecreaseAP();
         }
         else
         {
             Debug.Log("NoSpace");
         }
-
+        
 
     }
     public void spawnRanger()
@@ -108,6 +109,7 @@ public class CityManager : MonoBehaviour
             gameobjectTile._occupied = true;
             Debug.Log(_tGold);
             Instantiate(ranger, spawnPosition, Quaternion.identity);
+            Gamemanager.Instance.DecreaseAP();
         }
         else
         {
