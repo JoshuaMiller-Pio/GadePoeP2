@@ -22,9 +22,9 @@ public abstract class CharacterSuper : MonoBehaviour
 
     private void Start()
     {
+      
         
-
-
+        
     }
 
     public TurnManager.TurnOrder ControllingPlayer
@@ -55,7 +55,27 @@ public abstract class CharacterSuper : MonoBehaviour
     
     public void Move()
     {
+<<<<<<< HEAD
+        if (TurnManager.TurnPlayer == controllingPlayer)
+        {
 
+            Physics.Raycast(transform.position, Vector3.down, out info, 12);
+            CurrentTile = info.collider.gameObject;
+            Tile tileScript = CurrentTile.GetComponent<Tile>();
+            for (int i = 0; i < 4; i++)
+            {
+                if (SelectedTile.gameObject == tileScript.getMovmentBlocks(i) && !SelectedTile._occupied && availableMoves >0)
+                {
+                    availableMoves--;
+                    tileScript._occupied = false;
+                    SelectedTile._occupied = true;
+                    Vector3 MoveTarget = new Vector3(SelectedTile.transform.position.x, SelectedTile.transform.position.y + 10.1f, SelectedTile.transform.position.z);
+                    gameObject.transform.position = MoveTarget;
+
+                    CurrentTile = SelectedTile.gameObject;
+                }
+            }
+=======
         if ( tag == "Human" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && player == Gamemanager.Instance.selectedunit )
         {
             Physics.Raycast(transform.position, Vector3.down, out info, 12);
@@ -73,7 +93,7 @@ public abstract class CharacterSuper : MonoBehaviour
 
                     CurrentTile = SelectedTile.gameObject;
                 }
-
+>>>>>>> main
 
                 if (availableMoves <=0)
                 {
@@ -81,7 +101,8 @@ public abstract class CharacterSuper : MonoBehaviour
                 }
             }
         }
-
+<<<<<<< HEAD
+=======
         else if (tag == "Monster" && player == Gamemanager.Instance.selectedunit)
         {
             Debug.Log(tag + gameObject.name);
@@ -107,7 +128,7 @@ public abstract class CharacterSuper : MonoBehaviour
                 }
             }
         }
-
+>>>>>>> main
         
 
         //if raycasted tile == selected tile and selected tile isnt occupied then move and set to occupied and set previous tile to open.

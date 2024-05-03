@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 
 public class Character : CharacterSuper
@@ -22,6 +23,7 @@ public class Character : CharacterSuper
 
     void Start()
     {
+       
        // characterScript = gameObject.GetComponent<CharacterScriptable>();
         currentHealth = characterScript.maxHealth;
         damage = characterScript.damage;
