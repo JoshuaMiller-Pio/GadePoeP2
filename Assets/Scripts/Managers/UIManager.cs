@@ -6,7 +6,7 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject characterInfoPanel, characterActionPanel, tileInfoPanel, cityInfoPanel, cityActionPanel, pauseMenuCanvas, gameOverCanvas;
+    public GameObject characterInfoPanel, playerInfoPanel, characterActionPanel, tileInfoPanel, cityInfoPanel, cityActionPanel, pauseMenuCanvas, gameOverCanvas;
 
     public TMP_Text characterName,
         characterMove,
@@ -19,7 +19,9 @@ public class UIManager : MonoBehaviour
         cityName,
         cityHp,
         cityGold,
-        gameOverText;
+        gameOverText,
+        currentPlayer,
+        currentPlayerAP;
 
     public Image characterImage, tileImage, cityImage;
 
@@ -93,6 +95,21 @@ public class UIManager : MonoBehaviour
         
     }
 
+    public void UpdatePlayerInfoPanel()
+    {
+        switch (TurnManager.TurnPlayer)
+        {
+            case TurnManager.TurnOrder.Player1:
+                currentPlayer.text = "Player 1";
+                break;
+                case TurnManager.TurnOrder.Player2:
+                currentPlayer.text = "Player 2";
+                    break;
+                default:
+                break;
+        }
+        
+    }
     public void DisplayGameOver(String tag)
     {
         gameOverCanvas.SetActive(true);
@@ -113,5 +130,6 @@ public class UIManager : MonoBehaviour
         {
             pauseMenuCanvas.SetActive(true);
         }
+        UpdatePlayerInfoPanel();
     }
 }
