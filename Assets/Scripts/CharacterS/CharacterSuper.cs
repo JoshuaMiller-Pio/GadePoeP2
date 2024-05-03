@@ -73,6 +73,11 @@ public abstract class CharacterSuper : MonoBehaviour
                     CurrentTile = SelectedTile.gameObject;
                 }
             }
+
+            if (availableMoves <=0)
+            {
+                Debug.Log("no moves left");
+            }
         }
         
 
