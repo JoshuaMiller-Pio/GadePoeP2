@@ -5,23 +5,29 @@ using UnityEngine;
 
 public class Gamemanager : Singleton<Gamemanager>
 {
-    public TurnManager _turnManager;
    
     public bool canPlaceTown;
     private GameObject[] _towns;
     private int _townsPlaced = 0;
+
     public GameObject selectedunit;
     
+
+    public float _maxAP = 5, _currentAP;
+    public float currentAP => _currentAP;
+    public float maxAP => _maxAP;
+
     // Start is called before the first frame update
     void Start()
     {
         
         Application.targetFrameRate = 60;
-        _turnManager = GameObject.FindGameObjectWithTag("TurnManager").GetComponent<TurnManager>();
+       
     }
 
     public void subscribe()
     {
+        TurnManager.RoundEnd += ResetAP;
         GridManager.MapCreated += AllowPlacement;
         Tile.placeTown += TownPlaced;
     }
@@ -49,6 +55,14 @@ public class Gamemanager : Singleton<Gamemanager>
         _townsPlaced++;
     }
 
+    public void ResetAP()
+    {
+        _currentAP = _maxAP;
+    }
+    public void DecreaseAP()
+    {
+        _currentAP = _currentAP - 1;
+    }
 
     private void Update()
     {

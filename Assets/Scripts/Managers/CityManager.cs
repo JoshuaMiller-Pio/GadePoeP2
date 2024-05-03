@@ -16,9 +16,11 @@ public class CityManager : MonoBehaviour
     public static event Action<CityManager> cityInfoUI;
     public static event Action<CityManager> cityActionUI;
     public static event Action<String> gameOver;
+    
   
     void Start()
     {
+        
         Character.Incrasegold += increaseGold;
         if (gameObject.tag == "Human")
         {
@@ -135,7 +137,7 @@ public class CityManager : MonoBehaviour
 
     }
 
-  
+   
     private void increaseGold(float mineGold)
     {
         Debug.Log("IncreasedGold");
