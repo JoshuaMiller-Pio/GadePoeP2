@@ -63,7 +63,8 @@ public abstract class CharacterSuper : MonoBehaviour
             Physics.Raycast(transform.position, Vector3.down, out info, 12);
             CurrentTile = info.collider.gameObject;
             
-            GameObject citytile = Gamemanager.Instance.Mcity.collider.gameObject;
+            GameObject citytile = Gamemanager.Instance.Mcitytile;
+            
             Tile tileScript = CurrentTile.GetComponent<Tile>();
             for (int i = 0; i < 4; i++)
             {
@@ -76,21 +77,18 @@ public abstract class CharacterSuper : MonoBehaviour
                     gameObject.transform.position = MoveTarget;
                     Gamemanager.Instance._currentAP--;
                     CurrentTile = SelectedTile.gameObject;
-                     tileScript = CurrentTile.GetComponent<Tile>();
+
                 }
                 if (availableMoves <=0)
                 {
                     Debug.Log("no moves left");
                 }
 
-                //check if near enemy city
-                if (tileScript.getAttackBlocks(i) != null)
+    
+                tileScript = CurrentTile.GetComponent<Tile>();
+                if (  citytile == tileScript.getCityBlocks(i) )
                 {
-                    Debug.Log($"citytile is at {citytile} + {citytile.transform.localPosition} + {citytile.tag}");
-                }
-                else if (  citytile ==tileScript.getAttackBlocks(i) )
-                {
-                     deductHP = citytile.GetComponent<CityManager>();
+                     deductHP = Gamemanager.Instance.Mcity.GetComponent<CityManager>();
                      Debug.Log("successful");
                     nearEnemyCity = true;
                 }
@@ -102,11 +100,13 @@ public abstract class CharacterSuper : MonoBehaviour
         else if (tag == "Monster" && player == Gamemanager.Instance.selectedunit)
         {
 
-            Debug.Log(tag + gameObject.name);
             Physics.Raycast(transform.position, Vector3.down, out info, 12);
             CurrentTile = info.collider.gameObject;
+            
+            GameObject citytile = Gamemanager.Instance.Pcitytile;
+
             Tile tileScript = CurrentTile.GetComponent<Tile>();
-            GameObject citytile = info.collider.gameObject;
+           
             for (int i = 0; i < 4; i++)
             {
                 if (SelectedTile != null&& SelectedTile.gameObject == tileScript.getMovmentBlocks(i) && !SelectedTile._occupied && availableMoves >0 && Gamemanager.Instance._currentAP != 0)
@@ -123,6 +123,16 @@ public abstract class CharacterSuper : MonoBehaviour
                 if (availableMoves <=0)
                 {
                     Debug.Log("no moves left");
+                }
+                
+                
+               
+                tileScript = CurrentTile.GetComponent<Tile>();
+                if (  citytile == tileScript.getCityBlocks(i) )
+                {
+                    deductHP = Gamemanager.Instance.Mcity.GetComponent<CityManager>();
+                    Debug.Log("successful");
+                    nearEnemyCity = true;
                 }
              
             }
@@ -147,16 +157,7 @@ public abstract class CharacterSuper : MonoBehaviour
             CurrentTile = info.collider.gameObject;
             Tile PtileScript = CurrentTile.GetComponent<Tile>();
             
-            if (nearEnemyCity && tag == "Human" && deductHP.gameObject.tag != "Human"  && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && player == Gamemanager.Instance.selectedunit )
-            {
-                deductHP.takeDamage(damage);
-                return;
-            }
-            if (nearEnemyCity && tag == "Monster" && deductHP.gameObject.tag != "Monster"  &&  player == Gamemanager.Instance.selectedunit )
-            {
-                deductHP.takeDamage(damage);
-                return;
-            }
+           
              if ( tag == "Human" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && player == Gamemanager.Instance.selectedunit && Gamemanager.Instance.selectedEnemy != null )
             {
                 
@@ -172,7 +173,6 @@ public abstract class CharacterSuper : MonoBehaviour
                 }
                 
             }
-             //TODO FIX ELSE CANT ATTACK AS MONSTER
             else if (tag == "Monster" && player == Gamemanager.Instance.selectedunit && Gamemanager.Instance.selectedEnemy != null)
             {
                
@@ -186,6 +186,21 @@ public abstract class CharacterSuper : MonoBehaviour
                         
                     }
                 }
+            }
+        }
+        else
+        {
+            if (nearEnemyCity && tag == "Human" && deductHP.gameObject.tag != "Human"  && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && player == Gamemanager.Instance.selectedunit )
+            {
+                deductHP.takeDamage(damage);
+                Debug.Log("attackCity");
+                return;
+            }
+            if (nearEnemyCity && tag == "Monster" && deductHP.gameObject.tag != "Monster"  &&  player == Gamemanager.Instance.selectedunit )
+            {
+                deductHP.takeDamage(damage);
+                Debug.Log("attackCity");
+                return;
             }
         }
        

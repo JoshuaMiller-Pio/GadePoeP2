@@ -125,7 +125,56 @@ public class Tile : MonoBehaviour
     Debug.Log("wrong");
        return null;
    }
-   
+   public GameObject getCityBlocks(int passthrough)
+   {
+       RaycastHit info;
+       
+      
+       if (Physics.Raycast(transform.position, Vector3.forward, out info, 12) && passthrough == 0)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile || gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile)
+           {
+               Debug.Log("forward");
+               return info.collider.gameObject;
+           }
+       }
+       if (Physics.Raycast(transform.position, Vector3.back, out info, 12) && passthrough == 1)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile || gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile)
+           {
+               Debug.Log("back");
+
+               return info.collider.gameObject;
+           }
+       }
+       if (Physics.Raycast(transform.position, Vector3.left, out info, 12) && passthrough == 2)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile || gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile)
+           {
+               Debug.Log("left");
+
+               return info.collider.gameObject;
+           }
+       }
+       if (Physics.Raycast(transform.position, Vector3.right, out info, 12)&& passthrough == 3)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile || gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile)
+           {
+               Debug.Log("right");
+               return info.collider.gameObject;
+           }
+       }
+       Debug.Log("null");
+       return null;
+   }
    public GameObject getAttackBlocks(int passthrough)
    {
        RaycastHit info;
@@ -137,6 +186,7 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==true)
            {
+               Debug.Log("forward");
                return info.collider.gameObject;
            }
        }
@@ -146,6 +196,8 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==true)
            {
+               Debug.Log("back");
+
                return info.collider.gameObject;
            }
        }
@@ -155,6 +207,8 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==true)
            {
+               Debug.Log("left");
+
                return info.collider.gameObject;
            }
        }
@@ -164,9 +218,11 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==true)
            {
+               Debug.Log("right");
                return info.collider.gameObject;
            }
        }
+       Debug.Log("null");
        return null;
    }
    public GameObject getMovmentBlocks(int passthrough)

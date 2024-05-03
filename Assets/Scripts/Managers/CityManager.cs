@@ -27,11 +27,6 @@ public class CityManager : MonoBehaviour
             ButtonManager.SpawnHA += spawnRanger;
             ButtonManager.SpawnHM += spawnUnit ;
             ButtonManager.SpawnHMi += spawnWorker ;
-            RaycastHit hinfo;
-            Physics.Raycast(transform.position, Vector3.down, out hinfo, 5, layerMask: LayerMask.NameToLayer("Tile"));
-            Gamemanager.Instance.Pcity = hinfo;
-            
-            Debug.Log("human");
 
         }
         else 
@@ -40,10 +35,7 @@ public class CityManager : MonoBehaviour
             ButtonManager.SpawnMM += spawnUnit;
             ButtonManager.SpawnMMi += spawnWorker;
             Debug.Log("Monster");
-            RaycastHit minfo;
-
-            Physics.Raycast(transform.position, Vector3.down, out minfo, 5, layerMask: LayerMask.NameToLayer("Tile"));
-            Gamemanager.Instance.Mcity = minfo;
+          
 
         }
         
