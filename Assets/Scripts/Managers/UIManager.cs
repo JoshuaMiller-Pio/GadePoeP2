@@ -108,7 +108,8 @@ public class UIManager : MonoBehaviour
                 default:
                 break;
         }
-        
+
+        currentPlayerAP.text = "AP: " + Gamemanager.Instance._currentAP;
     }
     public void DisplayGameOver(String tag)
     {
