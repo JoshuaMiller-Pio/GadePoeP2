@@ -158,10 +158,25 @@ public class CityManager : MonoBehaviour
 
     private void roundEnd()
     {
-        if (canheal)
+        
+
+        if (this.gameObject.tag == "Human" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1)
         {
-         heal();
-            
+             _tGold += _gpt;
+             if (canheal)
+             {
+                 heal();
+                
+             }
+        }
+        if (this.gameObject.tag == "Monster" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2)
+        {
+            _tGold += _gpt;
+            if (canheal)
+            {
+                heal();
+                
+            }
         }
 
         canheal = false;
@@ -173,7 +188,6 @@ public class CityManager : MonoBehaviour
     }
     private void increaseGold(float mineGold)
     {
-        _tGold += _gpt;
         _tGold += mineGold;
     }
 
