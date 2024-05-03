@@ -70,7 +70,11 @@ public class CityManager : MonoBehaviour
     {
         GameObject TargetPosition = tileBelow.GetComponent<Tile>().getSurroundingBlocks();
         Vector3 spawnPosition = new Vector3(TargetPosition.transform.position.x, TargetPosition.transform.position.y+10.1f,TargetPosition.transform.position.z);
-        if (TargetPosition != null && (_tGold - 5) >=0 )
+        if ((_tGold - 5) <0 ) 
+        {
+            Debug.Log("noGold");
+        }
+        if ( (_tGold - 5) >=0 )
         {
             _aPop++;
             _tGold -= 5;
@@ -83,6 +87,7 @@ public class CityManager : MonoBehaviour
         {
             Debug.Log("NoSpace");
         }
+
 
     }
     public void spawnRanger()

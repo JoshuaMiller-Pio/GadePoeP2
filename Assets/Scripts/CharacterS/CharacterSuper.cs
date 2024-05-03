@@ -59,7 +59,7 @@ public abstract class CharacterSuper : MonoBehaviour
         Tile tileScript = CurrentTile.GetComponent<Tile>();
         for (int i = 0; i < 4; i++)
         {
-            if (SelectedTile.gameObject == tileScript.getMovmentBlocks(i) && !SelectedTile._occupied && availableMoves >0)
+            if (SelectedTile != null&& SelectedTile.gameObject == tileScript.getMovmentBlocks(i) && !SelectedTile._occupied && availableMoves >0)
             {
                 availableMoves--;
                 tileScript._occupied = false;
