@@ -33,6 +33,7 @@ public class TurnManager : MonoBehaviour
     public void EndTurn()
     {
         RoundEnd?.Invoke();
+        Debug.Log("roundEnded");
         if (TurnPlayer == TurnOrder.Player1)
         {
             TurnPlayer = TurnOrder.Player2;

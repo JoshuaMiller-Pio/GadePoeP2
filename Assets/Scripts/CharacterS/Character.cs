@@ -67,6 +67,7 @@ public class Character : CharacterSuper
     void resetMoves()
     {
         availableMoves = characterScript.moveableTiles;
+        Debug.Log("moves reset");
     }
 
     public override void UseAbility(int ability)
