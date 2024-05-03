@@ -1489,7 +1489,7 @@ GameObject:
   - component: {fileID: 8094106911079625906}
   m_Layer: 0
   m_Name: HumanMiner
-  m_TagString: Untagged
+  m_TagString: Human
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1602,9 +1602,8 @@ MonoBehaviour:
   moveableTiles: 0
   abilityType: 0
   controllingPlayer: 0
+  availableMoves: 0
   characterScript: {fileID: 11400000, guid: d3016369e79a3074fb37963af752bd72, type: 2}
-  moveSpeed: 5
-  target: {fileID: 0}
   name: 
 --- !u!1 &3890857048151486236
 GameObject:

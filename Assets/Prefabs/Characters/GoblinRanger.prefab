@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1830524526325850215}
   m_Layer: 0
   m_Name: GoblinRanger
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,10 @@ PrefabInstance:
     - target: {fileID: 3039090254889373696, guid: 22f01c42c907a21488ce3a7e00638a43, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039090254889373696, guid: 22f01c42c907a21488ce3a7e00638a43, type: 3}
+      propertyPath: m_TagString
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 3039090254889864288, guid: 22f01c42c907a21488ce3a7e00638a43, type: 3}
       propertyPath: m_LocalScale.x
