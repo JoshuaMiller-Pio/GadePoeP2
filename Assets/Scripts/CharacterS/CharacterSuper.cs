@@ -69,6 +69,11 @@ public abstract class CharacterSuper : MonoBehaviour
 
                 CurrentTile = SelectedTile.gameObject;
             }
+
+            if (availableMoves <=0)
+            {
+                Debug.Log("no moves left");
+            }
         }
 
         //if raycasted tile == selected tile and selected tile isnt occupied then move and set to occupied and set previous tile to open.

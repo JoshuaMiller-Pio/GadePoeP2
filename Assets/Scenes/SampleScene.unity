@@ -4914,8 +4914,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1568565796}
-        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+      - m_Target: {fileID: 486489828}
+        m_TargetAssemblyTypeName: TurnManager, Assembly-CSharp
         m_MethodName: EndTurn
         m_Mode: 1
         m_Arguments:
