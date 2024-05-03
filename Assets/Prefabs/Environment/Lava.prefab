@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7608698434173236379}
   - component: {fileID: 4560852819664111573}
   - component: {fileID: 8369789989472538583}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,3 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileInfo: {fileID: 11400000, guid: 226ef78adfec05a45989a74ebb5dc81b, type: 2}
+  _occupied: 0

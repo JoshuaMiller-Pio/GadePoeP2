@@ -13,6 +13,7 @@ public class ButtonManager : MonoBehaviour
     public static event Action SpawnMMi;
     
     public static event Action onMovePressed;
+    public static event Action onAttackPressed;
 
     private bool player1turn = true;
     
@@ -76,6 +77,10 @@ public class ButtonManager : MonoBehaviour
     public void moveCharacter()
     {
         onMovePressed?.Invoke();
+    } 
+    public void AttackCharacter()
+    {
+        onAttackPressed?.Invoke();
     }
     private void Start()
     {

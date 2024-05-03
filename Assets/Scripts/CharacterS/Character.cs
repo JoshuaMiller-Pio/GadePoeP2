@@ -32,6 +32,7 @@ public class Character : CharacterSuper
         name = characterScript.characterNames[Convert.ToInt32(characterScript.CharacterType)];
         Tile.TileSelected += selectTile;
         ButtonManager.onMovePressed += Move;
+        ButtonManager.onAttackPressed += Attack;
         availableMoves = characterScript.moveableTiles;
         TurnManager.RoundEnd += GoldUpdate;
         TurnManager.RoundEnd += resetMoves;
@@ -50,7 +51,28 @@ public class Character : CharacterSuper
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
         characterActionUI?.Invoke(this);
-        Gamemanager.Instance.selectedunit = this.gameObject;
+        if (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && gameObject.tag == "Human")
+        {
+            Gamemanager.Instance.selectedunit = this.gameObject;
+        }
+        else if (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2 && gameObject.tag == "Monster")
+        {
+            Gamemanager.Instance.selectedunit = this.gameObject;
+
+        }
+      
+
+        if (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && gameObject.tag == "Monster")
+        {
+            Gamemanager.Instance.selectedEnemy = this.gameObject;
+        }
+        else if (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2 && gameObject.tag == "Human")
+        {
+            Gamemanager.Instance.selectedEnemy = this.gameObject;
+        }
+
+        
+      
     }
 
    

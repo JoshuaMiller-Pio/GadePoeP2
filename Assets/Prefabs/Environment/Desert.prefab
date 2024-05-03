@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3619053339790905324}
   - component: {fileID: 1738544003897402765}
   - component: {fileID: 6102709259537334913}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Desert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,3 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileInfo: {fileID: 11400000, guid: d5b9e354b6ffd464bb7872a7fe0d6fa9, type: 2}
+  _occupied: 0

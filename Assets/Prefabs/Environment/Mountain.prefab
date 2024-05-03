@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3546194807078612486}
   - component: {fileID: 901530702353403246}
   - component: {fileID: 3975894219743522306}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mountain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,3 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileInfo: {fileID: 11400000, guid: 82f7a8be0ba18e148b07a5bbd28fde0d, type: 2}
+  _occupied: 0

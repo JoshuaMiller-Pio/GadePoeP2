@@ -35,6 +35,6 @@ MonoBehaviour:
   hasMine: 1
   tickDamage: 2
   APneeded: 1
-  mineValue: 10
+  mineValue: 5
   mine: {fileID: 6434864199351736583, guid: ef8615e1eba3e03458178ce5aad76dc9, type: 3}
   tileType: 2
