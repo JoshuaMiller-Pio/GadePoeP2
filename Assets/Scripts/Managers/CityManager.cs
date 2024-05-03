@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class CityManager : MonoBehaviour
 {
-    private float _tGold = 10, _cityHealth = 20, _bPop = 1, _aPop =0, _gpt = 1;
+    private float _tGold = 10, _cityHealth = 20, _bPop = 1, _aPop =0, _gpt = 5;
     public static event Func<Vector3, GameObject> CityManagerTile; 
     private Renderer _renderer;
     private bool player1turn = true;
