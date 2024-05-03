@@ -14,6 +14,8 @@ public class ButtonManager : MonoBehaviour
     
     public static event Action onMovePressed;
     public static event Action onAttackPressed;
+    public static event Action onHReinforcedPressed;
+    public static event Action onMReinforcedPressed;
 
     private bool player1turn = true;
     
@@ -85,5 +87,17 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         TurnManager.RoundEnd += switchPlayer;
+    }
+    public void reinforce()
+    {
+        if (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1)
+        {
+            onHReinforcedPressed?.Invoke();
+        }
+        else
+        {
+            
+            onMReinforcedPressed?.Invoke();
+        }
     }
 }

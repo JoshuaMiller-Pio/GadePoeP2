@@ -17,16 +17,20 @@ public class CityManager : MonoBehaviour
     public static event Action<CityManager> cityActionUI;
     public static event Action<String> gameOver;
     
+    bool canheal = false;
+
   
     void Start()
     {
         
         Character.Incrasegold += increaseGold;
+        TurnManager.RoundEnd += roundEnd;
         if (gameObject.tag == "Human")
         {
             ButtonManager.SpawnHA += spawnRanger;
             ButtonManager.SpawnHM += spawnUnit ;
             ButtonManager.SpawnHMi += spawnWorker ;
+            ButtonManager.onHReinforcedPressed += reinforced ;
 
         }
         else 
@@ -34,6 +38,7 @@ public class CityManager : MonoBehaviour
             ButtonManager.SpawnMA += spawnRanger;
             ButtonManager.SpawnMM += spawnUnit;
             ButtonManager.SpawnMMi += spawnWorker;
+            ButtonManager.onMReinforcedPressed += reinforced ;
             Debug.Log("Monster");
           
 
@@ -122,6 +127,15 @@ public class CityManager : MonoBehaviour
     {
         gameOver?.Invoke(gameObject.tag);
     }
+    
+    private void reinforced()
+    {
+        if (_tGold - 2 >= 0 && !canheal)
+        {
+            canheal = true;
+            _tGold -= 2;
+        }
+    }
     public void spawnWorker()
     {
         GameObject TargetPosition = tileBelow.GetComponent<Tile>().getSurroundingBlocks();
@@ -142,7 +156,21 @@ public class CityManager : MonoBehaviour
 
     }
 
-   
+    private void roundEnd()
+    {
+        if (canheal)
+        {
+         heal();
+            
+        }
+
+        canheal = false;
+    }
+
+    private void heal()
+    {
+        _cityHealth += 3;
+    }
     private void increaseGold(float mineGold)
     {
         _tGold += _gpt;
