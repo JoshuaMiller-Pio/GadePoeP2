@@ -75,7 +75,7 @@ public abstract class CharacterSuper : MonoBehaviour
                     SelectedTile._occupied = true;
                     Vector3 MoveTarget = new Vector3(SelectedTile.transform.position.x, SelectedTile.transform.position.y + 10.1f, SelectedTile.transform.position.z);
                     gameObject.transform.position = MoveTarget;
-                    Gamemanager.Instance._currentAP--;
+                    Gamemanager.Instance.DecreaseAP();
                     CurrentTile = SelectedTile.gameObject;
 
                 }
@@ -89,7 +89,6 @@ public abstract class CharacterSuper : MonoBehaviour
                 if (  citytile == tileScript.getCityBlocks(i) )
                 {
                      deductHP = Gamemanager.Instance.Mcity.GetComponent<CityManager>();
-                     Debug.Log("successful");
                     nearEnemyCity = true;
                 }
 
@@ -131,7 +130,6 @@ public abstract class CharacterSuper : MonoBehaviour
                 if (  citytile == tileScript.getCityBlocks(i) )
                 {
                     deductHP = Gamemanager.Instance.Mcity.GetComponent<CityManager>();
-                    Debug.Log("successful");
                     nearEnemyCity = true;
                 }
              
@@ -165,10 +163,8 @@ public abstract class CharacterSuper : MonoBehaviour
                 {
                     if (EtileScript != null && EtileScript.gameObject == PtileScript.getAttackBlocks(i) && Gamemanager.Instance._currentAP != 0)
                     {
-                        Gamemanager.Instance.DecreaseAP();                    
-                        Debug.Log("Attack");
                         Gamemanager.Instance.selectedEnemy.GetComponent<Character>().TakeDamage(damage);
-                        
+                        Gamemanager.Instance.DecreaseAP();
                     }
                 }
                 
@@ -180,10 +176,9 @@ public abstract class CharacterSuper : MonoBehaviour
                 {
                     if (EtileScript != null && EtileScript.gameObject == PtileScript.getAttackBlocks(i) && Gamemanager.Instance._currentAP != 0)
                     {
-                        Gamemanager.Instance.DecreaseAP();                    
-                        Debug.Log("Attack");
                         Gamemanager.Instance.selectedEnemy.GetComponent<Character>().TakeDamage(damage);
-                        
+                        Gamemanager.Instance.DecreaseAP();
+
                     }
                 }
             }
@@ -193,13 +188,15 @@ public abstract class CharacterSuper : MonoBehaviour
             if (nearEnemyCity && tag == "Human" && deductHP.gameObject.tag != "Human"  && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && player == Gamemanager.Instance.selectedunit )
             {
                 deductHP.takeDamage(damage);
-                Debug.Log("attackCity");
+                Gamemanager.Instance.DecreaseAP();
+
                 return;
             }
             if (nearEnemyCity && tag == "Monster" && deductHP.gameObject.tag != "Monster"  &&  player == Gamemanager.Instance.selectedunit )
             {
                 deductHP.takeDamage(damage);
-                Debug.Log("attackCity");
+                Gamemanager.Instance.DecreaseAP();
+
                 return;
             }
         }
@@ -217,8 +214,8 @@ public abstract class CharacterSuper : MonoBehaviour
         }
     }
 
+    
     public abstract void UseAbility(int ability);
-
     public abstract void Death();
 
 }
