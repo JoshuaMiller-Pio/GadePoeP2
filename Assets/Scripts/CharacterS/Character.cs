@@ -32,6 +32,7 @@ public class Character : CharacterSuper
         ButtonManager.onMovePressed += Move;
         availableMoves = characterScript.moveableTiles;
         TurnManager.RoundEnd += GoldUpdate;
+        TurnManager.RoundEnd += resetMoves;
 
     }
 
@@ -57,14 +58,16 @@ public class Character : CharacterSuper
         Physics.Raycast(transform.position, Vector3.down, out info, 12);
         GameObject CurrentTile = info.collider.gameObject;
         Tile tileScript = CurrentTile.GetComponent<Tile>();
-            Debug.Log("isInsideFuncion");
         if (characterScript.CharacterType == CharacterScriptable.characterType.Miner && tileScript.HasMine )
         {
             Incrasegold?.Invoke(tileScript.tileInfo.mineValue);
-            Debug.Log("invoked");
         }
     }
-   
+
+    void resetMoves()
+    {
+        availableMoves = characterScript.moveableTiles;
+    }
 
     public override void UseAbility(int ability)
     {

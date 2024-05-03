@@ -37,6 +37,7 @@ public class Tile : MonoBehaviour
         {
             return;
         }
+        Debug.Log("Weird");
         Vector3 newTileLocation = new Vector3(transform.localPosition.x, transform.localPosition.y,transform.localPosition.z);
         
         
