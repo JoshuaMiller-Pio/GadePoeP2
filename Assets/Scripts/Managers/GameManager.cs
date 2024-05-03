@@ -11,7 +11,8 @@ public class Gamemanager : Singleton<Gamemanager>
     private int _townsPlaced = 0;
 
     public GameObject selectedunit, selectedEnemy ;
-    public RaycastHit Mcity, Pcity;
+    public GameObject Mcitytile, Pcitytile;
+    public GameObject Mcity, Pcity;
 
     public float _maxAP = 5, _currentAP;
     public float currentAP => _currentAP;
@@ -22,7 +23,7 @@ public class Gamemanager : Singleton<Gamemanager>
     {
         
         Application.targetFrameRate = 60;
-       
+        _currentAP = maxAP;
     }
 
     public void subscribe()
@@ -45,6 +46,16 @@ public class Gamemanager : Singleton<Gamemanager>
            GameObject town = Instantiate(_towns[_townsPlaced], castleLocation, Quaternion.identity);
            town.GetComponent<CityManager>().tileBelow = SBLocation;
            SBLocation.GetComponent<Tile>()._occupied = true;
+           if (_townsPlaced == 0)
+           {
+               Pcitytile = SBLocation;
+               Pcity = town;
+           }
+           else
+           {
+               Mcitytile = SBLocation;
+               Mcity = town;
+           }
         }
         else
         {

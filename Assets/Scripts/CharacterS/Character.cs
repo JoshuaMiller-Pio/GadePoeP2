@@ -33,9 +33,9 @@ public class Character : CharacterSuper
         Tile.TileSelected += selectTile;
         ButtonManager.onMovePressed += Move;
         ButtonManager.onAttackPressed += Attack;
-        availableMoves = characterScript.moveableTiles;
         TurnManager.RoundEnd += GoldUpdate;
         TurnManager.RoundEnd += resetMoves;
+        availableMoves = characterScript.moveableTiles;
         tag = gameObject.tag;
         player = this.gameObject;
     }
@@ -113,7 +113,15 @@ public class Character : CharacterSuper
             
         }
     }
-    
+
+    private void OnDestroy()
+    {
+        Tile.TileSelected -= selectTile;
+        ButtonManager.onMovePressed -= Move;
+        ButtonManager.onAttackPressed -= Attack;
+        TurnManager.RoundEnd -= GoldUpdate;
+        TurnManager.RoundEnd -= resetMoves;    }
+
     public override void Death()
     {
         Destroy(this.gameObject);
