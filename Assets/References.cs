@@ -1,7 +1,8 @@
 /*
+ Reference List:
  
- 
- 
+ 3D Models:
+
  https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/cardboard-fat-man-231760
   
  https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/goblin-ranger-14607
@@ -15,9 +16,10 @@
  
  https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/goblin-12131
  
- 
- 
- 
+ Images:
+Miller-Pio, J. 2024. Kingdoms Conquest Main Menu background. [Personal image]. Cape Town. Unpublished
+Zunde, J. 2024. Kingdoms Conquest In-game UI. [Personal image]. Cape Town. Unpublished
+
  
  
  
