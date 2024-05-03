@@ -25,10 +25,10 @@ public class GridManager : MonoBehaviour
         minesAllowed = distance / 3;
         
         //displaces the perlin noise for randomness
-        displacement = Random.Range(4, 7);//4 7
+        displacement = 7;//Random.Range(4, 7);//4 7
         
         //allows for more randomness
-        secondDisplace = Random.Range(8, 30);//8 30
+        secondDisplace = 25;// Random.Range(8, 30);//8 30
        
         //creates the dictionary 
         _tiles = new Dictionary<Vector3, GameObject>();

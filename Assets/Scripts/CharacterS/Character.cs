@@ -33,7 +33,7 @@ public class Character : CharacterSuper
         Tile.TileSelected += selectTile;
         ButtonManager.onMovePressed += Move;
         ButtonManager.onAttackPressed += Attack;
-        TurnManager.RoundEnd += GoldUpdate;
+        TurnManager.RoundEnd += RoundEndUpdate;
         TurnManager.RoundEnd += resetMoves;
         availableMoves = characterScript.moveableTiles;
         tag = gameObject.tag;
@@ -78,7 +78,7 @@ public class Character : CharacterSuper
    
 
     
-    void GoldUpdate()
+    void RoundEndUpdate()
     {
         RaycastHit info;
         Physics.Raycast(transform.position, Vector3.down, out info, 12);
@@ -87,6 +87,11 @@ public class Character : CharacterSuper
         if (characterScript.CharacterType == CharacterScriptable.characterType.Miner && tileScript.HasMine )
         {
             Incrasegold?.Invoke(tileScript.tileInfo.mineValue);
+        }
+
+        if (tileScript.tileInfo.tileType == TileScriptable.TileType.Lava)
+        {
+            currentHealth -= tileScript.tileInfo.tickDamage;
         }
     }
 
@@ -119,7 +124,7 @@ public class Character : CharacterSuper
         Tile.TileSelected -= selectTile;
         ButtonManager.onMovePressed -= Move;
         ButtonManager.onAttackPressed -= Attack;
-        TurnManager.RoundEnd -= GoldUpdate;
+        TurnManager.RoundEnd -= RoundEndUpdate;
         TurnManager.RoundEnd -= resetMoves;    }
 
     public override void Death()
