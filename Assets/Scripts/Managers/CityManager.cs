@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class CityManager : MonoBehaviour
 {
-    private float _tGold = 10, _cityHealth = 100, _bPop = 1, _aPop =0, _gpt = 1;
+    private float _tGold = 10, _cityHealth = 20, _bPop = 1, _aPop =0, _gpt = 1;
     public static event Func<Vector3, GameObject> CityManagerTile; 
     private Renderer _renderer;
     private bool player1turn = true;
@@ -27,13 +27,24 @@ public class CityManager : MonoBehaviour
             ButtonManager.SpawnHA += spawnRanger;
             ButtonManager.SpawnHM += spawnUnit ;
             ButtonManager.SpawnHMi += spawnWorker ;
+            RaycastHit hinfo;
+            Physics.Raycast(transform.position, Vector3.down, out hinfo, 5, layerMask: LayerMask.NameToLayer("Tile"));
+            Gamemanager.Instance.Pcity = hinfo;
             
+            Debug.Log("human");
+
         }
         else 
         {
             ButtonManager.SpawnMA += spawnRanger;
             ButtonManager.SpawnMM += spawnUnit;
             ButtonManager.SpawnMMi += spawnWorker;
+            Debug.Log("Monster");
+            RaycastHit minfo;
+
+            Physics.Raycast(transform.position, Vector3.down, out minfo, 5, layerMask: LayerMask.NameToLayer("Tile"));
+            Gamemanager.Instance.Mcity = minfo;
+
         }
         
        
@@ -132,7 +143,7 @@ public class CityManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("NoSpace");
+            Debug.Log("NoSpace/ no gold");
         }
 
     }
@@ -140,14 +151,14 @@ public class CityManager : MonoBehaviour
    
     private void increaseGold(float mineGold)
     {
-        Debug.Log("IncreasedGold");
         _tGold += _gpt;
         _tGold += mineGold;
     }
 
-    private void takeDamage(float damage)
+    public void takeDamage(float damage)
     {
         _cityHealth -= damage;
+        Debug.Log(_cityHealth);
         if (_cityHealth <= 0)
         {
             Death();

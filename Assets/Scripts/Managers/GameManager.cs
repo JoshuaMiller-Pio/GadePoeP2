@@ -10,8 +10,8 @@ public class Gamemanager : Singleton<Gamemanager>
     private GameObject[] _towns;
     private int _townsPlaced = 0;
 
-    public GameObject selectedunit;
-    
+    public GameObject selectedunit, selectedEnemy ;
+    public RaycastHit Mcity, Pcity;
 
     public float _maxAP = 5, _currentAP;
     public float currentAP => _currentAP;

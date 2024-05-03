@@ -126,7 +126,49 @@ public class Tile : MonoBehaviour
        return null;
    }
    
-   
+   public GameObject getAttackBlocks(int passthrough)
+   {
+       RaycastHit info;
+       
+      
+       if (Physics.Raycast(transform.position, Vector3.forward, out info, 12) && passthrough == 0)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==true)
+           {
+               return info.collider.gameObject;
+           }
+       }
+       if (Physics.Raycast(transform.position, Vector3.back, out info, 12) && passthrough == 1)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==true)
+           {
+               return info.collider.gameObject;
+           }
+       }
+       if (Physics.Raycast(transform.position, Vector3.left, out info, 12) && passthrough == 2)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==true)
+           {
+               return info.collider.gameObject;
+           }
+       }
+       if (Physics.Raycast(transform.position, Vector3.right, out info, 12)&& passthrough == 3)
+       {
+           Tile gameobjectTile = info.collider.gameObject.GetComponent<Tile>();
+           
+           if (gameobjectTile._occupied ==true)
+           {
+               return info.collider.gameObject;
+           }
+       }
+       return null;
+   }
    public GameObject getMovmentBlocks(int passthrough)
    {
        RaycastHit info;
@@ -168,7 +210,6 @@ public class Tile : MonoBehaviour
                return info.collider.gameObject;
            }
        }
-       Debug.Log("wrong");
        return null;
    }
     // Update is called once per frame

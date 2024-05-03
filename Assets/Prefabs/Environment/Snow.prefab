@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2750696086094570286}
   - component: {fileID: 494920469958603804}
   - component: {fileID: 4605738578004079348}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,3 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileInfo: {fileID: 11400000, guid: 1bb4c7593dcba604eaacf3937791c1f1, type: 2}
+  _occupied: 0

@@ -33,7 +33,9 @@ public class TurnManager : MonoBehaviour
     public void EndTurn()
     {
         RoundEnd?.Invoke();
-        Debug.Log("roundEnded");
+        //TODO check if its workingsa
+        Gamemanager.Instance.selectedunit = null;
+        Gamemanager.Instance.selectedEnemy = null;
         if (TurnPlayer == TurnOrder.Player1)
         {
             TurnPlayer = TurnOrder.Player2;

@@ -106,7 +106,6 @@ public class GridManager : MonoBehaviour
             {
 
                     DesertBioms++;
-                    Debug.Log(info.collider.gameObject.name);
                     return desert;
 
             }

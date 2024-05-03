@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 40629242349240362}
   - component: {fileID: 4034783644854069240}
   - component: {fileID: 2829809417972002149}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Forest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,3 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileInfo: {fileID: 11400000, guid: d17c39ed919e2a748b9b967e72aee7f9, type: 2}
+  _occupied: 0
