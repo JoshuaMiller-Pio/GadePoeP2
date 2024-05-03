@@ -70,7 +70,7 @@ public abstract class CharacterSuper : MonoBehaviour
                     SelectedTile._occupied = true;
                     Vector3 MoveTarget = new Vector3(SelectedTile.transform.position.x, SelectedTile.transform.position.y + 10.1f, SelectedTile.transform.position.z);
                     gameObject.transform.position = MoveTarget;
-
+                    Gamemanager.Instance._currentAP--;
                     CurrentTile = SelectedTile.gameObject;
                 }
 
@@ -97,7 +97,7 @@ public abstract class CharacterSuper : MonoBehaviour
                     SelectedTile._occupied = true;
                     Vector3 MoveTarget = new Vector3(SelectedTile.transform.position.x, SelectedTile.transform.position.y + 10.1f, SelectedTile.transform.position.z);
                     gameObject.transform.position = MoveTarget;
-
+                    Gamemanager.Instance._currentAP--;
                     CurrentTile = SelectedTile.gameObject;
                 }
 
@@ -108,16 +108,16 @@ public abstract class CharacterSuper : MonoBehaviour
             }
         }
 
-        
 
-        //if raycasted tile == selected tile and selected tile isnt occupied then move and set to occupied and set previous tile to open.
-        
-        //deduct AP
+
     }
 
     public void Attack()
     {
-        
+         if ( tag == "Human" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && player == Gamemanager.Instance.selectedunit )
+        {   
+            
+        }
     }
 
     public  void TakeDamage(float incomingDamage)
