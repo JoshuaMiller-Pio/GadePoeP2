@@ -11630,7 +11630,7 @@ GameObject:
   - component: {fileID: 2235822459777654279}
   m_Layer: 0
   m_Name: GoblinMiner
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11747,9 +11747,8 @@ MonoBehaviour:
   moveableTiles: 0
   abilityType: 0
   controllingPlayer: 0
+  availableMoves: 0
   characterScript: {fileID: 11400000, guid: 151514e6fd8fc134e96cb133deecdeb5, type: 2}
-  moveSpeed: 5
-  target: {fileID: 0}
   name: 
 --- !u!1 &9124899165644550460
 GameObject:

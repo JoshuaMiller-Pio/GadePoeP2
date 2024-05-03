@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 3133953776566801059}
   m_Layer: 0
   m_Name: HumanRanged
-  m_TagString: Untagged
+  m_TagString: Human
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -520,9 +520,8 @@ MonoBehaviour:
   moveableTiles: 0
   abilityType: 0
   controllingPlayer: 0
+  availableMoves: 0
   characterScript: {fileID: 11400000, guid: 44e0d0a91a88a874d92893a4740441f8, type: 2}
-  moveSpeed: 5
-  target: {fileID: 0}
   name: 
 --- !u!1 &1815215960044882025
 GameObject:

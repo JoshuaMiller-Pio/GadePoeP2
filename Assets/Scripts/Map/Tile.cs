@@ -37,7 +37,6 @@ public class Tile : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Weird");
         Vector3 newTileLocation = new Vector3(transform.localPosition.x, transform.localPosition.y,transform.localPosition.z);
         
         
@@ -66,7 +65,6 @@ public class Tile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // tileInfo = gameObject.GetComponent<TileScriptable>();
         _renderer = GetComponent<Renderer>();
         tileInfo.name = tileInfo.names[Convert.ToInt32(tileInfo.tileType)];
         tileInfo.tileDescription = tileInfo.tileDescriptions[Convert.ToInt32(tileInfo.tileType)];

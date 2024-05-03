@@ -1071,7 +1071,7 @@ GameObject:
   - component: {fileID: 8905714504632259192}
   m_Layer: 0
   m_Name: GoblinMelee
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1180,9 +1180,8 @@ MonoBehaviour:
   moveableTiles: 0
   abilityType: 0
   controllingPlayer: 0
+  availableMoves: 0
   characterScript: {fileID: 11400000, guid: b7377d9aa85ab614a81488b4b2ef0971, type: 2}
-  moveSpeed: 5
-  target: {fileID: 0}
   name: 
 --- !u!1 &7069404883025381189
 GameObject:

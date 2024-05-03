@@ -10,6 +10,7 @@ public class Gamemanager : Singleton<Gamemanager>
     public bool canPlaceTown;
     private GameObject[] _towns;
     private int _townsPlaced = 0;
+    public GameObject selectedunit;
     
     // Start is called before the first frame update
     void Start()
