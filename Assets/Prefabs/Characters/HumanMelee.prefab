@@ -2239,7 +2239,7 @@ GameObject:
   - component: {fileID: 8091362308565761779}
   m_Layer: 0
   m_Name: HumanMelee
-  m_TagString: Untagged
+  m_TagString: Human
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2326,9 +2326,8 @@ MonoBehaviour:
   moveableTiles: 0
   abilityType: 0
   controllingPlayer: 0
+  availableMoves: 0
   characterScript: {fileID: 11400000, guid: 7e9201101c49514469b915eeffad98c7, type: 2}
-  moveSpeed: 5
-  target: {fileID: 0}
   name: 
 --- !u!1 &8638466382313798831
 GameObject:

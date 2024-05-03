@@ -33,7 +33,8 @@ public class Character : CharacterSuper
         availableMoves = characterScript.moveableTiles;
         TurnManager.RoundEnd += GoldUpdate;
         TurnManager.RoundEnd += resetMoves;
-
+        tag = gameObject.tag;
+        player = this.gameObject;
     }
 
     private void OnMouseEnter()
@@ -47,6 +48,7 @@ public class Character : CharacterSuper
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
         characterActionUI?.Invoke(this);
+        Gamemanager.Instance.selectedunit = this.gameObject;
     }
 
    

@@ -12,7 +12,8 @@ public abstract class CharacterSuper : MonoBehaviour
     Tile  SelectedTile;
     private RaycastHit info;
     public float availableMoves;
-
+    public string tag;
+    public GameObject player;
     public float MoveableTiles
     {
         get => moveableTiles;
@@ -54,15 +55,15 @@ public abstract class CharacterSuper : MonoBehaviour
     
     public void Move()
     {
-        if (TurnManager.TurnPlayer == controllingPlayer)
-        {
 
+        if ( tag == "Human" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && player == Gamemanager.Instance.selectedunit )
+        {
             Physics.Raycast(transform.position, Vector3.down, out info, 12);
             CurrentTile = info.collider.gameObject;
             Tile tileScript = CurrentTile.GetComponent<Tile>();
             for (int i = 0; i < 4; i++)
             {
-                if (SelectedTile.gameObject == tileScript.getMovmentBlocks(i) && !SelectedTile._occupied && availableMoves >0)
+                if (SelectedTile != null&& SelectedTile.gameObject == tileScript.getMovmentBlocks(i) && !SelectedTile._occupied && availableMoves >0)
                 {
                     availableMoves--;
                     tileScript._occupied = false;
@@ -72,13 +73,41 @@ public abstract class CharacterSuper : MonoBehaviour
 
                     CurrentTile = SelectedTile.gameObject;
                 }
-            }
 
-            if (availableMoves <=0)
-            {
-                Debug.Log("no moves left");
+
+                if (availableMoves <=0)
+                {
+                    Debug.Log("no moves left");
+                }
             }
         }
+
+        else if (tag == "Monster" && player == Gamemanager.Instance.selectedunit)
+        {
+            Debug.Log(tag + gameObject.name);
+            Physics.Raycast(transform.position, Vector3.down, out info, 12);
+            CurrentTile = info.collider.gameObject;
+            Tile tileScript = CurrentTile.GetComponent<Tile>();
+            for (int i = 0; i < 4; i++)
+            {
+                if (SelectedTile != null&& SelectedTile.gameObject == tileScript.getMovmentBlocks(i) && !SelectedTile._occupied && availableMoves >0)
+                {
+                    availableMoves--;
+                    tileScript._occupied = false;
+                    SelectedTile._occupied = true;
+                    Vector3 MoveTarget = new Vector3(SelectedTile.transform.position.x, SelectedTile.transform.position.y + 10.1f, SelectedTile.transform.position.z);
+                    gameObject.transform.position = MoveTarget;
+
+                    CurrentTile = SelectedTile.gameObject;
+                }
+
+                if (availableMoves <=0)
+                {
+                    Debug.Log("no moves left");
+                }
+            }
+        }
+
         
 
         //if raycasted tile == selected tile and selected tile isnt occupied then move and set to occupied and set previous tile to open.
