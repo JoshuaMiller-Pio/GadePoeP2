@@ -4153,7 +4153,7 @@ GameObject:
   - component: {fileID: -2439776701560584148}
   m_Layer: 0
   m_Name: MCastle
-  m_TagString: Monster
+  m_TagString: MonsterB
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -14,7 +14,7 @@ public abstract class CharacterSuper : MonoBehaviour
     public float availableMoves;
     public string tag;
     public GameObject player;
-    private bool nearEnemyCity;
+    public bool nearEnemyCity, canMove;
     private CityManager deductHP;
     public float MoveableTiles
     {
@@ -82,6 +82,7 @@ public abstract class CharacterSuper : MonoBehaviour
                 if (availableMoves <=0)
                 {
                     Debug.Log("no moves left");
+                    canMove = false;
                 }
 
     
@@ -185,14 +186,14 @@ public abstract class CharacterSuper : MonoBehaviour
         }
         else
         {
-            if (nearEnemyCity && tag == "Human" && deductHP.gameObject.tag != "Human"  && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && player == Gamemanager.Instance.selectedunit )
+            if (nearEnemyCity && tag == "Human" && deductHP.gameObject.tag != "HumanB"  && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1 && player == Gamemanager.Instance.selectedunit )
             {
                 deductHP.takeDamage(damage);
                 Gamemanager.Instance.DecreaseAP();
 
                 return;
             }
-            if (nearEnemyCity && tag == "Monster" && deductHP.gameObject.tag != "Monster"  &&  player == Gamemanager.Instance.selectedunit )
+            if (nearEnemyCity && tag == "Monster" && deductHP.gameObject.tag != "MonsterB"  &&  player == Gamemanager.Instance.selectedunit )
             {
                 deductHP.takeDamage(damage);
                 Gamemanager.Instance.DecreaseAP();

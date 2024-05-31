@@ -7596,7 +7596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a0ffbc618b30254a844d5c4d8d814bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 25
+  distance: 20
   displacement: 0
   secondDisplace: 15
   forest: {fileID: 4632799756089274787, guid: 9ab27959486195e46bcaccd289d1db24, type: 3}

@@ -7,7 +7,7 @@ public class AIPlayer : PlayerSuper
     // Start is called before the first frame update
     void Start()
     {
-        _gameManager = Gamemanager.Instance;
+       
         player = TurnManager.TurnOrder.Player2;
     }
 
@@ -17,6 +17,7 @@ public class AIPlayer : PlayerSuper
         
     }
 
+   
     public override void RestartGame()
     {
         throw new System.NotImplementedException();

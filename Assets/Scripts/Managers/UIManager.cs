@@ -114,13 +114,13 @@ public class UIManager : MonoBehaviour
     public void DisplayGameOver(String tag)
     {
         gameOverCanvas.SetActive(true);
-        if (tag != "Human")
+        if (tag != "HumanB")
         {
-            gameOverText.text = "Player 1 Wins! Congratulations!";
+            gameOverText.text = "Humans Win! Congratulations!";
         }
         else
         {
-            gameOverText.text = "Player 2 Wins! Congratulations!";
+            gameOverText.text = "Monsters Win! Congratulations!";
         }
     }
     

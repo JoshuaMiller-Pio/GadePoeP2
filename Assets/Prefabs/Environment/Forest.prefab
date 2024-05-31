@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2829809417972002149}
   m_Layer: 3
   m_Name: Forest
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
