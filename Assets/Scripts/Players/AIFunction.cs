@@ -31,7 +31,7 @@ public class AIFunction : Singleton<AIFunction>
 
     }
 
-    public  void AIUtilityFunction()
+    public void AIUtilityFunction()
     {
         if (Hbase == null)
         {
@@ -102,8 +102,8 @@ public class AIFunction : Singleton<AIFunction>
     public float whereToMove()
     {
         /*
-            Utility for where for an army to move:  (DEC - DL) OR (DEP - DL)
-            Utility for where a miner should move = DG - DL
+            Utility for where for an army to move:  (distance to enemy city - distance to lava) OR (distance to enemy piece - distance to lava)
+            Utility for where a miner should move = distance to gold - Distance to lava
          */
         return 0;
     }
@@ -111,8 +111,8 @@ public class AIFunction : Singleton<AIFunction>
     public float whatToSummon()
     {
         /*
-         * Summon Army: (Bool space is empty) (DEP - DL) / 100 OR (if no enemy pieces spawned (DEC - DL) / 100
-            Summon Miner: (DG - DL) / 100
+         * Summon Army: (Bool space is empty) (distance to enemy piece - distance to lava) / 100 OR (if no enemy pieces spawned (DEC - DL) / 100
+            Summon Miner: (distance to gold - Distance to lava) / 100
          */
         return 0;
     }
