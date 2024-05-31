@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class CityManager : MonoBehaviour
 {
-    private float _tGold = 10, _cityHealth = 20, _bPop = 1, _aPop =0, _gpt = 5;
+    public float _tGold = 10, _cityHealth = 20, _bPop = 1, _aPop =0, _gpt = 5;
     public static event Func<Vector3, GameObject> CityManagerTile; 
     private Renderer _renderer;
     private bool player1turn = true;
@@ -25,7 +25,7 @@ public class CityManager : MonoBehaviour
         
         Character.Incrasegold += increaseGold;
         TurnManager.RoundEnd += roundEnd;
-        if (gameObject.tag == "Human")
+        if (gameObject.tag == "HumanB")
         {
             ButtonManager.SpawnHA += spawnRanger;
             ButtonManager.SpawnHM += spawnUnit ;
@@ -160,7 +160,7 @@ public class CityManager : MonoBehaviour
     {
         
 
-        if (this.gameObject.tag == "Human" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1)
+        if (this.gameObject.tag == "HumanB" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player1)
         {
              _tGold += _gpt;
              if (canheal)
@@ -169,7 +169,7 @@ public class CityManager : MonoBehaviour
                 
              }
         }
-        if (this.gameObject.tag == "Monster" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2)
+        if (this.gameObject.tag == "MonsterB" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2)
         {
             _tGold += _gpt;
             if (canheal)

@@ -7,6 +7,9 @@ TagManager:
   - TurnManager
   - Human
   - Monster
+  - Tile
+  - HumanB
+  - MonsterB
   layers:
   - Default
   - TransparentFX

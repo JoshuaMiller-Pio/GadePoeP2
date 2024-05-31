@@ -7,7 +7,7 @@ public abstract class PlayerSuper : MonoBehaviour
     public float currentAP;
     public float maxAP;
     public TurnManager.TurnOrder player;
-    public Gamemanager _gameManager;
+   
     
     public float CurrentAP
     {

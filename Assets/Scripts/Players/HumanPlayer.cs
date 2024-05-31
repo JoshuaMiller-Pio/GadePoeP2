@@ -7,7 +7,7 @@ public class HumanPlayer : PlayerSuper
     // Start is called before the first frame update
     void Start()
     {
-        _gameManager = Gamemanager.Instance;
+      
         player = TurnManager.TurnOrder.Player1;
     }
 
