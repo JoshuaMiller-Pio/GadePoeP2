@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 public class CityManager : MonoBehaviour
 {
-    public float _tGold = 10, _cityHealth = 20, _bPop = 1, _aPop =0, _gpt = 5;
+    public float _tGold = 10, _cityHealth = 20, _bPop = 1, _aPop =0, _gpt = 5, currentArmyHealth, currentWorkerHealth, controlledMines;
     public static event Func<Vector3, GameObject> CityManagerTile; 
     private Renderer _renderer;
     private bool player1turn = true;
@@ -48,9 +48,45 @@ public class CityManager : MonoBehaviour
         
        
     }
-    
-    
 
+
+    public float UpdateArmyHealth()
+    {
+        for (int i = 0; i < summonedArmy.Count; i++)
+        {
+            Character character = summonedArmy[i].GetComponent<Character>();
+           
+            currentArmyHealth = currentArmyHealth + character.currentHealth;
+        }
+
+        return currentArmyHealth;
+    }
+
+    public float UpdatesControlledMines()
+    {
+        for (int i = 0; i < summonedWorkers.Count; i++)
+        {
+            controlledMines = 0;
+            Character worker = summonedWorkers[i].GetComponent<Character>();
+            if (worker.Occupiedtile.tileInfo.hasMine)
+            {
+                controlledMines++;
+            }
+        }
+
+        return controlledMines;
+    }
+    public float UpdateWorkerHealth()
+    {
+        for (int i = 0; i < summonedWorkers.Count; i++)
+        {
+            Character character = summonedWorkers[i].GetComponent<Character>();
+           
+            currentWorkerHealth = currentWorkerHealth + character.currentHealth;
+        }
+
+        return currentWorkerHealth;
+    }
     private void OnMouseEnter()
     {
      //   Color highlightcolor = Color.cyan;
