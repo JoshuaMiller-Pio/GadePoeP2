@@ -41,6 +41,10 @@ public class GridManager : MonoBehaviour
                 float y = PerlNoise(x, z, displacement) * secondDisplace;
                 Vector3 position = new Vector3(x * 6, y , z * 6);
                 GameObject tile = Instantiate(Biomeselector(position,mapCoverage,bioNum),position,Quaternion.identity);
+             
+                
+                tile.GetComponent<Tile>().x = x;
+                tile.GetComponent<Tile>().y = z;
                 if (currentMines <minesAllowed && Random.Range(0, 40) == Random.Range(0, 40))
                 {
                     tile.GetComponent<Tile>().hasMine();

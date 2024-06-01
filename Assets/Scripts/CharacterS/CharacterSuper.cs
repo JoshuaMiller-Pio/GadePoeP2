@@ -10,6 +10,7 @@ public abstract class CharacterSuper : MonoBehaviour
     public TurnManager.TurnOrder controllingPlayer;
     private GameObject CurrentTile,EnemyTile;
     Tile  SelectedTile;
+    public Tile Occupiedtile;
     private RaycastHit info ;
     public float availableMoves;
     public string tag;
@@ -77,6 +78,7 @@ public abstract class CharacterSuper : MonoBehaviour
                     gameObject.transform.position = MoveTarget;
                     Gamemanager.Instance.DecreaseAP();
                     CurrentTile = SelectedTile.gameObject;
+                    Occupiedtile = CurrentTile.GetComponent<Tile>();
 
                 }
                 if (availableMoves <=0)
