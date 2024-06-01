@@ -10,6 +10,7 @@ public class AIFunction : Singleton<AIFunction>
     public List<GameObject> Munits, Hunits;
     private GameObject[,] tiles = new GameObject[20,20];
     private GameObject Hbase, Mbase;
+    private Tile HbaseTile, MbaseTile;
     private Dictionary<int, LavaLocations> _lavaLocationsMap = new Dictionary<int, LavaLocations>();
     private Dictionary<int, GoldLocations> _goldLocationsMap = new Dictionary<int, GoldLocations>();
     private enum Summonable
@@ -45,10 +46,12 @@ public class AIFunction : Singleton<AIFunction>
         if (Hbase == null)
         {
             Hbase = GameObject.FindGameObjectWithTag("HumanB");
+            HbaseTile = Hbase.GetComponent<CityManager>().tileBelow.GetComponent<Tile>();
         }
         if (Mbase == null)
         {
             Mbase = GameObject.FindGameObjectWithTag("MonsterB");
+            MbaseTile = Mbase.GetComponent<CityManager>().tileBelow.GetComponent<Tile>();
         }
 
       
@@ -148,17 +151,21 @@ public class AIFunction : Singleton<AIFunction>
         return final;
     }
 
-    public float whereToMove()
+    public float whereToMove(GameObject unit)
     {
+        float final = 0;
+        
+        
         /*
-            Utility for where for an army to move:  (distance to enemy city - distance to lava) OR (distance to enemy piece - distance to lava)
             Utility for where a miner should move = distance to gold - Distance to lava
+            Utility for where for an army to move:  (distance to enemy city - distance to lava) OR (distance to enemy piece - distance to lava)
          */
-        return 0;
+        return final;
     }
 
     public float whatToSummon()
     {
+        float final;
         /*
          * Summon Army: (Bool space is empty) (distance to enemy piece - distance to lava) / 100 OR (if no enemy pieces spawned (DEC - DL) / 100
             Summon Miner: (distance to gold - Distance to lava) / 100
@@ -168,8 +175,9 @@ public class AIFunction : Singleton<AIFunction>
 
     public float Attack()
     {
+        float final;
         /*
-         * If distance to city greater than attack range : Utility for where to attack : (Target health after attack) / 100
+            If distance to city greater than attack range : Utility for where to attack : (Target health after attack) / 100
             If distance to city less than attack range: (Target health after attack) / 100
          */
         return 0;
