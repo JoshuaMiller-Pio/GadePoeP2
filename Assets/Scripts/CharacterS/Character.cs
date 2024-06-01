@@ -13,6 +13,8 @@ public class Character : CharacterSuper
     public static event Action<Character> characterActionUI;
     public static event Action<float> Incrasegold;
     public string name;
+
+    private CityManager _cityManager;
     // Start is called before the first frame update
     public enum Ability
     {
@@ -38,6 +40,14 @@ public class Character : CharacterSuper
         availableMoves = characterScript.moveableTiles;
         tag = gameObject.tag;
         player = this.gameObject;
+        if (gameObject.tag == "Human")
+        {
+            _cityManager = GameObject.FindGameObjectWithTag("HumanB").GetComponent<CityManager>();
+        }
+        else
+        {
+            _cityManager = GameObject.FindGameObjectWithTag("MonsterB").GetComponent<CityManager>();
+        }
     }
 
     private void OnMouseEnter()
@@ -130,6 +140,14 @@ public class Character : CharacterSuper
 
     public override void Death()
     {
+        if (characterScript.CharacterType == CharacterScriptable.characterType.Miner)
+        {
+            _cityManager.summonedWorkers.Remove(gameObject);
+        }
+        else
+        {
+            _cityManager.summonedArmy.Remove(gameObject);
+        }
         Destroy(this.gameObject);
     }
     // Update is called once per frame

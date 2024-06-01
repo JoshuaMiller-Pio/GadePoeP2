@@ -1,5 +1,6 @@
 using System.Collections;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -16,7 +17,8 @@ public class CityManager : MonoBehaviour
     public static event Action<CityManager> cityInfoUI;
     public static event Action<CityManager> cityActionUI;
     public static event Action<String> gameOver;
-    
+    public List<GameObject> summonedArmy;
+    public List<GameObject> summonedWorkers;
     bool canheal = false;
 
   
@@ -78,6 +80,7 @@ public class CityManager : MonoBehaviour
     
     public void spawnUnit()
     {
+        
         GameObject TargetPosition = tileBelow.GetComponent<Tile>().getSurroundingBlocks();
         Vector3 spawnPosition = new Vector3(TargetPosition.transform.position.x, TargetPosition.transform.position.y+10.1f,TargetPosition.transform.position.z);
         if ((_tGold - 5) <0 ) 
@@ -86,12 +89,14 @@ public class CityManager : MonoBehaviour
         }
         if ( (_tGold - 5) >=0 )
         {
+            GameObject newCharacter;
             _aPop++;
             _tGold -= 5;
             Tile gameobjectTile = TargetPosition.GetComponent<Tile>();
 
             gameobjectTile._occupied = true;
-            Instantiate(meele, spawnPosition, Quaternion.identity);
+            newCharacter = Instantiate(meele, spawnPosition, Quaternion.identity);
+            summonedArmy.Add(newCharacter);
             Gamemanager.Instance.DecreaseAP();
         }
         else
@@ -108,12 +113,13 @@ public class CityManager : MonoBehaviour
         if (TargetPosition != null&& (_tGold - 5) >=0)
         {
             Tile gameobjectTile = TargetPosition.GetComponent<Tile>();
-
+            GameObject newCharacter;
             _aPop++;
             _tGold -= 5;
             gameobjectTile._occupied = true;
             Debug.Log(_tGold);
-            Instantiate(ranger, spawnPosition, Quaternion.identity);
+            newCharacter = Instantiate(ranger, spawnPosition, Quaternion.identity);
+            summonedArmy.Add(newCharacter);
             Gamemanager.Instance.DecreaseAP();
         }
         else
@@ -143,11 +149,12 @@ public class CityManager : MonoBehaviour
         if (TargetPosition != null && (_tGold - 5) >=0)
         {
             Tile gameobjectTile = TargetPosition.GetComponent<Tile>();
-
+            GameObject newCharacter;
             _bPop++;
             _tGold -= 5;
             gameobjectTile._occupied = true;
-            Instantiate(worker, spawnPosition, Quaternion.identity);
+            newCharacter = Instantiate(worker, spawnPosition, Quaternion.identity);
+            summonedWorkers.Add(newCharacter);
         }
         else
         {
