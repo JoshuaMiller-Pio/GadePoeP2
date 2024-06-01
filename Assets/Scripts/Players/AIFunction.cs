@@ -94,15 +94,52 @@ public class AIFunction : Singleton<AIFunction>
     {
         float final=0;
         Character charScript = unit.GetComponent<Character>();
-        if (charScript.characterScript.CharacterType == CharacterScriptable.characterType.Melee &&charScript.characterScript.CharacterType == CharacterScriptable.characterType.Ranged )
+        
+        if (charScript.characterScript.CharacterType == CharacterScriptable.characterType.Miner)
         {
-            int max=-1000;
-         
-            final = Convert.ToInt32(charScript.canMove) * ((Hbase.GetComponent<CityManager>().TGold/Mbase.GetComponent<CityManager>().TGold) /* distance to gold + distance to lava */);
+            float gmin = 1000, gdistance, lmin = 1000, ldistance;
+            for (int i = 0; i < _goldLocationsMap.Count; i++)
+            {
+                gdistance = distance(unit.GetComponent<Character>().Occupiedtile.x, _goldLocationsMap[i].x, unit.GetComponent<Character>().Occupiedtile.y, _goldLocationsMap[i].y);
+                if (gmin>gdistance)
+                {
+                    gmin = gdistance;
+                }
+            }
+            for (int i = 0; i < _lavaLocationsMap.Count; i++)
+            {
+                ldistance = distance(unit.GetComponent<Character>().Occupiedtile.x, _lavaLocationsMap[i].x, unit.GetComponent<Character>().Occupiedtile.y, _lavaLocationsMap[i].y);
+                if (lmin>ldistance)
+                {
+                    lmin = ldistance;
+                }
+            }
+
+            final = Convert.ToInt32(charScript.canMove) * ((Hbase.GetComponent<CityManager>().TGold/Mbase.GetComponent<CityManager>().TGold) * (gmin +lmin) );
         }
         else
         {
-            final = Convert.ToInt32(charScript.canMove) * ((Hbase.GetComponent<CityManager>().TGold/Mbase.GetComponent<CityManager>().TGold) /* distance to enemy + distance to lava */);
+            float emin = 1000, edistance, lmin = 1000, ldistance;
+
+            for (int i = 0; i < _lavaLocationsMap.Count; i++)
+            {
+                ldistance = distance(unit.GetComponent<Character>().Occupiedtile.x, _lavaLocationsMap[i].x, unit.GetComponent<Character>().Occupiedtile.x, _lavaLocationsMap[i].y);
+                if (lmin<ldistance)
+                {
+                    lmin = ldistance;
+                }
+            }
+         
+            for (int i = 0; i < Hunits.Count; i++)
+            {
+                edistance = distance(unit.GetComponent<Character>().Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.x, unit.GetComponent<Character>().Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.y);
+                if (emin > edistance)
+                {
+                    emin = edistance;
+                }
+            } 
+            final = Convert.ToInt32(charScript.canMove) * ((Hbase.GetComponent<CityManager>().TGold/Mbase.GetComponent<CityManager>().TGold) *  (emin +lmin) );
+            
             
         }
         
@@ -138,10 +175,9 @@ public class AIFunction : Singleton<AIFunction>
         return 0;
     }
 
-    public int distance(int x1, int x2, int y1, int y2)
+    public float distance(int x1, int x2, int y1, int y2)
     {
-       int distance = Convert.ToInt32(Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2))); 
-        
+       float distance = (float)Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2)); 
         return distance;
     }
     

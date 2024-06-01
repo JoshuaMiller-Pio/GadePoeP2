@@ -78,7 +78,6 @@ public abstract class CharacterSuper : MonoBehaviour
                     gameObject.transform.position = MoveTarget;
                     Gamemanager.Instance.DecreaseAP();
                     CurrentTile = SelectedTile.gameObject;
-                    Occupiedtile = CurrentTile.GetComponent<Tile>();
 
                 }
                 if (availableMoves <=0)
@@ -89,6 +88,7 @@ public abstract class CharacterSuper : MonoBehaviour
 
     
                 tileScript = CurrentTile.GetComponent<Tile>();
+                Occupiedtile = CurrentTile.GetComponent<Tile>();
                 if (  citytile == tileScript.getCityBlocks(i) )
                 {
                      deductHP = Gamemanager.Instance.Mcity.GetComponent<CityManager>();
