@@ -9,7 +9,7 @@ public class Tile : MonoBehaviour
     private bool _hasMine;
     private Renderer _renderer;
     public  bool _occupied;
-
+    public int x = 0, y = 0;
     public bool HasMine => _hasMine;
     public static event Action<GameObject> placeTown;
     public static event Action<Tile> TileSelected;
@@ -37,6 +37,7 @@ public class Tile : MonoBehaviour
         {
             return;
         }
+        Debug.Log(x +" " + y);
         Vector3 newTileLocation = new Vector3(transform.localPosition.x, transform.localPosition.y,transform.localPosition.z);
         
         
