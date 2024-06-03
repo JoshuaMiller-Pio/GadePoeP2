@@ -50,6 +50,7 @@ public class AIFunction : Singleton<AIFunction>
             
         }
 
+        AIUtilityFunction();
     }
 
     public void AIUtilityFunction()
