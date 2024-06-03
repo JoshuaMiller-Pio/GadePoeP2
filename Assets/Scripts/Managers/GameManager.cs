@@ -6,10 +6,10 @@ using UnityEngine;
 public class Gamemanager : Singleton<Gamemanager>
 {
    
-    public bool canPlaceTown;
+    public bool canPlaceTown,AIPlayer=false;
     private GameObject[] _towns;
     private int _townsPlaced = 0;
-
+    
     public GameObject selectedunit, selectedEnemy ;
     public GameObject Mcitytile, Pcitytile;
     public GameObject Mcity, Pcity;
@@ -75,6 +75,12 @@ public class Gamemanager : Singleton<Gamemanager>
         _currentAP = _currentAP - 1;
     }
 
+    public void AIPlaying()
+    {
+        AIPlayer = true;
+        AIFunction ai = gameObject.GetComponent<AIFunction>();
+      //  ai.enabled =true;
+    }
     private void Update()
     {
     }

@@ -12,7 +12,8 @@ public class TurnManager : MonoBehaviour
     public enum TurnOrder
     {
         Player1,
-        Player2
+        Player2,
+        AI
     };
     
     // Start is called before the first frame update
@@ -20,7 +21,6 @@ public class TurnManager : MonoBehaviour
     {
         TurnPlayer = TurnOrder.Player1;
         ResetGame();
-
     }
 
     
@@ -33,12 +33,20 @@ public class TurnManager : MonoBehaviour
     public void EndTurn()
     {
         RoundEnd?.Invoke();
-        //TODO check if its workingsa
         Gamemanager.Instance.selectedunit = null;
         Gamemanager.Instance.selectedEnemy = null;
-        if (TurnPlayer == TurnOrder.Player1)
+        if (TurnPlayer == TurnOrder.Player1 )
         {
-            TurnPlayer = TurnOrder.Player2;
+            if ( !Gamemanager.Instance.AIPlayer)
+            {
+                TurnPlayer = TurnOrder.Player2;
+                
+            }
+            else
+            {
+                TurnPlayer = TurnOrder.AI;
+
+            }
         }
         else
         {

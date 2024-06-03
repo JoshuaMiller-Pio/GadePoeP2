@@ -99,7 +99,7 @@ public abstract class CharacterSuper : MonoBehaviour
             }
         }
 
-        else if (tag == "Monster" && player == Gamemanager.Instance.selectedunit)
+        else if (tag == "Monster" && player == Gamemanager.Instance.selectedunit && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2)
         {
 
             Physics.Raycast(transform.position, Vector3.down, out info, 12);
@@ -172,7 +172,7 @@ public abstract class CharacterSuper : MonoBehaviour
                 }
                 
             }
-            else if (tag == "Monster" && player == Gamemanager.Instance.selectedunit && Gamemanager.Instance.selectedEnemy != null)
+            else if (tag == "Monster" && player == Gamemanager.Instance.selectedunit && Gamemanager.Instance.selectedEnemy != null && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2)
             {
                
                 for (int i = 0; i < 4; i++)
@@ -195,7 +195,7 @@ public abstract class CharacterSuper : MonoBehaviour
 
                 return;
             }
-            if (nearEnemyCity && tag == "Monster" && deductHP.gameObject.tag != "MonsterB"  &&  player == Gamemanager.Instance.selectedunit )
+            if (nearEnemyCity && tag == "Monster" && deductHP.gameObject.tag != "MonsterB"  &&  player == Gamemanager.Instance.selectedunit && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2)
             {
                 deductHP.takeDamage(damage);
                 Gamemanager.Instance.DecreaseAP();
