@@ -68,6 +68,9 @@ public class Gamemanager : Singleton<Gamemanager>
                 Pcitytile = SBLocation;
                 Pcity = town;
             }
+
+            AIFunction ai = gameObject.GetComponent<AIFunction>();
+            ai.enabled =true;
         }
         else
         {
@@ -78,6 +81,18 @@ public class Gamemanager : Singleton<Gamemanager>
         _townsPlaced++;
     }
 
+    public void placeAITown(GameObject SBLocation)
+    {
+        Vector3 castleLocation = new Vector3(SBLocation.transform.position.x, SBLocation.transform.position.y + 9.59f, SBLocation.transform.position.z);
+        GameObject town = Instantiate(_towns[1], castleLocation, Quaternion.identity);
+        town.GetComponent<CityManager>().tileBelow = SBLocation;
+        SBLocation.GetComponent<Tile>()._occupied = true;
+        if (_townsPlaced == 0)
+        {
+            Mcitytile = SBLocation;
+            Mcity = town;
+        }
+    }
     public void ResetAP()
     {
         _currentAP = _maxAP;
@@ -90,8 +105,7 @@ public class Gamemanager : Singleton<Gamemanager>
     public void AIPlaying()
     {
         AIPlayer = true;
-        AIFunction ai = gameObject.GetComponent<AIFunction>();
-      //  ai.enabled =true;
+       
     }
     private void Update()
     {
