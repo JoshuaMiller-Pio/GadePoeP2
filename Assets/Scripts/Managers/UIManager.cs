@@ -105,6 +105,9 @@ public class UIManager : MonoBehaviour
                 case TurnManager.TurnOrder.Player2:
                 currentPlayer.text = "Player 2";
                     break;
+                case TurnManager.TurnOrder.AI:
+                currentPlayer.text = "Player 2";
+                break;
                 default:
                 break;
         }
