@@ -36,7 +36,7 @@ public class TurnManager : MonoBehaviour
         Gamemanager.Instance.selectedunit = null;
         Gamemanager.Instance.selectedEnemy = null;
         if (TurnPlayer == TurnOrder.Player1 )
-        {
+        { 
             if ( !Gamemanager.Instance.AIPlayer)
             {
                 TurnPlayer = TurnOrder.Player2;
@@ -47,11 +47,14 @@ public class TurnManager : MonoBehaviour
                 TurnPlayer = TurnOrder.AI;
 
             }
+            
+
         }
         else
         {
             TurnPlayer = TurnOrder.Player1;
         }
+        Debug.Log(TurnPlayer.ToString());
     }
     
     // Update is called once per frame

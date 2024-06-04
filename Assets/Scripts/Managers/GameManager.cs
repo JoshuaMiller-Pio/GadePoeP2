@@ -40,7 +40,7 @@ public class Gamemanager : Singleton<Gamemanager>
 
     private void TownPlaced(GameObject SBLocation)
     {
-        if (_townsPlaced <  2)
+        if (_townsPlaced <  2 && !AIPlayer)
         {
             Vector3 castleLocation = new Vector3(SBLocation.transform.position.x, SBLocation.transform.position.y + 9.59f, SBLocation.transform.position.z);
            GameObject town = Instantiate(_towns[_townsPlaced], castleLocation, Quaternion.identity);
@@ -56,6 +56,18 @@ public class Gamemanager : Singleton<Gamemanager>
                Mcitytile = SBLocation;
                Mcity = town;
            }
+        }
+        else if (_townsPlaced <1 && AIPlayer)
+        {
+            Vector3 castleLocation = new Vector3(SBLocation.transform.position.x, SBLocation.transform.position.y + 9.59f, SBLocation.transform.position.z);
+            GameObject town = Instantiate(_towns[_townsPlaced], castleLocation, Quaternion.identity);
+            town.GetComponent<CityManager>().tileBelow = SBLocation;
+            SBLocation.GetComponent<Tile>()._occupied = true;
+            if (_townsPlaced == 0)
+            {
+                Pcitytile = SBLocation;
+                Pcity = town;
+            }
         }
         else
         {
