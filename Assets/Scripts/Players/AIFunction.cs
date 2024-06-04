@@ -62,9 +62,11 @@ public class AIFunction : Singleton<AIFunction>
             HbaseTile = Hbase.GetComponent<CityManager>().tileBelow.GetComponent<Tile>();
         }
         if (Mbase == null)
-        {
+        {   
+            
             Mbase = GameObject.FindGameObjectWithTag("MonsterB");
             MbaseTile = Mbase.GetComponent<CityManager>().tileBelow.GetComponent<Tile>();
+            
         }
 
       
