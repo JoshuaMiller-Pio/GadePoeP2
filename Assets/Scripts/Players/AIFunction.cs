@@ -28,29 +28,41 @@ public class AIFunction : Singleton<AIFunction>
        back
     }
 
+    public enum Difficulty
+    {
+        Easy,
+        Medium,
+        Hard
+    }
+
+    private Difficulty currentD = Difficulty.Easy;
     private move currentMove = move.noMove;
     
     private Summonable WhatToSummon;
 
     private void OnEnable()
     {
-        presortedTiles = GameObject.FindGameObjectsWithTag("Tile");
-        int sentinal = 0, lavas = 0, golds =0;
-        for (int i = 0; i < 20; i++)
+        if (presortedTiles == null)
         {
-            for (int j = 0; j < 20; j++)
+            presortedTiles = GameObject.FindGameObjectsWithTag("Tile");
+            int sentinal = 0, lavas = 0, golds =0;
+            for (int i = 0; i < 20; i++)
             {
-                tiles[i,j] = presortedTiles[sentinal];
-                sentinal++;
-                _lavaLocationsMap.Add(lavas,new LavaLocations(i,j));
-                _goldLocationsMap.Add(lavas,new GoldLocations(i,j));
-                lavas++;
-                golds++;
-            }
+                for (int j = 0; j < 20; j++)
+                {
+                    tiles[i,j] = presortedTiles[sentinal];
+                    sentinal++;
+                    _lavaLocationsMap.Add(lavas,new LavaLocations(i,j));
+                    _goldLocationsMap.Add(lavas,new GoldLocations(i,j));
+                    lavas++;
+                    golds++;
+                }
             
-        }
+            }
 
-        AIUtilityFunction();
+            AIUtilityFunction();
+        }
+       
     }
 
     public void AIUtilityFunction()
@@ -64,6 +76,19 @@ public class AIFunction : Singleton<AIFunction>
         if (Mbase == null)
         {   
             
+            //TODO Switch between difficulties
+            switch (currentD)
+            {
+                case Difficulty.Easy:
+                    Gamemanager.Instance.placeAITown(tiles[16,8]);
+                    break;
+                case Difficulty.Medium:
+                    Gamemanager.Instance.placeAITown(tiles[9,6]);
+                    break;
+                case Difficulty.Hard:
+                    Gamemanager.Instance.placeAITown(tiles[9,16]);
+                    break;
+            }
             Mbase = GameObject.FindGameObjectWithTag("MonsterB");
             MbaseTile = Mbase.GetComponent<CityManager>().tileBelow.GetComponent<Tile>();
             
@@ -93,13 +118,6 @@ public class AIFunction : Singleton<AIFunction>
             }
             
         }
-        
-
-
-
-
-
-        
     }
 
 /*                                    _____KEY_____
