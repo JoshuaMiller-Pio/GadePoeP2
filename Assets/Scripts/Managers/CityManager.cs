@@ -41,6 +41,10 @@ public class CityManager : MonoBehaviour
             ButtonManager.SpawnMM += spawnUnit;
             ButtonManager.SpawnMMi += spawnWorker;
             ButtonManager.onMReinforcedPressed += reinforced ;
+            AIFunction.Instance.onAIReinforcedPressed += reinforced;
+            AIFunction.Instance.SpawnAIA += spawnUnit;
+            AIFunction.Instance.SpawnAIM += spawnWorker;
+            AIFunction.Instance.SpawnAIR += spawnRanger;
             Debug.Log("Monster");
           
 
@@ -49,6 +53,31 @@ public class CityManager : MonoBehaviour
        
     }
 
+    private void OnDisable()
+    {
+        Character.Incrasegold -= increaseGold;
+        TurnManager.RoundEnd -= roundEnd;
+        if (gameObject.tag == "HumanB")
+        {
+            ButtonManager.SpawnHA -= spawnRanger;
+            ButtonManager.SpawnHM -= spawnUnit ;
+            ButtonManager.SpawnHMi -= spawnWorker ;
+            ButtonManager.onHReinforcedPressed -= reinforced ;
+
+        }
+        else 
+        {
+            ButtonManager.SpawnMA -= spawnRanger;
+            ButtonManager.SpawnMM -= spawnUnit;
+            ButtonManager.SpawnMMi -= spawnWorker;
+            ButtonManager.onMReinforcedPressed -= reinforced ;
+            AIFunction.Instance.onAIReinforcedPressed -= reinforced;
+            Debug.Log("Monster");
+          
+
+        }
+
+    }
 
     public float UpdateArmyHealth()
     {
