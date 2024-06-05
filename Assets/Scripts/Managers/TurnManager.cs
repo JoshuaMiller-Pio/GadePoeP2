@@ -45,7 +45,7 @@ public class TurnManager : MonoBehaviour
             else
             {
                 TurnPlayer = TurnOrder.AI;
-
+                AIFunction.Instance.AIUtilityFunction();
             }
             
 
@@ -54,7 +54,7 @@ public class TurnManager : MonoBehaviour
         {
             TurnPlayer = TurnOrder.Player1;
         }
-        Debug.Log(TurnPlayer.ToString());
+        
     }
     
     // Update is called once per frame
