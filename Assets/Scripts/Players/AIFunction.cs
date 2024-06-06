@@ -115,38 +115,41 @@ public class AIFunction : Singleton<AIFunction>
 
         }
 
-
+        Munits.Clear();
+        Hunits.Clear();
         //assigns most resent units to list
         Munits = GameObject.FindGameObjectsWithTag("Monster").ToList();
         Hunits = GameObject.FindGameObjectsWithTag("Human").ToList();
 
+            
 
 
-
-
-        float[] unitUtilitiy = new float[Munits.Count];
-        GameObject MoveUnit,AttackUnit,summonUnit;
-        float Mmax = -1000, Dmax = -1000, Amax = -1000, Smax = -1000, utility1, utility2;
-        int position = 0;
-        for (int i = 0; i < Munits.Count; i++)
+            float[] unitUtilitiy = new float[Munits.Count];
+            float[] unitUtilitiyH = new float[Hunits.Count];
+            GameObject MoveUnit = null,AttackUnit = null,summonUnit;
+            float Mmax = -1000, Dmax = -1000, Amax = -1000, Smax = -1000, utility1, utility2;
+            int position = 0;
+        if (Munits.Count > 0)
         {
-            //stores all unit utilities in an array to select the biggest and use that as the piece to move 
-            unitUtilitiy[i] = piecetoMove(Munits[i]);
-        }
-
-        for (int i = 0; i < unitUtilitiy.Length; i++)
-        {
-            if (unitUtilitiy[i] > Mmax)
+            for (int i = 0; i < Munits.Count; i++)
             {
-                Mmax = unitUtilitiy[i];
-                position = i;
+                //stores all unit utilities in an array to select the biggest and use that as the piece to move 
+                unitUtilitiy[i] = piecetoMove(Munits[i]);
             }
-        }
-        //chosen moving unit
-        MoveUnit = Munits[position];
-        
-        
-        
+
+            for (int i = 0; i < unitUtilitiy.Length; i++)
+            {
+                if (unitUtilitiy[i] > Mmax)
+                {
+                    Mmax = unitUtilitiy[i];
+                    position = i;
+                }
+            }
+            
+            
+            //chosen moving unit
+            MoveUnit = Munits[position];
+
         for (int i = 0; i < Munits.Count; i++)
         {
             //stores all unit utilities in an array to select the biggest and use that as the piece to attack 
@@ -158,27 +161,38 @@ public class AIFunction : Singleton<AIFunction>
             if (unitUtilitiy[i] > Amax)
             {
                 Amax = unitUtilitiy[i];
+                Debug.Log("unitUtil: " + unitUtilitiy[i]);
+                Gamemanager.Instance.selectedunit = Munits[i];
+
                 position = i;
             }
         }
-        AttackUnit = Munits[position];
-        Smax = whatToSummon();
-        
-        for (int i = 0; i < Hunits.Count; i++)
-        {
-            //stores all unit utilities in an array to select the biggest and use that as the piece to attack 
-            unitUtilitiy[i] = Udefend(Hunits[i]);
+            AttackUnit = Munits[position];
         }
-
-        for (int i = 0; i < unitUtilitiy.Length; i++)
+        Smax = whatToSummon(); 
+            
+        if (Hunits.Count >0)
         {
-            if (unitUtilitiy[i] > Dmax)
+            
+
+            for (int i = 0; i < Hunits.Count; i++)
             {
-                Dmax = unitUtilitiy[i];
+                //stores all unit utilities in an array to select the biggest and use that as the piece to attack 
+                unitUtilitiyH[i] = Udefend(Hunits[i]);
+                
             }
         }
-       
+      
+
+        for (int i = 0; i < unitUtilitiyH.Length; i++)
+        {
+            if (unitUtilitiyH[i] > Dmax)
+            {
+                Dmax = unitUtilitiyH[i];
+            }
+        }
         
+         
         
         action uAction1 = action.noAction, uAction2 = action.noAction;
 
@@ -193,6 +207,7 @@ public class AIFunction : Singleton<AIFunction>
             uAction1 = action.Defend;
         }
 
+        
         if (Amax > Smax)
         {
             utility2 = Amax;
@@ -214,11 +229,16 @@ public class AIFunction : Singleton<AIFunction>
         {
             currentAction = uAction2;
         }
+        
 
         switch (currentAction)
         {
             case action.move:
-                Move(MoveUnit);
+                if (MoveUnit!= null)
+                {
+                    Move(MoveUnit);
+                    
+                }
                 break;
             case action.Attack:
                 Attack(AttackUnit);
@@ -246,12 +266,13 @@ public class AIFunction : Singleton<AIFunction>
         float final=0;
         Character charScript = unit.GetComponent<Character>();
         
-        if (charScript.characterScript.CharacterType == CharacterScriptable.characterType.Miner && charScript.canMove)
+        if (charScript.characterScript.CharacterType == CharacterScriptable.characterType.Miner && charScript.canMove && charScript.Occupiedtile != null)
         {
             float gmin = 1000, gdistance, lmin = 1000, ldistance;
+            
             for (int i = 0; i < _goldLocationsMap.Count; i++)
             {
-                gdistance = distance(charScript.Occupiedtile.x, _goldLocationsMap[i].x, charScript.Occupiedtile.y, _goldLocationsMap[i].y);
+                gdistance = distance(charScript.Occupiedtile.x, _goldLocationsMap[i].x, charScript.Occupiedtile.y, _goldLocationsMap[i].y)/40;
                 if (gmin>gdistance)
                 {
                     gmin = gdistance;
@@ -266,37 +287,51 @@ public class AIFunction : Singleton<AIFunction>
                 }
             }
 
-            final = Convert.ToInt32(charScript.canMove) * ((Hbase.GetComponent<CityManager>().TGold/Mbase.GetComponent<CityManager>().TGold) * (gmin +lmin) );
+            final = (Convert.ToInt32(charScript.canMove) * ((Hbase.GetComponent<CityManager>().TGold/Mbase.GetComponent<CityManager>().TGold) * (gmin +lmin) ))/40;
         }
         else if(charScript.canMove)
         {
             float emin = 1000, edistance, lmin = 1000, ldistance;
-
-            for (int i = 0; i < _lavaLocationsMap.Count; i++)
-            {
-                ldistance = distance(unit.GetComponent<Character>().Occupiedtile.x, _lavaLocationsMap[i].x, unit.GetComponent<Character>().Occupiedtile.x, _lavaLocationsMap[i].y);
-                if (lmin<ldistance)
+        
+                for (int i = 0; i < _lavaLocationsMap.Count; i++)
                 {
-                    lmin = ldistance;
+                    ldistance = distance(charScript.Occupiedtile.x, _lavaLocationsMap[i].x, charScript.Occupiedtile.x, _lavaLocationsMap[i].y);
+
+                    if (lmin>ldistance)
+                    {
+                        lmin = ldistance;
+                    }
+                    
                 }
-            }
-         
             for (int i = 0; i < Hunits.Count; i++)
             {
-                edistance = distance(charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.y);
-                if (emin > edistance)
+                if (Hunits[i].GetComponent<Character>().Occupiedtile != null && charScript.Occupiedtile != null)
                 {
-                    emin = edistance;
+                    edistance = distance(charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.y);
+                    
+                    if (emin > edistance)
+                    {
+                        emin = edistance;
+                    }
                 }
-            } 
-            final = Convert.ToInt32(charScript.canMove) * ((Hbase.GetComponent<CityManager>().TGold/Mbase.GetComponent<CityManager>().TGold) *  (emin +lmin) );
-            
+               
+            }
+
+            float DEC = distance(charScript.Occupiedtile.x, HbaseTile.x, charScript.Occupiedtile.x, HbaseTile.y);
+            if (DEC> emin)
+            {
+                final = (Convert.ToInt32(charScript.canMove) * ((Hbase.GetComponent<CityManager>().TGold/Mbase.GetComponent<CityManager>().TGold) *  (emin +lmin) ))/40;
+            }
+            else
+            {
+                final = (Convert.ToInt32(charScript.canMove) * ((Hbase.GetComponent<CityManager>().TGold/Mbase.GetComponent<CityManager>().TGold) *  (DEC +lmin) ))/40;
+
+            }
             
         }
-        
- 
+       
 
-        return final;
+        return  final;
     }
 
     public void whereToMove(GameObject unit)
@@ -307,161 +342,239 @@ public class AIFunction : Singleton<AIFunction>
         Character charScript = unit.GetComponent<Character>();
         float emin = 1000, edistance;
         float Ld=9999, Rd=9999, Fd=9999, Bd=9999;
+        
         for (int i = 0; i < Hunits.Count; i++)
         {
-            edistance = distance(charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.y);
-            if (emin > edistance)
+            if (true )
             {
-                emin = edistance;
-                closestUnit = Hunits[i];
+                edistance = distance(charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.y);
+                if (emin > edistance)
+                {
+                    emin = edistance;
+                    closestUnit = Hunits[i];
+                }
             }
-        } 
-        
-        float cDistance =distance(charScript.Occupiedtile.x, HbaseTile.x, charScript.Occupiedtile.x, HbaseTile.y);
-        
-        //determins which target is closer and sets that as the target
-        if (emin > cDistance)
-        {
-            target = Hbase;
-        }
-        else
-        {
-            target = closestUnit;
-        }
-        
-        //left
-        if (charScript.Occupiedtile.x != 0&& !tiles[charScript.Occupiedtile.x - 1, charScript.Occupiedtile.y].GetComponent<Tile>()._occupied)
-        {
-            Ld = distance(charScript.Occupiedtile.x - 1,
-                target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().x, charScript.Occupiedtile.y,
-                target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().y);
-        }
-        //back
-        if (charScript.Occupiedtile.y != 0&& !tiles[charScript.Occupiedtile.x, charScript.Occupiedtile.y-1].GetComponent<Tile>()._occupied)
-        {
-            Bd = distance(charScript.Occupiedtile.x ,
-                target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().x, charScript.Occupiedtile.y-1,
-                target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().y);
-        }
-        //right
-        if (charScript.Occupiedtile.x != 19 && !tiles[charScript.Occupiedtile.x + 1, charScript.Occupiedtile.y].GetComponent<Tile>()._occupied )
-        {
-            Rd = distance(charScript.Occupiedtile.x + 1,
-                target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().x, charScript.Occupiedtile.y,
-                target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().y);
-        }
-        //forwards
-        if (charScript.Occupiedtile.y != 19 && !tiles[charScript.Occupiedtile.x, charScript.Occupiedtile.y+1].GetComponent<Tile>()._occupied )
-        {
-            Fd = distance(charScript.Occupiedtile.x,
-                target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().x, charScript.Occupiedtile.y+1,
-                target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().y);
+           
         }
 
-        float ylowest, xlowest;
-        if (Fd<Bd)
-        {
-            optimalMoveY = move.forward;
-            ylowest = Fd;
-        }
-        else
-        {
+       
+            float cDistance = distance(charScript.Occupiedtile.x, HbaseTile.x, charScript.Occupiedtile.x, HbaseTile.y);
+
+            //determins which target is closer and sets that as the target
+            if (emin > cDistance)
+            {
+                target = Hbase;
+                //left
+                if (charScript.Occupiedtile.x != 0 && !tiles[charScript.Occupiedtile.x - 1, charScript.Occupiedtile.y]
+                        .GetComponent<Tile>()._occupied)
+                {
+               
+                    Ld = distance(charScript.Occupiedtile.x - 1,
+                        target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().x, charScript.Occupiedtile.y,
+                        target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().y);
+                }
+
+                //back
+                if (charScript.Occupiedtile.y != 0 && !tiles[charScript.Occupiedtile.x, charScript.Occupiedtile.y - 1]
+                        .GetComponent<Tile>()._occupied)
+                {
+                    Bd = distance(charScript.Occupiedtile.x,
+                        target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().x, charScript.Occupiedtile.y - 1,
+                        target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().y);
+                }
+
+                //right
+                if (charScript.Occupiedtile.x != 19 && !tiles[charScript.Occupiedtile.x + 1, charScript.Occupiedtile.y]
+                        .GetComponent<Tile>()._occupied)
+                {
+                    Rd = distance(charScript.Occupiedtile.x + 1,
+                        target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().x, charScript.Occupiedtile.y,
+                        target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().y);
+                }
+
+                //forwards
+                if (charScript.Occupiedtile.y != 19 && !tiles[charScript.Occupiedtile.x, charScript.Occupiedtile.y + 1]
+                        .GetComponent<Tile>()._occupied)
+                {
+                    Fd = distance(charScript.Occupiedtile.x,
+                        target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().x, charScript.Occupiedtile.y + 1,
+                        target.GetComponent<CityManager>().tileBelow.GetComponent<Tile>().y);
+                }
+            }
+            else
+            {
+                target = closestUnit;
+                //left
+                if (charScript.Occupiedtile.x != 0 && !tiles[charScript.Occupiedtile.x - 1, charScript.Occupiedtile.y]
+                        .GetComponent<Tile>()._occupied)
+                {
+               
+                    Ld = distance(charScript.Occupiedtile.x - 1,
+                        target.GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.y,
+                        target.GetComponent<Character>().Occupiedtile.y);
+                }
+
+                //back
+                if (charScript.Occupiedtile.y != 0 && !tiles[charScript.Occupiedtile.x, charScript.Occupiedtile.y - 1]
+                        .GetComponent<Tile>()._occupied)
+                {
+                    Bd = distance(charScript.Occupiedtile.x,
+                        target.GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.y - 1,
+                        target.GetComponent<Character>().Occupiedtile.y);
+                }
+
+                //right
+                if (charScript.Occupiedtile.x != 19 && !tiles[charScript.Occupiedtile.x + 1, charScript.Occupiedtile.y]
+                        .GetComponent<Tile>()._occupied)
+                {
+                    Rd = distance(charScript.Occupiedtile.x + 1,
+                        target.GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.y,
+                        target.GetComponent<Character>().Occupiedtile.y);
+                }
+
+                //forwards
+                if (charScript.Occupiedtile.y != 19 && !tiles[charScript.Occupiedtile.x, charScript.Occupiedtile.y + 1]
+                        .GetComponent<Tile>()._occupied)
+                {
+                    Fd = distance(charScript.Occupiedtile.x,
+                        target.GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.y + 1,
+                        target.GetComponent<Character>().Occupiedtile.y);
+                }
             
-            optimalMoveY = move.back;
-            ylowest = Bd;
+
+          
+         
+
+            float ylowest, xlowest;
+            if (Fd < Bd)
+            {
+                optimalMoveY = move.forward;
+                ylowest = Fd;
+            }
+            else
+            {
+
+                optimalMoveY = move.back;
+                ylowest = Bd;
 
 
+            }
+
+            if (Rd < Ld)
+            {
+                optimalMoveX = move.right;
+                xlowest = Rd;
+
+            }
+            else
+            {
+                optimalMoveX = move.left;
+                xlowest = Ld;
+            }
+
+            if (xlowest < ylowest)
+            {
+                currentMove = optimalMoveX;
+            }
+            else
+            {
+                currentMove = optimalMoveY;
+
+            }
         }
-        if (Rd<Ld)
-        {
-            optimalMoveX = move.right;
-            xlowest = Rd;
-
-        }
-        else
-        {
-            optimalMoveX = move.left;
-            xlowest = Ld;
-        }
-
-        if (xlowest<ylowest)
-        {
-            currentMove = optimalMoveX;
-        }
-        else
-        {
-            currentMove = optimalMoveY;
-
-        }
-
     }
 
     public float whatToSummon()
     {
-        float final, minerEQ, ArmyEQ;
-        float miners=0, army =0,maxarmy=15,maxMiners=10;
-        
-        //determins how many units of each type there are
-        for (int i = 0; i < Munits.Count; i++)
+        if (!tiles[MbaseTile.x+1,MbaseTile.y].GetComponent<Tile>()._occupied ||!tiles[MbaseTile.x-1,MbaseTile.y]||!tiles[MbaseTile.x,MbaseTile.y+1].GetComponent<Tile>()._occupied ||!tiles[MbaseTile.x,MbaseTile.y-1].GetComponent<Tile>()._occupied)
         {
-            if (Munits[i].GetComponent<Character>().characterScript.CharacterType == CharacterScriptable.characterType.Miner)
+            
+       
+            float final, minerEQ, ArmyEQ;
+            float miners=0, army =0,maxarmy=15,maxMiners=10;
+            
+            //determins how many units of each type there are
+            for (int i = 0; i < Munits.Count; i++)
             {
-                miners++;
+                if (Munits[i].GetComponent<Character>().characterScript.CharacterType == CharacterScriptable.characterType.Miner)
+                {
+                    miners++;
+                }
+                else
+                {
+                    army++;
+                }
+            }
+            minerEQ = ((maxMiners - miners) / maxMiners + (Mbase.GetComponent<CityManager>().TGold / 100)) / 2;
+            ArmyEQ = ((maxarmy - army) / maxarmy + (Mbase.GetComponent<CityManager>().TGold / 100)) / 2;
+            if (minerEQ > ArmyEQ)
+            {
+                final = minerEQ;
+                WhatToSummon = Summonable.Miner;
             }
             else
             {
-                army++;
+                final = ArmyEQ;
+                WhatToSummon = Summonable.Army;
             }
-        }
-        minerEQ = ((maxMiners - miners) / maxMiners + (Mbase.GetComponent<CityManager>().TGold / 100)) / 2;
-        ArmyEQ = ((maxarmy - army) / maxarmy + (Mbase.GetComponent<CityManager>().TGold / 100)) / 2;
-        if (minerEQ > ArmyEQ)
-        {
-            final = minerEQ;
-            WhatToSummon = Summonable.Miner;
-        }
-        else
-        {
-            final = ArmyEQ;
-            WhatToSummon = Summonable.Army;
+            return final;
+
         }
 
-        return final;
+        return 0;
     }
 
     public float UAttack(GameObject unit)
     {
         Character charScript = unit.GetComponent<Character>();
 
-        float final, distC,distE;
-        distC = distance(charScript.Occupiedtile.x, HbaseTile.x, charScript.Occupiedtile.y, HbaseTile.y);
+        float final =0, distC,distE;
         float eminDist = 1000, edistance;
-        for (int i = 0; i < Hunits.Count; i++)
+
+
+        if (unit.GetComponent<Character>().characterScript.CharacterType != CharacterScriptable.characterType.Miner)
         {
-            distE = distance(charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.y, Hunits[i].GetComponent<Character>().Occupiedtile.y);
-            if (eminDist > distE)
+            distC = distance(charScript.Occupiedtile.x, HbaseTile.x, charScript.Occupiedtile.y, HbaseTile.y);
+            for (int i = 0; i < Hunits.Count; i++)
             {
-                eminDist = distE;
-                Gamemanager.Instance.selectedEnemy = Hunits[i];
+                distE = distance(charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.y, Hunits[i].GetComponent<Character>().Occupiedtile.y);
+                if (eminDist > distE)
+                {
+                    eminDist = distE;
+                    Gamemanager.Instance.selectedEnemy = Hunits[i];
+                }
             }
-        }
-        if (distC > eminDist)
-        {
-            final = 1/distC ;
+            if (distC < eminDist)
+            {
+                final = 1/distC ;
+               
+
+            }
+            else
+            {
+                final = 1 / eminDist;
+            }
+
+            if (final != 1)
+            {
+                final = 0;
+            }
+
         }
         else
         {
-            final = 1 / eminDist;
+            final = 0;
         }
+     
         return final;
     }
 
     public float Udefend(GameObject unit)
     {
+        float final =(20- Mbase.GetComponent<CityManager>().CityHealth)/20;
+ 
         
-            float final = (distance(MbaseTile.x, unit.GetComponent<Character>().Occupiedtile.x, MbaseTile.y,
-                unit.GetComponent<Character>().Occupiedtile.y) - 40) / 4;
-
+           
         
         return final;
     }
@@ -469,13 +582,14 @@ public class AIFunction : Singleton<AIFunction>
     void Move(GameObject unit)
     {
         whereToMove(unit);
-     
-        
+        Debug.Log(currentMove.ToString() );
+        //TODO figure out why they can only move once, seems like they arent updating the occupied tile POSITION but could also be that its not selecting the correct unit
         switch (currentMove)
         {
             case move.forward:
                 unit.GetComponent<Character>().SelectedTile = tiles[unit.GetComponent<Character>().Occupiedtile.x,
                     unit.GetComponent<Character>().Occupiedtile.y + 1].GetComponent<Tile>();
+               
                 break;
             case move.back:
                 unit.GetComponent<Character>().SelectedTile = tiles[unit.GetComponent<Character>().Occupiedtile.x,
@@ -496,11 +610,26 @@ public class AIFunction : Singleton<AIFunction>
             
         }
         unit.GetComponent<Character>().Move();
+        Debug.Log(unit.GetComponent<Character>().Occupiedtile.x + " After" +unit.GetComponent<Character>().Occupiedtile.y );
+
     }
 
     void Attack(GameObject unit)
     {
-        unit.GetComponent<Character>().Attack();        
+        
+        float distC = distance(unit.GetComponent<Character>().Occupiedtile.x, HbaseTile.x, unit.GetComponent<Character>().Occupiedtile.y, HbaseTile.y);
+        Debug.Log(distC);
+        if (distC ==1)
+        {
+            Hbase.GetComponent<CityManager>().takeDamage(unit.GetComponent<Character>().Damage);
+
+        }
+        else
+        {
+            unit.GetComponent<Character>().Attack();   
+            
+        }
+             
     }
 
     void Defend()

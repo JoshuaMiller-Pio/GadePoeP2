@@ -78,6 +78,8 @@ public abstract class CharacterSuper : MonoBehaviour
                     gameObject.transform.position = MoveTarget;
                     Gamemanager.Instance.DecreaseAP();
                     CurrentTile = SelectedTile.gameObject;
+                    Occupiedtile = SelectedTile;
+
 
                 }
                 if (availableMoves <=0)
@@ -120,13 +122,15 @@ public abstract class CharacterSuper : MonoBehaviour
                     Vector3 MoveTarget = new Vector3(SelectedTile.transform.position.x, SelectedTile.transform.position.y + 10.1f, SelectedTile.transform.position.z);
                     gameObject.transform.position = MoveTarget;
                     CurrentTile = SelectedTile.gameObject;
+                    Debug.Log("MOVED TILES");
+                    Occupiedtile = CurrentTile.GetComponent<Tile>();
                 }
 
                 if (availableMoves <=0)
                 {
                     Debug.Log("no moves left");
                 }
-                
+
                 
                
                 tileScript = CurrentTile.GetComponent<Tile>();
@@ -196,12 +200,14 @@ public abstract class CharacterSuper : MonoBehaviour
                 return;
             }
             if (nearEnemyCity && tag == "Monster" && deductHP.gameObject.tag != "MonsterB"  &&  player == Gamemanager.Instance.selectedunit && (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2 || TurnManager.TurnPlayer == TurnManager.TurnOrder.AI))
-            {
+            { 
+                Debug.Log("base");
                 deductHP.takeDamage(damage);
                 Gamemanager.Instance.DecreaseAP();
 
                 return;
             }
+                Debug.Log("outsidebase");
         }
        
 
