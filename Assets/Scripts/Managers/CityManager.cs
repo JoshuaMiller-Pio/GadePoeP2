@@ -14,6 +14,7 @@ public class CityManager : MonoBehaviour
     private Renderer _renderer;
     private bool player1turn = true;
     public GameObject tileBelow, meele, ranger, worker;
+    public Tile CityTile;
     public static event Action<CityManager> cityInfoUI;
     public static event Action<CityManager> cityActionUI;
     public static event Action<String> gameOver;
@@ -45,7 +46,6 @@ public class CityManager : MonoBehaviour
             AIFunction.Instance.SpawnAIA += spawnUnit;
             AIFunction.Instance.SpawnAIM += spawnWorker;
             AIFunction.Instance.SpawnAIR += spawnRanger;
-            Debug.Log("Monster");
           
 
         }
@@ -53,6 +53,15 @@ public class CityManager : MonoBehaviour
        
     }
 
+    private void OnEnable()
+    {
+        Invoke("test", 0.1f);
+    }
+
+    void test()
+    {
+        CityTile = tileBelow.GetComponent<Tile>();
+    }
     private void OnDisable()
     {
         Character.Incrasegold -= increaseGold;
@@ -72,7 +81,6 @@ public class CityManager : MonoBehaviour
             ButtonManager.SpawnMMi -= spawnWorker;
             ButtonManager.onMReinforcedPressed -= reinforced ;
             AIFunction.Instance.onAIReinforcedPressed -= reinforced;
-            Debug.Log("Monster");
           
 
         }
@@ -161,6 +169,7 @@ public class CityManager : MonoBehaviour
 
             gameobjectTile._occupied = true;
             newCharacter = Instantiate(meele, spawnPosition, Quaternion.identity);
+            newCharacter.GetComponent<Character>().Occupiedtile = gameobjectTile;
             summonedArmy.Add(newCharacter);
             Gamemanager.Instance.DecreaseAP();
         }
@@ -184,6 +193,8 @@ public class CityManager : MonoBehaviour
             gameobjectTile._occupied = true;
             Debug.Log(_tGold);
             newCharacter = Instantiate(ranger, spawnPosition, Quaternion.identity);
+            newCharacter.GetComponent<Character>().Occupiedtile = gameobjectTile;
+
             summonedArmy.Add(newCharacter);
             Gamemanager.Instance.DecreaseAP();
         }
@@ -219,6 +230,8 @@ public class CityManager : MonoBehaviour
             _tGold -= 5;
             gameobjectTile._occupied = true;
             newCharacter = Instantiate(worker, spawnPosition, Quaternion.identity);
+            newCharacter.GetComponent<Character>().Occupiedtile = gameobjectTile;
+
             summonedWorkers.Add(newCharacter);
         }
         else
@@ -241,7 +254,7 @@ public class CityManager : MonoBehaviour
                 
              }
         }
-        if (this.gameObject.tag == "MonsterB" && TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2)
+        if (this.gameObject.tag == "MonsterB" && (TurnManager.TurnPlayer == TurnManager.TurnOrder.Player2|| TurnManager.TurnPlayer == TurnManager.TurnOrder.AI))
         {
             _tGold += _gpt;
             if (canheal)

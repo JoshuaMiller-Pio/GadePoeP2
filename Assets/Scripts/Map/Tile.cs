@@ -37,7 +37,6 @@ public class Tile : MonoBehaviour
         {
             return;
         }
-        Debug.Log(x +" " + y);
         Vector3 newTileLocation = new Vector3(transform.localPosition.x, transform.localPosition.y,transform.localPosition.z);
         
         
@@ -59,7 +58,6 @@ public class Tile : MonoBehaviour
         }
         else
         {
-            Debug.Log("null");
         }
     }
 
@@ -123,7 +121,6 @@ public class Tile : MonoBehaviour
                return info.collider.gameObject;
            }
        }
-    Debug.Log("wrong");
        return null;
    }
    public GameObject getCityBlocks(int passthrough)
@@ -137,7 +134,6 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile || gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile)
            {
-               Debug.Log("forward");
                return info.collider.gameObject;
            }
        }
@@ -147,7 +143,6 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile || gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile)
            {
-               Debug.Log("back");
 
                return info.collider.gameObject;
            }
@@ -158,7 +153,6 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile || gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile)
            {
-               Debug.Log("left");
 
                return info.collider.gameObject;
            }
@@ -169,11 +163,9 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile || gameobjectTile.gameObject == Gamemanager.Instance.Mcitytile)
            {
-               Debug.Log("right");
                return info.collider.gameObject;
            }
        }
-       Debug.Log("null");
        return null;
    }
    public GameObject getAttackBlocks(int passthrough)
@@ -187,7 +179,6 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==true)
            {
-               Debug.Log("forward");
                return info.collider.gameObject;
            }
        }
@@ -197,7 +188,6 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==true)
            {
-               Debug.Log("back");
 
                return info.collider.gameObject;
            }
@@ -208,7 +198,6 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==true)
            {
-               Debug.Log("left");
 
                return info.collider.gameObject;
            }
@@ -219,11 +208,9 @@ public class Tile : MonoBehaviour
            
            if (gameobjectTile._occupied ==true)
            {
-               Debug.Log("right");
                return info.collider.gameObject;
            }
        }
-       Debug.Log("null");
        return null;
    }
    public GameObject getMovmentBlocks(int passthrough)

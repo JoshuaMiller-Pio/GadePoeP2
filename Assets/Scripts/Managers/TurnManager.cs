@@ -45,7 +45,10 @@ public class TurnManager : MonoBehaviour
             else
             {
                 TurnPlayer = TurnOrder.AI;
-                AIFunction.Instance.AIUtilityFunction();
+               
+                    AIFunction.Instance.AIUtilityFunction();
+
+                
             }
             
 
