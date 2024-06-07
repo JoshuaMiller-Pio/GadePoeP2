@@ -8,7 +8,7 @@ public abstract class CharacterSuper : MonoBehaviour
     public float currentHealth, damage, moveableTiles;
     public int abilityType;
     public TurnManager.TurnOrder controllingPlayer;
-    private GameObject CurrentTile,EnemyTile;
+    public GameObject CurrentTile,EnemyTile;
     public Tile  SelectedTile;
     public Tile Occupiedtile;
     private RaycastHit info ;
@@ -122,7 +122,6 @@ public abstract class CharacterSuper : MonoBehaviour
                     Vector3 MoveTarget = new Vector3(SelectedTile.transform.position.x, SelectedTile.transform.position.y + 10.1f, SelectedTile.transform.position.z);
                     gameObject.transform.position = MoveTarget;
                     CurrentTile = SelectedTile.gameObject;
-                    Debug.Log("MOVED TILES");
                     Occupiedtile = CurrentTile.GetComponent<Tile>();
                 }
 
