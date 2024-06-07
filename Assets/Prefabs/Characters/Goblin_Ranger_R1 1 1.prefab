@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin_Ranger_R1 1 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100042, guid: ed1f8609fea7f9348b92206e3d12581e, type: 3}
+      propertyPath: m_TagString
+      value: Monster
+      objectReference: {fileID: 0}
     - target: {fileID: 400042, guid: ed1f8609fea7f9348b92206e3d12581e, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.7248
@@ -163,9 +167,16 @@ MonoBehaviour:
   moveableTiles: 0
   abilityType: 0
   controllingPlayer: 0
+  CurrentTile: {fileID: 0}
+  EnemyTile: {fileID: 0}
+  SelectedTile: {fileID: 0}
+  Occupiedtile: {fileID: 0}
+  availableMoves: 0
+  tag: 
+  player: {fileID: 0}
+  nearEnemyCity: 0
+  canMove: 0
   characterScript: {fileID: 11400000, guid: 5c0e2de09fb388046b5834155690e4ea, type: 2}
-  moveSpeed: 5
-  target: {fileID: 0}
   name: 
 --- !u!4 &3039090254889864288 stripped
 Transform:

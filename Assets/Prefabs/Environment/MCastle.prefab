@@ -4186,10 +4186,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b643acfd8fc44f43a4347021bb77135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tGold: 10
+  _cityHealth: 20
+  _bPop: 1
+  _aPop: 0
+  _gpt: 5
+  currentArmyHealth: 0
+  currentWorkerHealth: 0
+  controlledMines: 0
   tileBelow: {fileID: 0}
   meele: {fileID: 6893929604075401528, guid: 66af8c496c4d36e4abbb597c95df5a07, type: 3}
-  ranger: {fileID: 7371885598783366818, guid: fa7cfb0ceb1c93643b1805f0804841cf, type: 3}
+  ranger: {fileID: 3039090254889373696, guid: 22f01c42c907a21488ce3a7e00638a43, type: 3}
   worker: {fileID: 9116189292021764401, guid: 069580bdb7c20bc41a070fe34d62780d, type: 3}
+  CityTile: {fileID: 0}
+  summonedArmy: []
+  summonedWorkers: []
 --- !u!65 &-2439776701560584148
 BoxCollider:
   m_ObjectHideFlags: 0
