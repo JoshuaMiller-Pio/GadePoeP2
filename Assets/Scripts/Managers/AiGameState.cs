@@ -29,17 +29,17 @@ public class AiGameState : MonoBehaviour
         _turnManager = GameObject.FindGameObjectWithTag("TurnManager").GetComponent<TurnManager>();
     }
 
-    public float CalculateGameState(TurnManager.TurnOrder turnPlayer)
+    public float CalculateGameState(TurnManager.TurnOrder turnPlayer, CityManager player, CityManager ai)
     {
         if (turnPlayer == TurnManager.TurnOrder.Player1)
         {
-            turnPlayerCityManager = GameObject.FindGameObjectWithTag("HumanB").GetComponent<CityManager>();
-            enemyPlayerCityManager = GameObject.FindGameObjectWithTag("MonsterB").GetComponent<CityManager>();
+            turnPlayerCityManager = player;
+            enemyPlayerCityManager = ai;
         }
         else
         {
-            enemyPlayerCityManager = GameObject.FindGameObjectWithTag("HumanB").GetComponent<CityManager>();
-            turnPlayerCityManager = GameObject.FindGameObjectWithTag("MonsterB").GetComponent<CityManager>();
+            enemyPlayerCityManager = player;
+            turnPlayerCityManager = ai;
         }
 
         turnPlayerArmyPop= turnPlayerCityManager._aPop;

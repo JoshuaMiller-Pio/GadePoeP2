@@ -16,7 +16,7 @@ public class ButtonManager : MonoBehaviour
     public static event Action onAttackPressed;
     public static event Action onHReinforcedPressed;
     public static event Action onMReinforcedPressed;
-
+    public NewAIFunction _newAIFunction;
     private bool player1turn = true;
     
     
@@ -69,6 +69,12 @@ public class ButtonManager : MonoBehaviour
         if (player1turn)
         {
             player1turn = false;
+            if (Gamemanager.Instance.AIPlayer)
+            {
+                _newAIFunction = Gamemanager.Instance.GetComponent<NewAIFunction>();
+                _newAIFunction._BoardState.TurnStartUpdateBoardState();
+                //run minimax
+            }
         }
         else
         {

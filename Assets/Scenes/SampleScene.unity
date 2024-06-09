@@ -4710,6 +4710,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097156987}
   m_CullTransparentMesh: 1
+--- !u!1 &1111168632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1111168634}
+  - component: {fileID: 1111168633}
+  m_Layer: 0
+  m_Name: BoardState
+  m_TagString: BoardState
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1111168633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111168632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92021cfe83604a642aba4f07bc0449b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _GridManager: {fileID: 0}
+  presortedTiles: []
+  simTurnManager: {fileID: 0}
+  playerManager: {fileID: 0}
+  AIManager: {fileID: 0}
+  turnStartPlayerManager: {fileID: 0}
+  turnStartAIManager: {fileID: 0}
+  turnStartPlayerArmy: []
+  turnStartAIArmy: []
+  turnStartPlayerWorkers: []
+  turnStartAIWorkers: []
+  playerArmy: []
+  aiArmy: []
+  playerWorkers: []
+  aiWorkers: []
+--- !u!4 &1111168634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111168632}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 863.44293, y: 424.04932, z: 2194.265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1127267961
 GameObject:
   m_ObjectHideFlags: 0
@@ -8878,3 +8937,4 @@ SceneRoots:
   - {fileID: 306406920}
   - {fileID: 473779112}
   - {fileID: 282739762}
+  - {fileID: 1111168634}

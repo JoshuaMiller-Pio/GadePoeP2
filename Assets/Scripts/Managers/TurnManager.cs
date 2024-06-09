@@ -8,7 +8,7 @@ public class TurnManager : MonoBehaviour
 {
     public static TurnOrder TurnPlayer;
     public static event Action RoundEnd;
-    
+    public NewAIFunction _newAIFunction;
     public enum TurnOrder
     {
         Player1,
@@ -20,6 +20,8 @@ public class TurnManager : MonoBehaviour
     void Start()
     {
         TurnPlayer = TurnOrder.Player1;
+        
+        
         ResetGame();
     }
 
