@@ -17,6 +17,7 @@ public abstract class CharacterSuper : MonoBehaviour
     public GameObject player;
     public bool nearEnemyCity, canMove;
     private CityManager deductHP;
+    
     public float MoveableTiles
     {
         get => moveableTiles;

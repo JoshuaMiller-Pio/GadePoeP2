@@ -21,11 +21,11 @@ public class CityManager : MonoBehaviour
     public List<GameObject> summonedArmy;
     public List<GameObject> summonedWorkers;
     bool canheal = false;
-
+    
   
     void Start()
     {
-        
+       
         Character.Incrasegold += increaseGold;
         TurnManager.RoundEnd += roundEnd;
         if (gameObject.tag == "HumanB")
@@ -38,10 +38,12 @@ public class CityManager : MonoBehaviour
         }
         else 
         {
+            
             ButtonManager.SpawnMA += spawnRanger;
             ButtonManager.SpawnMM += spawnUnit;
             ButtonManager.SpawnMMi += spawnWorker;
             ButtonManager.onMReinforcedPressed += reinforced ;
+            //Called form AIFunction
             AIFunction.Instance.onAIReinforcedPressed += reinforced;
             AIFunction.Instance.SpawnAIA += spawnUnit;
             AIFunction.Instance.SpawnAIM += spawnWorker;

@@ -10,6 +10,7 @@ TagManager:
   - Tile
   - HumanB
   - MonsterB
+  - BoardState
   layers:
   - Default
   - TransparentFX

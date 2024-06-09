@@ -13,7 +13,7 @@ public class Character : CharacterSuper
     public static event Action<Character> characterActionUI;
     public static event Action<float> Incrasegold;
     public string name;
-
+    public static event Action<CharacterSuper> moveCharacter;
     private CityManager _cityManager;
     // Start is called before the first frame update
     public enum Ability
@@ -25,7 +25,7 @@ public class Character : CharacterSuper
 
     void Start()
     {
-       
+        
        // characterScript = gameObject.GetComponent<CharacterScriptable>();
         currentHealth = characterScript.maxHealth;
         damage = characterScript.damage;

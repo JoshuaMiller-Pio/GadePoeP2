@@ -30,7 +30,7 @@ public class MiniMax : MonoBehaviour
     public int RunMiniMax(float difficulty, bool isMax)
     {
         
-    int miniMax = 0; 
+    int miniMaxResult = 0; 
     /*
          for (however many times we want minmax to run)
          {
@@ -50,7 +50,7 @@ public class MiniMax : MonoBehaviour
              clear all lists
          }
         */
-    return miniMax;
+    return miniMaxResult;
     }
     // Update is called once per frame
     void Update()
