@@ -1730,6 +1730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea204788ec42df34187c79114ebeb987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _newAIFunction: {fileID: 0}
 --- !u!1 &493854357
 GameObject:
   m_ObjectHideFlags: 0
@@ -4746,6 +4747,7 @@ MonoBehaviour:
   AIManager: {fileID: 0}
   turnStartPlayerManager: {fileID: 0}
   turnStartAIManager: {fileID: 0}
+  tile: {fileID: 0}
   turnStartPlayerArmy: []
   turnStartAIArmy: []
   turnStartPlayerWorkers: []
@@ -6933,6 +6935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 099855f274ea6ca44a51ab99c80a711b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _newAIFunction: {fileID: 0}
 --- !u!4 &1568565797
 Transform:
   m_ObjectHideFlags: 0
