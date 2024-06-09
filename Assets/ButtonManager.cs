@@ -72,7 +72,7 @@ public class ButtonManager : MonoBehaviour
             if (Gamemanager.Instance.AIPlayer)
             {
                 _newAIFunction = Gamemanager.Instance.GetComponent<NewAIFunction>();
-                _newAIFunction._BoardState.TurnStartUpdateBoardState();
+                _newAIFunction.RunAIUtility();
                 //run minimax
             }
         }

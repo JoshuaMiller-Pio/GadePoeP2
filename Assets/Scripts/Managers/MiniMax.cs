@@ -37,10 +37,10 @@ public class MiniMax : MonoBehaviour
              UpdateBoardState for start of turn
              for (AP)
                  {
-                   Run AIFunction utility check
+                   Run newAIFunction utility check
                    apply the chosen function to the board state (sim functions in board state)
                    store the function in a list
-                   can even be a string list like "Attack(GameObject attcker, GameObject target)"
+                  
                  }
              Run the game state check
              add that gamestate value to a list

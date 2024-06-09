@@ -70,7 +70,8 @@ public class Gamemanager : Singleton<Gamemanager>
             }
 
             AIFunction ai = gameObject.GetComponent<AIFunction>();
-            ai.enabled =true;
+            //ai.enabled =true;
+            
             NewAIFunction newAI = gameObject.GetComponent<NewAIFunction>();
             newAI.enabled = true;
         }

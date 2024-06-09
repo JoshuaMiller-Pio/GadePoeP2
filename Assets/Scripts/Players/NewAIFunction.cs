@@ -71,32 +71,58 @@ public class NewAIFunction : MonoBehaviour
     {
         turnPlayer = TurnManager.TurnOrder.AI;
         _BoardState = GameObject.FindGameObjectWithTag("BoardState").GetComponent<BoardState>();
-       /* if (presortedTiles == null)
+        if (presortedTiles == null)
         {
             presortedTiles = GameObject.FindGameObjectsWithTag("Tile");
-            int sentinal = 0, lavas = 0, golds =0;
+            int sentinal = 0, lavas = 0, golds = 0;
             for (int i = 0; i < 20; i++)
             {
                 for (int j = 0; j < 20; j++)
                 {
-                    tiles[i,j] = presortedTiles[sentinal];
+                    tiles[i, j] = presortedTiles[sentinal];
                     sentinal++;
-                    _lavaLocationsMap.Add(lavas,new LavaLocations(i,j));
-                    _goldLocationsMap.Add(lavas,new GoldLocations(i,j));
+                    _lavaLocationsMap.Add(lavas, new LavaLocations(i, j));
+                    _goldLocationsMap.Add(lavas, new GoldLocations(i, j));
                     lavas++;
                     golds++;
                 }
-            
-            }*/
-       _BoardState.TurnStartUpdateBoardState();
-       tiles = _BoardState.tiles;
-       RunAIUtility();
-       
-       
+
+            }
+            if (Mbase == null)
+            {
+
+                //TODO Switch between difficulties
+                switch (currentD)
+                {
+                    case Difficulty.Easy:
+                        Gamemanager.Instance.placeAITown(tiles[16, 8]);
+                        break;
+                    case Difficulty.Medium:
+                        Gamemanager.Instance.placeAITown(tiles[9, 6]);
+                        break;
+                    case Difficulty.Hard:
+                        Gamemanager.Instance.placeAITown(tiles[9, 16]);
+                        break;
+                }
+
+                Mbase = GameObject.FindGameObjectWithTag("MonsterB");
+                MbaseTile = Mbase.GetComponent<CityManager>().tileBelow.GetComponent<Tile>();
+             //   Mbase = _BoardState.AIManager.gameObject;
+             //   MbaseTile = _BoardState.AIManager.tileBelow.GetComponent<Tile>();
+
+            }
+            _BoardState.TurnStartUpdateBoardState();
+            tiles = _BoardState.tiles;
+            RunAIUtility();
+
+
+        }
     }
 
     public void RunAIUtility()
     {
+        _BoardState.TurnStartUpdateBoardState();
+        tiles = _BoardState.tiles;
         for (int i = 0; i < 5; i++)
         {
             AIUtilityFunction(); 
@@ -115,35 +141,13 @@ public class NewAIFunction : MonoBehaviour
         //assigns bases
         if (Hbase == null)
         {
-            Hbase = _BoardState.playerManager.gameObject;
-            HbaseTile = _BoardState.playerManager.tileBelow.GetComponent<Tile>();
-            /*Hbase = GameObject.FindGameObjectWithTag("HumanB");
-            HbaseTile = Hbase.GetComponent<CityManager>().tileBelow.GetComponent<Tile>();*/
+           // Hbase = _BoardState.playerManager.gameObject;
+           // HbaseTile = _BoardState.playerManager.tileBelow.GetComponent<Tile>();
+            Hbase = GameObject.FindGameObjectWithTag("HumanB");
+            HbaseTile = Hbase.GetComponent<CityManager>().tileBelow.GetComponent<Tile>();
         }
 
-        if (Mbase == null)
-        {
-
-            //TODO Switch between difficulties
-           /* switch (currentD)
-            {
-                case Difficulty.Easy:
-                    Gamemanager.Instance.placeAITown(tiles[16, 8]);
-                    break;
-                case Difficulty.Medium:
-                    Gamemanager.Instance.placeAITown(tiles[9, 6]);
-                    break;
-                case Difficulty.Hard:
-                    Gamemanager.Instance.placeAITown(tiles[9, 16]);
-                    break;
-            }
-
-            Mbase = GameObject.FindGameObjectWithTag("MonsterB");
-            MbaseTile = Mbase.GetComponent<CityManager>().tileBelow.GetComponent<Tile>();*/
-           Mbase = _BoardState.AIManager.gameObject;
-           MbaseTile = _BoardState.AIManager.tileBelow.GetComponent<Tile>();
-
-        }
+        
 
        /* Munits.Clear();
         Hunits.Clear();
@@ -175,6 +179,8 @@ public class NewAIFunction : MonoBehaviour
             {
                 //stores all unit utilities in an array to select the biggest and use that as the piece to move, which piece we want to move
                 unitUtilitiy[i] = piecetoMove(Munits[i]);
+                Debug.Log("Unit utility = " + unitUtilitiy);
+                
             }
             //Sorting to see which utility is the max of each unit, winner gets to move
             for (int i = 0; i < unitUtilitiy.Length; i++)
@@ -184,17 +190,19 @@ public class NewAIFunction : MonoBehaviour
                     Mmax = unitUtilitiy[i];
                     selectedMoveUnit    = Munits[i];
                     position = i;
+                    
                 }
             }
             //chosen moving unit
             MoveUnit = Munits[position];
-            
+           
             
         //Utility for attacking
         for (int i = 0; i < Munits.Count; i++)
         {
             //stores all unit utilities in an array to select the biggest and use that as the piece to attack 
             unitUtilitiy[i] = UAttack(Munits[i]);
+            Debug.Log("Attack utility =" + unitUtilitiy[i]);
         }
 
         //Sorting highest ustility to attack
@@ -209,6 +217,7 @@ public class NewAIFunction : MonoBehaviour
             }
         }
             AttackUnit = Munits[position];
+            
         }
         
         //Calls what to summon, doesn't need array to sort
@@ -223,7 +232,7 @@ public class NewAIFunction : MonoBehaviour
             {
                 //stores all unit utilities in an array to select the biggest and use that as the piece to attack 
                 unitUtilitiyH[i] = Udefend(Hunits[i]);
-                
+                Debug.Log("Unit defend utility = " + unitUtilitiyH[i]);
             }
         }
       
@@ -268,12 +277,14 @@ public class NewAIFunction : MonoBehaviour
         if (utility1 > utility2)
         {
             currentAction = uAction1;
-
+            
         }
         else
         {
             currentAction = uAction2;
         }
+        
+        Debug.Log("Chosen action =" + currentAction.ToString());
         
         //Calls the function of the decied action
         switch (currentAction)
@@ -555,7 +566,8 @@ public class NewAIFunction : MonoBehaviour
     //Calculates utility of which unit is needed at the time, currently only selects between archers and army
     public float whatToSummon()
     {
-        if (!tiles[MbaseTile.x+1,MbaseTile.y].GetComponent<Tile>()._occupied ||!tiles[MbaseTile.x-1,MbaseTile.y]||!tiles[MbaseTile.x,MbaseTile.y+1].GetComponent<Tile>()._occupied ||!tiles[MbaseTile.x,MbaseTile.y-1].GetComponent<Tile>()._occupied)
+        Debug.Log(tiles[_BoardState.AIManager.tileBelow.GetComponent<Tile>().x, _BoardState.AIManager.tileBelow.GetComponent<Tile>().y].name);
+        if (!tiles[_BoardState.AIManager.tileBelow.GetComponent<Tile>().x+1,_BoardState.AIManager.tileBelow.GetComponent<Tile>().y].GetComponent<Tile>()._occupied ||!tiles[_BoardState.AIManager.tileBelow.GetComponent<Tile>().x-1,_BoardState.AIManager.tileBelow.GetComponent<Tile>().y]||!tiles[_BoardState.AIManager.tileBelow.GetComponent<Tile>().x,_BoardState.AIManager.tileBelow.GetComponent<Tile>().y + 1].GetComponent<Tile>()._occupied ||!tiles[_BoardState.AIManager.tileBelow.GetComponent<Tile>().x,_BoardState.AIManager.tileBelow.GetComponent<Tile>().y -1].GetComponent<Tile>()._occupied)
         {
             
        

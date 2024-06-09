@@ -16,7 +16,7 @@ public class BoardState : MonoBehaviour
     private TurnManager.TurnOrder turnPlayer;
 
     public CityManager playerManager, AIManager, turnStartPlayerManager, turnStartAIManager;
-
+    public Tile tile;
     public List<GameObject> turnStartPlayerArmy, turnStartAIArmy, turnStartPlayerWorkers, turnStartAIWorkers,
         playerArmy, aiArmy, playerWorkers, aiWorkers;
     // Start is called before the first frame update
@@ -42,13 +42,25 @@ public class BoardState : MonoBehaviour
             
             }
         }
+       
     }
 
     public void TurnStartUpdateBoardState()
     {
+        playerManager = new CityManager();
+        AIManager = new CityManager();
         turnStartAIManager = GameObject.FindGameObjectWithTag("MonsterB").GetComponent<CityManager>();
         turnStartPlayerManager = GameObject.FindGameObjectWithTag("HumanB").GetComponent<CityManager>();
+        tile = tiles[turnStartPlayerManager.tileBelow.GetComponent<Tile>().x,
+            turnStartPlayerManager.tileBelow.GetComponent<Tile>().y].GetComponent<Tile>();
+        playerManager.tileBelow = tile.gameObject;
+        tile._occupied = true;
         playerManager._cityHealth = turnStartPlayerManager._cityHealth;
+        tile = tiles[turnStartAIManager.tileBelow.GetComponent<Tile>().x,
+            turnStartAIManager.tileBelow.GetComponent<Tile>().y].GetComponent<Tile>();
+        AIManager.tileBelow = tile.gameObject;
+        tile._occupied = true;
+       
         playerManager._gpt = turnStartPlayerManager._gpt;
         AIManager._cityHealth = turnStartAIManager._cityHealth;
         AIManager._gpt = turnStartAIManager._gpt;
