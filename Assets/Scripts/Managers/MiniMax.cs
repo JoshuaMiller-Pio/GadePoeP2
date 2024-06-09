@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,31 +28,48 @@ public class MiniMax : MonoBehaviour
     {
         _BoardState.TurnStartUpdateBoardState();
     }
-    public int RunMiniMax(float difficulty, bool isMax)
-    {
-        
-    int miniMaxResult = 0; 
-    /*
-         for (however many times we want minmax to run)
-         {
-             UpdateBoardState for start of turn
-             for (AP)
-                 {
-                   Run newAIFunction utility check
-                   apply the chosen function to the board state (sim functions in board state)
-                   store the function in a list
-                  
-                 }
-             Run the game state check
-             add that gamestate value to a list
 
-             Once the above is done, check for highest game state value
-             execute the stored array of functions in the actual game
-             clear all lists
-         }
-        */
-    return miniMaxResult;
+    public int miniMax(int depth, int index, bool isMax, int[] scores, int height)
+    {
+
+        int miniMaxResult = 0;
+        if (depth == height)
+        {
+            return scores[index];
+        }
+
+        if (isMax)
+        {
+            return Math.Max(miniMax(depth + 1, index * 2, false, scores, height),
+                miniMax(depth + 1, index * 2, false, scores, height));
+        }
+        else
+        {
+            return Math.Max(miniMax(depth + 1, index * 2, true, scores, height),
+                miniMax(depth + 1, index * 2, true, scores, height));
+        }
+
     }
+
+    /*
+     for (depth)
+     {
+         UpdateBoardState for start of turn
+         for (AP)
+             {
+               Run newAIFunction utility check
+               apply the chosen function to the board state (sim functions in board state)
+               store the function in a list
+
+             }
+         Run the game state check
+         add that gamestate value to a list
+
+         Once the above is done, check for highest game state value
+         execute the stored array of functions in the actual game
+         clear all lists
+     }
+    */
     // Update is called once per frame
     void Update()
     {

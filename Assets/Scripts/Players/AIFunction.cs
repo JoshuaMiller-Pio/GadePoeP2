@@ -56,7 +56,7 @@ public class AIFunction : Singleton<AIFunction>
         Hard
     }
 
-    private Difficulty currentD = Difficulty.Easy;
+    public Difficulty currentD = Difficulty.Easy;
     private move currentMove = move.noMove;
     
     private Summonable WhatToSummon;
