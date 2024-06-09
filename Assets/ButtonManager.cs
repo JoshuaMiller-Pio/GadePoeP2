@@ -93,6 +93,7 @@ public class ButtonManager : MonoBehaviour
     private void Start()
     {
         TurnManager.RoundEnd += switchPlayer;
+        _newAIFunction = Gamemanager.Instance.GetComponent<NewAIFunction>();
     }
     public void reinforce()
     {

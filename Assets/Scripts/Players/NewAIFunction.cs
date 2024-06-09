@@ -111,9 +111,9 @@ public class NewAIFunction : MonoBehaviour
              //   MbaseTile = _BoardState.AIManager.tileBelow.GetComponent<Tile>();
 
             }
-            _BoardState.TurnStartUpdateBoardState();
-            tiles = _BoardState.tiles;
-            RunAIUtility();
+            //_BoardState.TurnStartUpdateBoardState();
+           // tiles = _BoardState.tiles;
+            //RunAIUtility();
 
 
         }
@@ -201,7 +201,7 @@ public class NewAIFunction : MonoBehaviour
         for (int i = 0; i < Munits.Count; i++)
         {
             //stores all unit utilities in an array to select the biggest and use that as the piece to attack 
-            unitUtilitiy[i] = UAttack(Munits[i]);
+           unitUtilitiy[i] = UAttack(Munits[i]);
             Debug.Log("Attack utility =" + unitUtilitiy[i]);
         }
 
@@ -216,8 +216,10 @@ public class NewAIFunction : MonoBehaviour
                 position = i;
             }
         }
-            AttackUnit = Munits[position];
-            
+
+        GameObject decidedUnit = Munits[position];
+        AttackUnit = _BoardState.aiArmy[position];
+
         }
         
         //Calls what to summon, doesn't need array to sort
@@ -627,7 +629,7 @@ public class NewAIFunction : MonoBehaviour
 
         if (unit.GetComponent<Character>().characterScript.CharacterType != CharacterScriptable.characterType.Miner)
         {
-            distC = distance(charScript.Occupiedtile.x, HbaseTile.x, charScript.Occupiedtile.y, HbaseTile.y);
+            distC = distance(charScript.Occupiedtile.x, _BoardState.playerManager.tileBelow.GetComponent<Tile>().x, charScript.Occupiedtile.y, _BoardState.playerManager.tileBelow.GetComponent<Tile>().y);
             for (int i = 0; i < Hunits.Count; i++)
             {
                 distE = distance(charScript.Occupiedtile.x, Hunits[i].GetComponent<Character>().Occupiedtile.x, charScript.Occupiedtile.y, Hunits[i].GetComponent<Character>().Occupiedtile.y);

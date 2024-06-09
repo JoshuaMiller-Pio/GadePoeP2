@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using Unity.Properties;
 using Unity.VisualScripting;
 using UnityEngine;
+using Object = System.Object;
 
 public class BoardState : MonoBehaviour
 {
     public GridManager _GridManager;
-    public GameObject[] presortedTiles;
+    private GameObject[] presortedTiles;
     
     public GameObject[,] tiles = new GameObject[20,20];
 
@@ -26,6 +27,12 @@ public class BoardState : MonoBehaviour
     public List<List<MethodVariables>> listOfTurns = new List<List<MethodVariables>>();
     void Start()
     {
+
+        presortedTiles = null;
+    }
+
+    public void TurnStartUpdateBoardState()
+    {
         turnPlayer = TurnManager.TurnOrder.AI;
         if (presortedTiles == null)
         {
@@ -36,21 +43,34 @@ public class BoardState : MonoBehaviour
                 for (int j = 0; j < 20; j++)
                 {
                     tiles[i,j] = presortedTiles[sentinal];
+                    Tile presortedTile = presortedTiles[sentinal].GetComponent<Tile>();
+                    tiles[i, j].AddComponent<Tile>();
+                    Tile newTile = tiles[i, j].GetComponent<Tile>();
+                    newTile._occupied = presortedTile._occupied;
+                    newTile.tileInfo = presortedTile.tileInfo;
+                    newTile.x = presortedTile.x;
+                    newTile.y = presortedTile.y;
+                   // newTile.HasMine = presortedTile.HasMine;
+                    
                     sentinal++;
                  
                 }
             
             }
         }
-       
-    }
 
-    public void TurnStartUpdateBoardState()
-    {
-        playerManager = new CityManager();
-        AIManager = new CityManager();
+       
         turnStartAIManager = GameObject.FindGameObjectWithTag("MonsterB").GetComponent<CityManager>();
         turnStartPlayerManager = GameObject.FindGameObjectWithTag("HumanB").GetComponent<CityManager>();
+        playerManager = new CityManager();
+        AIManager = new CityManager();
+        playerManager._gpt = turnStartPlayerManager._gpt;
+        AIManager._cityHealth = turnStartAIManager._cityHealth;
+        AIManager._gpt = turnStartAIManager._gpt;
+        turnStartPlayerArmy = turnStartPlayerManager.summonedArmy;
+        turnStartAIArmy = turnStartAIManager.summonedArmy;
+        turnStartPlayerWorkers = turnStartPlayerManager.summonedWorkers;
+        turnStartAIWorkers = turnStartAIManager.summonedWorkers;
         tile = tiles[turnStartPlayerManager.tileBelow.GetComponent<Tile>().x,
             turnStartPlayerManager.tileBelow.GetComponent<Tile>().y].GetComponent<Tile>();
         playerManager.tileBelow = tile.gameObject;
@@ -60,15 +80,12 @@ public class BoardState : MonoBehaviour
             turnStartAIManager.tileBelow.GetComponent<Tile>().y].GetComponent<Tile>();
         AIManager.tileBelow = tile.gameObject;
         tile._occupied = true;
-       
-        playerManager._gpt = turnStartPlayerManager._gpt;
-        AIManager._cityHealth = turnStartAIManager._cityHealth;
-        AIManager._gpt = turnStartAIManager._gpt;
-        turnStartPlayerArmy = turnStartPlayerManager.summonedArmy;
-        turnStartAIArmy = turnStartAIManager.summonedArmy;
-        turnStartPlayerWorkers = turnStartPlayerManager.summonedWorkers;
-        turnStartAIWorkers = turnStartAIManager.summonedWorkers;
-        
+        playerManager.worker = turnStartPlayerManager.worker;
+        playerManager.meele = turnStartPlayerManager.meele;
+        playerManager.ranger = turnStartPlayerManager.ranger;
+        AIManager.worker = turnStartAIManager.worker;
+        AIManager.meele = turnStartAIManager.meele;
+        AIManager.ranger = turnStartAIManager.ranger;
         for (int j = 0; j < turnStartPlayerArmy.Count; j++)
         {
             GameObject newArmy = new GameObject();
