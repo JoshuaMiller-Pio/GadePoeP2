@@ -5421,6 +5421,18 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1674683729}
         m_TargetAssemblyTypeName: Gamemanager, Assembly-CSharp
+        m_MethodName: med
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1674683729}
+        m_TargetAssemblyTypeName: Gamemanager, Assembly-CSharp
         m_MethodName: AIPlaying
         m_Mode: 1
         m_Arguments:
@@ -8034,6 +8046,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2033574283}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: ChangeScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1674683729}
+        m_TargetAssemblyTypeName: Gamemanager, Assembly-CSharp
+        m_MethodName: hard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14167,6 +14191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Munits: []
   Hunits: []
+  currentD: 0
 --- !u!114 &1674683729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14219,6 +14244,11 @@ MonoBehaviour:
   Munits: []
   Hunits: []
   _BoardState: {fileID: 0}
+  _TurnManager: {fileID: 0}
+  turnPlayer: 0
+  _AiGameState: {fileID: 0}
+  gameStateScores: []
+  currentD: 0
 --- !u!1 &1686705589
 GameObject:
   m_ObjectHideFlags: 0
