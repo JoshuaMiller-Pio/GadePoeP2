@@ -62,7 +62,7 @@ public class NewAIFunction : MonoBehaviour
         Hard
     }
 
-    private Difficulty currentD = Difficulty.Easy;
+    public Difficulty currentD = Difficulty.Easy;
     private move currentMove = move.noMove;
     
     private Summonable WhatToSummon;
