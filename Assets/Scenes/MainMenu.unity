@@ -14236,19 +14236,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674683727}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8a662ba0da43a45846cb2383b57f5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d5b77de751c32d4f9a650341a8e1ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Munits: []
-  Hunits: []
+  _Gamemanager: {fileID: 0}
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  _GameState: {fileID: 0}
+  currentGameState: 0
   _BoardState: {fileID: 0}
-  _TurnManager: {fileID: 0}
-  turnPlayer: 0
-  _AiGameState: {fileID: 0}
-  gameStateScores: []
-  currentD: 0
 --- !u!1 &1686705589
 GameObject:
   m_ObjectHideFlags: 0
