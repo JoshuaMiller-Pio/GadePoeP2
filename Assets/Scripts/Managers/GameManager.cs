@@ -14,7 +14,7 @@ public class Gamemanager : Singleton<Gamemanager>
     public GameObject Mcitytile, Pcitytile;
     public GameObject Mcity, Pcity;
     private AIFunction ai;
-    private NewAIFunction newAI;
+   // private NewAIFunction newAI;
     public float _maxAP = 5, _currentAP;
     public float currentAP => _currentAP;
     public float maxAP => _maxAP;
@@ -26,7 +26,7 @@ public class Gamemanager : Singleton<Gamemanager>
         Application.targetFrameRate = 60;
         _currentAP = maxAP;
         ai = gameObject.GetComponent<AIFunction>();
-         newAI = gameObject.GetComponent<NewAIFunction>();
+        // newAI = gameObject.GetComponent<NewAIFunction>();
          
     }
 
@@ -73,10 +73,10 @@ public class Gamemanager : Singleton<Gamemanager>
                 Pcity = town;
             }
 
-           // ai.enabled =true;
+            ai.enabled =true;
             
-            newAI = gameObject.GetComponent<NewAIFunction>();
-            newAI.enabled = true;
+           // newAI = gameObject.GetComponent<NewAIFunction>();
+          //  newAI.enabled = true;
         }
         else
         {
@@ -117,14 +117,14 @@ public class Gamemanager : Singleton<Gamemanager>
     public void med()
     {
         ai.currentD = AIFunction.Difficulty.Medium;
-        newAI.currentD = NewAIFunction.Difficulty.Medium;
+       // newAI.currentD = NewAIFunction.Difficulty.Medium;
 
     }
 
     public void hard()
     {
         ai.currentD = AIFunction.Difficulty.Hard;
-        newAI.currentD = NewAIFunction.Difficulty.Hard;
+        //newAI.currentD = NewAIFunction.Difficulty.Hard;
 
     }
     private void Update()

@@ -71,8 +71,8 @@ public class ButtonManager : MonoBehaviour
             player1turn = false;
             if (Gamemanager.Instance.AIPlayer)
             {
-                _newAIFunction = Gamemanager.Instance.GetComponent<NewAIFunction>();
-                _newAIFunction.RunAIUtility();
+               // _newAIFunction = Gamemanager.Instance.GetComponent<NewAIFunction>();
+                //_newAIFunction.RunAIUtility();
                 //run minimax
             }
         }

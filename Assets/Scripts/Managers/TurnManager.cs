@@ -46,9 +46,12 @@ public class TurnManager : MonoBehaviour
             }
             else
             {
-                TurnPlayer = TurnOrder.AI;
-               
-                    AIFunction.Instance.AIUtilityFunction();
+                     TurnPlayer = TurnOrder.AI;
+                     for (int i = 0; i < 5; i++)
+                     {
+                        AIFunction.Instance.AIUtilityFunction();
+                         
+                     }
 
                 
             }
