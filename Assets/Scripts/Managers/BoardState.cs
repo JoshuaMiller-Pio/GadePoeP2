@@ -8,6 +8,18 @@ using Object = System.Object;
 
 public class BoardState : MonoBehaviour
 {
+    /*
+     * Board state is used to create and effect simulated characters and tiles that correlate to the actual character and tiles on the board
+     * We do this so that we can alter and effectively play with the characters, city managers and game bor without having to revert these changes each time the minimax runs.
+     * This effectively allows us to simulate every action done in a turn and assess the turn players gamestate at the end of the turn without effecting the actual game
+     * To do this we create dummy character objects for all the summoned characters and apply their corresponding actul game pieces stats (location, current health, character type etc to them.
+     * Then depending on the action decided upon by the NewAIFunction utility calculation we simulate the effect of the chosen move on the simulated board and characters
+     * We then create an ExecutableMethod (a separate class found at the bottom of the script) that holds a reference to the method chosen for the move (in the form of an enum) as well as
+     * object references to the apropriate variables needed for the move to be done (i.e if the action chosen was to move a piece we need to store a reference to the specific character being moved and which tile it is moving to).
+     * These Executable methods are stored in a list that represents 1 full turn
+     * The GameState is then calculated on the end result of the simulated turn and its game score is stored in a list
+     * After a full turn is simulated the list of moves for that turn is stored in another list that stores the list of every simulated turn
+     */
     public GridManager _GridManager;
     private GameObject[] presortedTiles;
     
@@ -31,6 +43,8 @@ public class BoardState : MonoBehaviour
         presortedTiles = null;
     }
 
+    
+    //Creates simulated versions of all tiles and summoned characters and sets all the stats apropriately.
     public void TurnStartUpdateBoardState()
     {
         turnPlayer = TurnManager.TurnOrder.AI;
@@ -157,6 +171,8 @@ public class BoardState : MonoBehaviour
     {
         
     }
+    
+    //Simulates moving a character to a new position on the board and creates the apropriate MethodVariables object and adds it to the list for the turn
     public void UpdateBoardMove(GameObject character, GameObject tile)
     {
         Tile SelectedTile = tile.GetComponent<Tile>();
@@ -191,6 +207,7 @@ public class BoardState : MonoBehaviour
       //  CurrentTile = SelectedTile.gameObject;
     }
 
+    //Simulates an attack and creates the apropriate MethodVariables object and adds it to the list for the turn
     public void UpdateBoardAttack(GameObject attacker, GameObject defender)
     {
         
@@ -222,6 +239,7 @@ public class BoardState : MonoBehaviour
         //Add destroy if needed
     }
 
+    //Simulates a citymanager healing creates the apropriate MethodVariables object and adds it to the list for the turn
     public void UpdateBoardHeal(TurnManager.TurnOrder turnPlayer)
     {
         if (turnPlayer == TurnManager.TurnOrder.AI)
@@ -237,6 +255,7 @@ public class BoardState : MonoBehaviour
         }
     }
 
+    //Simulates a new character to the board and creates the apropriate MethodVariables object and adds it to the list for the turn
     public void UpdateBoardSummon(GameObject chosenPiece, TurnManager.TurnOrder turnPlayer)
     {
        //TODO talk to josh about instantiate vs creat new gameobject and add character component as above

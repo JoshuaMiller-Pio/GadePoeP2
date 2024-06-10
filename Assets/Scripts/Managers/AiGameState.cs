@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class AiGameState : MonoBehaviour
 {
+    /*
+     * AIGameState is used to evaluate the state of the game at the end of a turn
+     * When called the calculateGameState method is passed a reference to 2 city manager scripts (this can be done on either the actual games city manager r the simulated city managers usd for the minimax
+     * There are several metrics used to asses the state of the game (Both players army sizes, how many mines they control, city health etc)
+     * A score of 1, 0 or -1 is applied to the turn players board state depending on the comparison of the above mentioned variables
+     * All of the above scores are added together to represent the overall gamestate faced by the player character.
+     */
     public float turnPlayerArmyPop { get; set; }
     public float enemyPlayerArmyPop { get; set; }
     public float turnPlayerWorkerPop { get; set; }
