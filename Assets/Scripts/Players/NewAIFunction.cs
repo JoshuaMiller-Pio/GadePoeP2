@@ -119,6 +119,17 @@ public class NewAIFunction : MonoBehaviour
         }
     }
 
+    /*
+     * RunAIUtility calles board state to create a simulated version of the current board (all characters, players etc)
+     * Calls the AIUtility function 5 times to calculate utility and decided what action will be done
+     * Then the board state is called to simulate the effects of the chosen ction on the simulatd board, create and store the apropriate MethodVaribles object in the turn moves list
+     * Once all 5 ap is used (the foir loop ends) the board state adds the completed methodsForTurn list of MethodVariables objects to the ListOfTurns list.
+     * the MethodsForTurn list is then cleared
+     * We then runthe CalculateGameState method on the simulated board to get a game state score for the execution of that turn
+     * We add that gamestore to a list of GameStateScores
+     * Because the list of GameState score will always be the same length as the listOfTurns list we can use the position of the highest scoring GameStateScore in the gamestate score list to locate the correct list of MethodVariables in the listOfTurns list.
+     * We can then use the information stores on each MethodVariables object in the retrieved list to call the apropriate method with the correct variables on the actual game board.
+     */
     public void RunAIUtility()
     {
         _BoardState.TurnStartUpdateBoardState();
